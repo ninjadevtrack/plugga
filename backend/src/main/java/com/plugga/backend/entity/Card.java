@@ -15,7 +15,7 @@ public class Card {
     @Column(name="last_used")
     private Timestamp lastUsed;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="pile_id")
     private int pile;
 

@@ -11,7 +11,7 @@ public class Pile {
     @Column(name="pile_id")
     private int id;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="deck_id")
     private Deck deck;
 
