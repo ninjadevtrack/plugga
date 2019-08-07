@@ -10,32 +10,33 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
-    
-    @Column(name="name")
+
+    @Column(name = "name")
     private String name;
-    
-    @Column(name="email")
+
+    @Column(name = "email")
     private String email;
-    
-    @Column(name="password")
+
+    @Column(name = "password")
     private String password;
-    
-    @Column(name="date_created")
+
+    @Column(name = "date_created")
     private Timestamp dateCreated;
-    
-    @Column(name="last_login")
+
+    @Column(name = "last_login")
     private Timestamp lastLogin;
-    
-    public User(){}
-    
-    public User(String name, String email, String password){
+
+    public User() {
+    }
+
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

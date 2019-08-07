@@ -2,22 +2,24 @@ package com.plugga.backend.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="card")
+@Table(name = "card")
 public class Card {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="card_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_id")
     private int id;
 
-    @Column(name="last_used")
+    @Column(name = "last_used")
     private Timestamp lastUsed;
 
-    @ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="pile_id")
-    private int pile;
+    @OneToMany(mappedBy = "card",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Side> sides;
 
     public Card() {
     }
@@ -42,20 +44,19 @@ public class Card {
         this.lastUsed = lastUsed;
     }
 
-    public int getPile() {
-        return pile;
-    }
-
-    public void setPile(final int pile) {
-        this.pile = pile;
-    }
-
     @Override
     public String toString() {
         return "Card{" +
                 "id=" + id +
                 ", lastUsed=" + lastUsed +
-                ", pile=" + pile +
                 '}';
+    }
+
+    public void add(Side side) {
+        if (sides == null) {
+            sides = new ArrayList<>();
+        }
+        sides.add(side);
+        side.setCard(this);
     }
 }

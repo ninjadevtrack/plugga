@@ -3,22 +3,22 @@ package com.plugga.backend.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="side")
+@Table(name = "side")
 public class Side {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="side_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "side_id")
     private int id;
 
-    @ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="card_id")
-    private int card;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "card_id")
+    private Card card;
 
-    @Column(name="image_url")
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name="text")
+    @Column(name = "text")
     private String text;
 
     public Side() {
@@ -37,11 +37,11 @@ public class Side {
         this.id = id;
     }
 
-    public int getCard() {
+    public Card getCard() {
         return card;
     }
 
-    public void setCard(final int card) {
+    public void setCard(final Card card) {
         this.card = card;
     }
 

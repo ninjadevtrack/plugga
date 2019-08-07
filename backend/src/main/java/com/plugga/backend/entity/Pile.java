@@ -3,22 +3,22 @@ package com.plugga.backend.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="pile")
+@Table(name = "pile")
 public class Pile {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="pile_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pile_id")
     private int id;
 
-    @ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="deck_id")
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "deck_id")
     private Deck deck;
 
-    @Column(name="rank")
+    @Column(name = "rank")
     private byte rank;
 
-    @Column(name="freq")
+    @Column(name = "freq")
     private byte freq;
 
     public Pile() {
