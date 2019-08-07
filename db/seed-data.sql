@@ -4,7 +4,7 @@ USE `plugga`;
 --
 -- Host: 127.0.0.1    Database: plugga
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,10 +27,7 @@ DROP TABLE IF EXISTS `card`;
 CREATE TABLE `card` (
   `card_id` int(10) unsigned NOT NULL,
   `last_used` timestamp NULL DEFAULT NULL,
-  `pile_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`card_id`),
-  KEY `card_pile_id_idx` (`pile_id`),
-  CONSTRAINT `card_pile_id` FOREIGN KEY (`pile_id`) REFERENCES `pile` (`pile_id`)
+  PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -79,11 +76,14 @@ CREATE TABLE `deck_card` (
   `deck_card_id` int(10) unsigned NOT NULL,
   `deck_id` int(10) unsigned NOT NULL,
   `card_id` int(10) unsigned NOT NULL,
+  `pile_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`deck_card_id`),
   KEY `deck_card_id_idx` (`card_id`),
   KEY `card_deck_id_idx` (`deck_id`),
+  KEY `deck_card_pile_id_idx` (`pile_id`),
   CONSTRAINT `card_deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`),
-  CONSTRAINT `deck_card_id` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`)
+  CONSTRAINT `deck_card_id` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`),
+  CONSTRAINT `deck_card_pile_id` FOREIGN KEY (`pile_id`) REFERENCES `pile` (`pile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -215,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-11 21:45:39
+-- Dump completed on 2019-08-07 15:46:44
