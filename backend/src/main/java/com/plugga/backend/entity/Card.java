@@ -21,6 +21,17 @@ public class Card {
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Side> sides;
 
+//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinTable(name = "deck_card",
+//            joinColumns = @JoinColumn(name = "card_id"),
+//            inverseJoinColumns = @JoinColumn(name = "deck_id")
+//    )
+//    private List<Card> decks;
+
+    @OneToMany(mappedBy = "card",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<DeckCard> decks;
+
     public Card() {
     }
 
@@ -44,6 +55,22 @@ public class Card {
         this.lastUsed = lastUsed;
     }
 
+    public List<Side> getSides() {
+        return sides;
+    }
+
+    public void setSides(final List<Side> sides) {
+        this.sides = sides;
+    }
+
+    public List<DeckCard> getDecks() {
+        return decks;
+    }
+
+    public void setDecks(final List<DeckCard> decks) {
+        this.decks = decks;
+    }
+
     @Override
     public String toString() {
         return "Card{" +
@@ -52,11 +79,18 @@ public class Card {
                 '}';
     }
 
-    public void add(Side side) {
+    public void addSide(Side side) {
         if (sides == null) {
             sides = new ArrayList<>();
         }
         sides.add(side);
         side.setCard(this);
+    }
+
+    public void addDeck(DeckCard deck) {
+        if (decks == null) {
+            decks = new ArrayList<>();
+        }
+        decks.add(deck);
     }
 }
