@@ -27,6 +27,17 @@ public class Deck {
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Pile> piles;
 
+//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinTable(name = "deck_card",
+//            joinColumns = @JoinColumn(name = "deck_id"),
+//            inverseJoinColumns = @JoinColumn(name = "card_id")
+//    )
+//    private List<Card> cards;
+
+    @OneToMany(mappedBy = "deck",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<DeckCard> cards;
+
     public Deck() {
     }
 
@@ -76,6 +87,14 @@ public class Deck {
         this.piles = piles;
     }
 
+    public List<DeckCard> getCards() {
+        return cards;
+    }
+
+    public void setCards(final List<DeckCard> cards) {
+        this.cards = cards;
+    }
+
     @Override
     public String toString() {
         return "Deck{" +
@@ -86,11 +105,18 @@ public class Deck {
                 '}';
     }
 
-    public void add(Pile tempPile) {
+    public void addPile(Pile pile) {
         if (piles == null) {
             piles = new ArrayList<>();
         }
-        piles.add(tempPile);
-        tempPile.setDeck(this);
+        piles.add(pile);
+        pile.setDeck(this);
+    }
+
+    public void addCard(DeckCard card) {
+        if (cards == null) {
+            cards = new ArrayList<>();
+        }
+        cards.add(card);
     }
 }

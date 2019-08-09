@@ -1,8 +1,14 @@
 com\plugga\backend\BackendApplication.class
+com\plugga\backend\entity\Side.class
+com\plugga\backend\entity\DeckCardId.class
 com\plugga\backend\service\UserService.class
 com\plugga\backend\entity\User.class
-com\plugga\backend\rest\UserController.class
 com\plugga\backend\dao\UserDAO.class
 com\plugga\backend\dao\UserDAOHibernateImpl.class
 com\plugga\backend\service\UserServiceImpl.class
 com\plugga\backend\TestController.class
+com\plugga\backend\entity\DeckCard.class
+com\plugga\backend\entity\Pile.class
+com\plugga\backend\entity\Deck.class
+com\plugga\backend\rest\UserController.class
+com\plugga\backend\entity\Card.class
