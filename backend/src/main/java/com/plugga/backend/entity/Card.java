@@ -21,13 +21,6 @@ public class Card {
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Side> sides;
 
-//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//    @JoinTable(name = "deck_card",
-//            joinColumns = @JoinColumn(name = "card_id"),
-//            inverseJoinColumns = @JoinColumn(name = "deck_id")
-//    )
-//    private List<Card> decks;
-
     @OneToMany(mappedBy = "card",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<DeckCard> decks;

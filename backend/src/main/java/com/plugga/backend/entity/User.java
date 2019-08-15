@@ -1,13 +1,9 @@
 package com.plugga.backend.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -32,6 +28,9 @@ public class User {
 
     @Column(name = "last_login")
     private Timestamp lastLogin;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserDeck> decks;
 
     public User() {
     }
@@ -90,6 +89,14 @@ public class User {
 
     public void setLastLogin(Timestamp lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public List<UserDeck> getDecks() {
+        return decks;
+    }
+
+    public void setDecks(final List<UserDeck> decks) {
+        this.decks = decks;
     }
 
     @Override

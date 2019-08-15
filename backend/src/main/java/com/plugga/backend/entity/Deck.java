@@ -27,16 +27,12 @@ public class Deck {
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Pile> piles;
 
-//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//    @JoinTable(name = "deck_card",
-//            joinColumns = @JoinColumn(name = "deck_id"),
-//            inverseJoinColumns = @JoinColumn(name = "card_id")
-//    )
-//    private List<Card> cards;
-
     @OneToMany(mappedBy = "deck",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<DeckCard> cards;
+
+    @OneToMany(mappedBy = "deck")
+    private List<UserDeck> users;
 
     public Deck() {
     }
@@ -93,6 +89,14 @@ public class Deck {
 
     public void setCards(final List<DeckCard> cards) {
         this.cards = cards;
+    }
+
+    public List<UserDeck> getUsers() {
+        return users;
+    }
+
+    public void setUsers(final List<UserDeck> users) {
+        this.users = users;
     }
 
     @Override
