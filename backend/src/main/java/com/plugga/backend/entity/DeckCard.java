@@ -3,17 +3,18 @@ package com.plugga.backend.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "deck_card")
 @IdClass(DeckCardId.class)
 public class DeckCard {
 
     @Id
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "deck_id")
+    @JoinColumn(name = "deck_id", referencedColumnName = "deck_id")
     private Deck deck;
 
     @Id
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "card_id")
+    @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     private Card card;
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

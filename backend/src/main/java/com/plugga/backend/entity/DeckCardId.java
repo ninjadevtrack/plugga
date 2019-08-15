@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class DeckCardId implements Serializable {
-
     private int deck;
     private int card;
 
