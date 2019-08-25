@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO {
     private EntityManager entityManager;
     
     @Autowired
-    public UserDAOImpl(EntityManager entityManager){
+    public UserDAOImpl(final EntityManager entityManager){
         this.entityManager = entityManager;
     }
     
