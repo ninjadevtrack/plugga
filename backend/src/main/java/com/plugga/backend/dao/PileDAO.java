@@ -5,11 +5,13 @@ import com.plugga.backend.entity.Pile;
 import java.util.List;
 
 public interface PileDAO {
-    public List<Pile> findAll();
+    List<Pile> findAll();
 
-    public Pile findById(int id);
+    Pile findById(int id);
 
-    public void save(Pile pile);
+    List<Pile> findByDeckId(int deckId);
 
-    public void deleteById(int id);
+    void save(Pile pile);
+
+    void deleteById(int id);
 }

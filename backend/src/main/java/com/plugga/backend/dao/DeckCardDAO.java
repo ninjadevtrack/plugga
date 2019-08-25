@@ -5,11 +5,15 @@ import com.plugga.backend.entity.DeckCard;
 import java.util.List;
 
 public interface DeckCardDAO {
-    public List<DeckCard> findAll();
+    List<DeckCard> findAll();
 
-    public DeckCard findById(int id);
+    DeckCard findById(int id);
 
-    public void save(DeckCard deckCard);
+    List<DeckCard> findByDeckId(int deckId);
 
-    public void deleteById(int id);
+    List<DeckCard> findByCardId(int cardId);
+
+    void save(DeckCard deckCard);
+
+    void deleteById(int id);
 }

@@ -5,11 +5,15 @@ import com.plugga.backend.entity.UserDeck;
 import java.util.List;
 
 public interface UserDeckDAO {
-    public List<UserDeck> findAll();
+    List<UserDeck> findAll();
 
-    public UserDeck findById(int id);
+    UserDeck findById(int id);
 
-    public void save(UserDeck userDeck);
+    List<UserDeck> findByUserId(int userId);
 
-    public void deleteById(int id);
+    List<UserDeck> findByDeckId(int deckId);
+
+    void save(UserDeck userDeck);
+
+    void deleteById(int id);
 }
