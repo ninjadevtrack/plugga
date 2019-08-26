@@ -5,12 +5,11 @@ import java.util.List;
 import com.plugga.backend.entity.User;
 
 public interface UserDAO {
+    List<User> findAll();
     
-    public List<User> findAll();
+    User findById(int id);
     
-    public User findById(int id);
+    void save(User user);
     
-    public void save(User user);
-    
-    public void deleteById(int id);
+    void deleteById(int id);
 }

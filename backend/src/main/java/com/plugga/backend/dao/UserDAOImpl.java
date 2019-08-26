@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 import com.plugga.backend.entity.User;
 
 @Repository
-public class UserDAOHibernateImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
     private EntityManager entityManager;
     
     @Autowired
-    public UserDAOHibernateImpl(EntityManager entityManager){
+    public UserDAOImpl(final EntityManager entityManager){
         this.entityManager = entityManager;
     }
     
