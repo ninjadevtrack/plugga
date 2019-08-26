@@ -1,6 +1,5 @@
 package com.plugga.backend.dao;
 
-import com.plugga.backend.entity.Pile;
 import com.plugga.backend.entity.Side;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
