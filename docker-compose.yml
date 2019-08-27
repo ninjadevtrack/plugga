@@ -11,7 +11,7 @@ services:
       MYSQL_USER: dev
       MYSQL_PASSWORD: password
     ports:
-      - "3308:3306"
+      - "3306:3306"
 
   backend:
     build: ./backend
@@ -30,6 +30,8 @@ services:
       - node-modules:/app/frontend/node_modules
     ports:
       - "3000:3000"
+    env_file:
+      - ./frontend/frontend-dev.env
 
 volumes:
   node-modules:
