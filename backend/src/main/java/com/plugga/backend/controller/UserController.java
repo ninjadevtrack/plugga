@@ -1,4 +1,4 @@
-package com.plugga.backend.rest;
+package com.plugga.backend.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
