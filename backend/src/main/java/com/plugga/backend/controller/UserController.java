@@ -17,9 +17,8 @@ import com.plugga.backend.entity.User;
 import com.plugga.backend.service.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
-    
     private UserService userService;
     
     @Autowired
@@ -27,21 +26,21 @@ public class UserController {
         this.userService = userService;
     }
     
-    @GetMapping("/users")
+    @GetMapping("/")
     public List<User> findAll(){
         return userService.findAll();
     }
     
-    @GetMapping("/users/{userId}")
+    @GetMapping("/{userId}")
     public User getUser(@PathVariable int userId){
-        User theUser = userService.findById(userId);
-        if (theUser == null){
+        User user = userService.findById(userId);
+        if (user == null){
             throw new RuntimeException("Could not find user using id: " + userId);
         }
-        return theUser;
+        return user;
     }
     
-    @PostMapping("/users")
+    @PostMapping("/")
     public User addUser(@RequestBody User user){
         user.setId(0);
         user.setDateCreated(new Timestamp(System.currentTimeMillis()));
@@ -49,13 +48,13 @@ public class UserController {
         return user;
     }
     
-    @PutMapping("/users")
+    @PutMapping("/")
     public User updateUser(@RequestBody User user){
         userService.save(user);
         return user;
     }
     
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/{userId}")
     public String deleteUser(@PathVariable int userId){
         User tempUser = userService.findById(userId);
         if (tempUser == null){

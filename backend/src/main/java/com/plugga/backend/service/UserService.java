@@ -5,12 +5,11 @@ import java.util.List;
 import com.plugga.backend.entity.User;
 
 public interface UserService {
+    List<User> findAll();
 
-    public List<User> findAll();
-    
-    public User findById(int id);
-    
-    public void save(User user);
-    
-    public void deleteById(int id);
+    User findById(int id);
+
+    void save(User user);
+
+    void deleteById(int id);
 }
