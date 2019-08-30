@@ -19,7 +19,6 @@ import com.plugga.backend.service.UserService;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    
     private UserService userService;
     
     @Autowired
@@ -34,11 +33,11 @@ public class UserController {
     
     @GetMapping("/{userId}")
     public User getUser(@PathVariable int userId){
-        User theUser = userService.findById(userId);
-        if (theUser == null){
+        User user = userService.findById(userId);
+        if (user == null){
             throw new RuntimeException("Could not find user using id: " + userId);
         }
-        return theUser;
+        return user;
     }
     
     @PostMapping("/")
