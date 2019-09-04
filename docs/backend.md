@@ -31,5 +31,5 @@
     * If this module does not already exist, you will have to create it. Check the section above on setting up 
       the backend module in IntelliJ.
   * Then `Run RemoteApplication`. This will start Spring Boot Remote as a service.
-  * Now whenever a change is made in the backend application, one can simply `Build Project (CTRL + F9)` and
-    LiveReload will be triggered.
+  * Now whenever a change is made in the backend application, one can simply `Build Project (CTRL + F9)` or 
+    `Build Module` and LiveReload will be triggered.
