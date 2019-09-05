@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `card` (
-  `card_id` int(10) unsigned NOT NULL,
+  `card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `last_used` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `deck`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `deck` (
-  `deck_id` int(11) unsigned NOT NULL,
+  `deck_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(16) DEFAULT NULL,
   `image_url` text,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS `deck_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `deck_card` (
-  `deck_card_id` int(10) unsigned NOT NULL,
+  `deck_card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `card_id` int(10) unsigned NOT NULL,
   `pile_id` int(10) unsigned NOT NULL,
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `pile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pile` (
-  `pile_id` int(10) unsigned NOT NULL,
+  `pile_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `rank` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `freq` tinyint(4) unsigned NOT NULL DEFAULT '7',
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `side`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `side` (
-  `side_id` int(10) unsigned NOT NULL,
+  `side_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `card_id` int(10) unsigned NOT NULL,
   `image_url` text,
   `text` text,
@@ -186,7 +186,7 @@ DROP TABLE IF EXISTS `user_deck`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_deck` (
-  `user_deck_id` int(10) unsigned NOT NULL,
+  `user_deck_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `deck_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_deck_id`),
