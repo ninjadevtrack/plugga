@@ -56,3 +56,9 @@
   `Build Module` and LiveReload will be triggered.
 * Optionally, to get IntelliJ to auto compile and build on saves, refer to the following 
   `https://stackoverflow.com/questions/12744303/intellij-idea-java-classes-not-auto-compiling-on-save` 
+
+### Database
+#### Set up the data source in IntelliJ
+* Open the database tool window by going to `View | Tool Windows | Database`
+* Click the `+` and `Datasource | MySQL`
+* Fill in the fields using the environment variables found in `docker-compose.yml`
