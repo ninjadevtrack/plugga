@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `card` (
-  `card_id` int(10) unsigned NOT NULL,
+  `card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `last_used` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -48,12 +48,12 @@ DROP TABLE IF EXISTS `deck`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `deck` (
-  `deck_id` int(11) unsigned NOT NULL,
-  `name` varchar(16) DEFAULT NULL,
+  `deck_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) DEFAULT NULL,
   `image_url` text,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`deck_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +62,7 @@ CREATE TABLE `deck` (
 
 LOCK TABLES `deck` WRITE;
 /*!40000 ALTER TABLE `deck` DISABLE KEYS */;
+INSERT INTO `deck` VALUES (1,'Leslie\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 22:55:02'),(2,'Knope\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:40'),(3,'Neo\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:46'),(4,'Matina\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:55'),(5,'Bulbasaur\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:11:05');
 /*!40000 ALTER TABLE `deck` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +74,7 @@ DROP TABLE IF EXISTS `deck_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `deck_card` (
-  `deck_card_id` int(10) unsigned NOT NULL,
+  `deck_card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `card_id` int(10) unsigned NOT NULL,
   `pile_id` int(10) unsigned NOT NULL,
@@ -104,7 +105,7 @@ DROP TABLE IF EXISTS `pile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pile` (
-  `pile_id` int(10) unsigned NOT NULL,
+  `pile_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `rank` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `freq` tinyint(4) unsigned NOT NULL DEFAULT '7',
@@ -131,7 +132,7 @@ DROP TABLE IF EXISTS `side`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `side` (
-  `side_id` int(10) unsigned NOT NULL,
+  `side_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `card_id` int(10) unsigned NOT NULL,
   `image_url` text,
   `text` text,
@@ -186,7 +187,7 @@ DROP TABLE IF EXISTS `user_deck`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_deck` (
-  `user_deck_id` int(10) unsigned NOT NULL,
+  `user_deck_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `deck_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_deck_id`),
@@ -215,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-07 15:46:44
+-- Dump completed on 2019-09-05 19:18:40
