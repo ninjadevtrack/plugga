@@ -4,7 +4,8 @@
 * `mvn -f ./backend/ package -Dmaven.test.skip=true package` to skip tests for compiling with the DB down.
 * Omit `-f ./backend/` from above if running from within `/backend/`.
 
-## Setting up the backend module in IntelliJ
+## Intellij
+### Setting up the backend module in IntelliJ
 * Open the `Project Structure (CTRL + ALT + SHIFT + S)`.
 * Go to `Modules` and add a new module by pressing the `+` button followed by `New Module`.
 * Click `Spring`.
@@ -33,3 +34,5 @@
   * Then `Run RemoteApplication`. This will start Spring Boot Remote as a service.
   * Now whenever a change is made in the backend application, one can simply `Build Project (CTRL + F9)` or 
     `Build Module` and LiveReload will be triggered.
+  * Optionally, to get IntelliJ to auto compile and build on saves, refer to the following 
+    `https://stackoverflow.com/questions/12744303/intellij-idea-java-classes-not-auto-compiling-on-save` 
