@@ -32,14 +32,6 @@ public class PileDAOImpl implements PileDAO {
     }
 
     @Override
-    public List<Pile> findByDeckId(final int deckId) {
-        Session currentSession = entityManager.unwrap(Session.class);
-        Query<Pile> query = currentSession.createQuery("from Pile where deck=:deckId", Pile.class);
-        query.setParameter("deckId", deckId);
-        return query.getResultList();
-    }
-
-    @Override
     public void save(final Pile pile) {
         Session currentSession = entityManager.unwrap(Session.class);
         currentSession.saveOrUpdate(pile);

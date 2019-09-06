@@ -31,12 +31,6 @@ public class PileServiceImpl implements PileService {
 
     @Override
     @Transactional
-    public List<Pile> findByDeckId(final int deckId) {
-        return pileDAO.findByDeckId(deckId);
-    }
-
-    @Override
-    @Transactional
     public void save(final Pile pile) {
         pileDAO.save(pile);
     }
