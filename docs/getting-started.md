@@ -58,6 +58,17 @@
   `https://stackoverflow.com/questions/12744303/intellij-idea-java-classes-not-auto-compiling-on-save` 
 
 ### Database
+#### Set up db module in IntelliJ
+* Open the `Project Structure (CTRL + ALT + SHIFT + S)`.
+* Go to `Modules` and add a new module by pressing the `+` button followed by `New Module`.
+* Click `Java` or whatever. It is not so important here what you choose as this module will have no source code.
+* Set the `Module name:` to be `db`.
+* Set the `Content root:` to be `Plugga/db` or wherever the `db` folder is located.
+* Click `Finish`
+* Now in `Project Structure | Modules` you should see the `db` module
+* Navigate over to the project view on the left, select `db` and delete the `src` folder as again, this module will
+  not contain any source code.
+  
 #### Set up the data source in IntelliJ
 * Open the database tool window by going to `View | Tool Windows | Database`
 * Click the `+` and `Datasource | MySQL`
