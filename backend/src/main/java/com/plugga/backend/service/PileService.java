@@ -9,8 +9,6 @@ public interface PileService {
 
     Pile findById(int id);
 
-    List<Pile> findByDeckId(int deckId);
-
     void save(Pile pile);
 
     void deleteById(int id);

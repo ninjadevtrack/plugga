@@ -11,10 +11,6 @@ public class Pile {
     @Column(name = "pile_id")
     private int id;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "deck_id")
-    private Deck deck;
-
     @Column(name = "rank")
     private byte rank;
 
@@ -37,13 +33,6 @@ public class Pile {
         this.id = id;
     }
 
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(final Deck deck) {
-        this.deck = deck;
-    }
 
     public byte getRank() {
         return rank;
@@ -65,7 +54,6 @@ public class Pile {
     public String toString() {
         return "Pile{" +
                 "id=" + id +
-                ", deck=" + deck +
                 ", rank=" + rank +
                 ", freq=" + freq +
                 '}';

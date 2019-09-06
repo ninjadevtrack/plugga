@@ -114,7 +114,6 @@ public class Deck {
             piles = new ArrayList<>();
         }
         piles.add(pile);
-        pile.setDeck(this);
     }
 
     public void addCard(DeckCard card) {

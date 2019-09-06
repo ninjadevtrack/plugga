@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `plugga` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `plugga`;
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: plugga
@@ -18,43 +16,14 @@ USE `plugga`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `card`
---
-
-DROP TABLE IF EXISTS `card`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `card` (
-  `card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `last_used` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`card_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `card`
 --
 
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
+INSERT INTO `card` VALUES (1,'2019-09-06 15:10:39'),(2,'2019-09-06 15:10:40'),(3,'2019-09-06 15:10:41'),(4,'2019-09-06 15:10:42'),(5,'2019-09-06 15:10:42'),(6,'2019-09-06 15:10:42'),(7,'2019-09-06 15:10:43'),(8,'2019-09-06 15:10:43'),(9,'2019-09-06 15:10:43'),(10,'2019-09-06 15:10:44'),(11,'2019-09-06 15:11:50'),(12,'2019-09-06 15:11:50'),(13,'2019-09-06 15:11:51'),(14,'2019-09-06 15:11:51'),(15,'2019-09-06 15:11:51'),(16,'2019-09-06 15:11:52'),(17,'2019-09-06 15:11:52'),(18,'2019-09-06 15:11:53'),(19,'2019-09-06 15:11:53'),(20,'2019-09-06 15:11:54');
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `deck`
---
-
-DROP TABLE IF EXISTS `deck`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `deck` (
-  `deck_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) DEFAULT NULL,
-  `image_url` text,
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`deck_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `deck`
@@ -62,31 +31,9 @@ CREATE TABLE `deck` (
 
 LOCK TABLES `deck` WRITE;
 /*!40000 ALTER TABLE `deck` DISABLE KEYS */;
-INSERT INTO `deck` VALUES (1,'Leslie\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 22:55:02'),(2,'Knope\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:40'),(3,'Neo\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:46'),(4,'Matina\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:55'),(5,'Bulbasaur\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:11:05');
+INSERT INTO `deck` VALUES (1,'Leslie\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 22:55:02'),(2,'Knope\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:40'),(3,'Neo\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:46'),(4,'Matina\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:10:55'),(5,'Bulbasaur\'s Deck','http://plugga.com/somefakeimage.jp','2019-09-05 23:11:05'),(6,'Leslie\'s Deck2','http://plugga.com/somefakeimage.jp','2019-09-06 14:48:11'),(7,'Knope\'s Deck2','http://plugga.com/somefakeimage.jp','2019-09-06 14:49:14'),(8,'Neo\'s Deck2','http://plugga.com/somefakeimage.jp','2019-09-06 14:49:20'),(9,'Matina\'s Deck2','http://plugga.com/somefakeimage.jp','2019-09-06 14:49:24'),(10,'Bulbasaur\'s Deck2','http://plugga.com/somefakeimage.jp','2019-09-06 14:49:31');
 /*!40000 ALTER TABLE `deck` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `deck_card`
---
-
-DROP TABLE IF EXISTS `deck_card`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `deck_card` (
-  `deck_card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `deck_id` int(10) unsigned NOT NULL,
-  `card_id` int(10) unsigned NOT NULL,
-  `pile_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`deck_card_id`),
-  KEY `deck_card_id_idx` (`card_id`),
-  KEY `card_deck_id_idx` (`deck_id`),
-  KEY `deck_card_pile_id_idx` (`pile_id`),
-  CONSTRAINT `card_deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`),
-  CONSTRAINT `deck_card_id` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`),
-  CONSTRAINT `deck_card_pile_id` FOREIGN KEY (`pile_id`) REFERENCES `pile` (`pile_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `deck_card`
@@ -94,26 +41,9 @@ CREATE TABLE `deck_card` (
 
 LOCK TABLES `deck_card` WRITE;
 /*!40000 ALTER TABLE `deck_card` DISABLE KEYS */;
+INSERT INTO `deck_card` VALUES (1,1,1,1),(2,1,2,2),(3,2,3,3),(4,2,4,4),(5,3,5,5),(6,3,6,6),(7,4,7,7),(8,4,8,8),(9,5,9,9),(10,5,10,10),(11,6,11,11),(12,6,12,12),(13,7,13,13),(14,7,14,14),(15,8,15,15),(16,8,16,16),(17,9,17,17),(18,9,18,18),(19,10,19,19),(20,10,20,20);
 /*!40000 ALTER TABLE `deck_card` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `pile`
---
-
-DROP TABLE IF EXISTS `pile`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `pile` (
-  `pile_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `deck_id` int(10) unsigned NOT NULL,
-  `rank` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `freq` tinyint(4) unsigned NOT NULL DEFAULT '7',
-  PRIMARY KEY (`pile_id`),
-  KEY `deck_id_idx` (`deck_id`),
-  CONSTRAINT `pile_deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `pile`
@@ -121,26 +51,9 @@ CREATE TABLE `pile` (
 
 LOCK TABLES `pile` WRITE;
 /*!40000 ALTER TABLE `pile` DISABLE KEYS */;
+INSERT INTO `pile` VALUES (1,1,1),(2,1,7),(3,1,1),(4,1,7),(5,1,1),(6,1,7),(7,1,1),(8,1,2),(9,1,1),(10,1,30),(11,1,1),(12,1,7),(13,1,1),(14,1,365),(15,1,30),(16,1,365),(17,1,1),(18,1,2),(19,1,2),(20,1,7);
 /*!40000 ALTER TABLE `pile` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `side`
---
-
-DROP TABLE IF EXISTS `side`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `side` (
-  `side_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `card_id` int(10) unsigned NOT NULL,
-  `image_url` text,
-  `text` text,
-  PRIMARY KEY (`side_id`),
-  KEY `side_card_id_idx` (`card_id`),
-  CONSTRAINT `side_card_id` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `side`
@@ -148,26 +61,9 @@ CREATE TABLE `side` (
 
 LOCK TABLES `side` WRITE;
 /*!40000 ALTER TABLE `side` DISABLE KEYS */;
+INSERT INTO `side` VALUES (1,1,'http://plugga.com/static/some_card_image.gif','How many hearts do octopuses have?'),(2,1,'http://plugga.com/static/some_card_image.gif','Three'),(3,2,'http://plugga.com/static/some_card_image.gif','On which planet is the largest mountain in the solar system found?'),(4,2,'http://plugga.com/static/some_card_image.gif','Mars: the mountain is called Olympus Mons.'),(5,3,'http://plugga.com/static/some_card_image.gif','What is the heaviest organ in the human body?'),(6,3,'http://plugga.com/static/some_card_image.gif','The liver.'),(7,4,'http://plugga.com/static/some_card_image.gif','Who discovered penicillin?'),(8,4,'http://plugga.com/static/some_card_image.gif','Alexander Fleming.'),(9,5,'http://plugga.com/static/some_card_image.gif','Which creature has the largest heart?'),(10,5,'http://plugga.com/static/some_card_image.gif','The blue whale: its heart weighs more than 1,500 pounds.'),(11,6,'http://plugga.com/static/some_card_image.gif','Who developed the special theory of relativity?'),(12,6,'http://plugga.com/static/some_card_image.gif','Albert Einstein.'),(13,7,'http://plugga.com/static/some_card_image.gif','How many hydrogen atoms are in one molecule of water?'),(14,7,'http://plugga.com/static/some_card_image.gif','Two.'),(15,8,'http://plugga.com/static/some_card_image.gif','Who was the first woman to win a Nobel Prize (for Physics in 1903)?'),(16,8,'http://plugga.com/static/some_card_image.gif','Marie Curie.'),(17,9,'http://plugga.com/static/some_card_image.gif','Who performed the first human heart transplant in 1967?'),(18,9,'http://plugga.com/static/some_card_image.gif','Dr. Christiaan Barnard'),(19,10,'http://plugga.com/static/some_card_image.gif','What is the fattest human organ?'),(20,10,'http://plugga.com/static/some_card_image.gif','The brain: it is about 60% fat.'),(21,11,'http://plugga.com/static/some_card_image.gif','Which of these is not found in the nucleus: A. proton, B. neutron, C. electron?'),(22,11,'http://plugga.com/static/some_card_image.gif','Electron.'),(23,12,'http://plugga.com/static/some_card_image.gif','Which planet in our solar system is closest to the sun?'),(24,12,'http://plugga.com/static/some_card_image.gif','Mercury.'),(25,13,'http://plugga.com/static/some_card_image.gif','How many compartments does a cow\'s stomach have?'),(26,13,'http://plugga.com/static/some_card_image.gif','Four.'),(27,14,'http://plugga.com/static/some_card_image.gif','What is the most abundant gas in the earth\'s atmosphere?'),(28,14,'http://plugga.com/static/some_card_image.gif','Nitrogen.'),(29,15,'http://plugga.com/static/some_card_image.gif','What is the longest bone in the human body?'),(30,15,'http://plugga.com/static/some_card_image.gif','The femur (thighbone).'),(31,16,'http://plugga.com/static/some_card_image.gif','What is the chemical symbol for potassium?'),(32,16,'http://plugga.com/static/some_card_image.gif','K'),(33,17,'http://plugga.com/static/some_card_image.gif','Who was the second man to walk on the moon?'),(34,17,'http://plugga.com/static/some_card_image.gif','Buzz Aldrin.'),(35,18,'http://plugga.com/static/some_card_image.gif','Which branch of biology deals with the behavior of animals, usually concentrating on animal behavior under natural conditions?'),(36,18,'http://plugga.com/static/some_card_image.gif','Ethology.'),(37,19,'http://plugga.com/static/some_card_image.gif','Who first formulated the theory of evolution in his book, \"The Origin of Species\"?'),(38,19,'http://plugga.com/static/some_card_image.gif','Charles Darwin.'),(39,20,'http://plugga.com/static/some_card_image.gif','What number on the Beaufort wind scale corresponds to hurricane force?'),(40,20,'http://plugga.com/static/some_card_image.gif','12.');
 /*!40000 ALTER TABLE `side` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `user` (
-  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(16) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` char(68) NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_login` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
@@ -180,30 +76,12 @@ INSERT INTO `user` VALUES (1,'Leslie','leslie@plugga.com','{bcrypt}$2a$04$WG3OFF
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_deck`
---
-
-DROP TABLE IF EXISTS `user_deck`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `user_deck` (
-  `user_deck_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `deck_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`user_deck_id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `deck_id_idx` (`deck_id`),
-  CONSTRAINT `deck_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `user_deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `user_deck`
 --
 
 LOCK TABLES `user_deck` WRITE;
 /*!40000 ALTER TABLE `user_deck` DISABLE KEYS */;
+INSERT INTO `user_deck` VALUES (1,1,1),(2,1,6),(3,2,2),(4,2,7),(5,3,3),(6,3,8),(7,4,4),(8,4,9),(9,5,5),(10,5,10);
 /*!40000 ALTER TABLE `user_deck` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -216,4 +94,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-05 19:18:40
+-- Dump completed on 2019-09-06 12:15:23
