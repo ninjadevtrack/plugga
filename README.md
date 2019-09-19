@@ -2,13 +2,13 @@
 * A flashcard app
 
 ## Technologies
-### Front-End
+### Front End
 * React.js
-### Back-End
+### Back End
 * Spring
 * MySQL
-### Android
-* Kotlin
+### Mobile
+* Android
 ### Misc
 * Docker
 
