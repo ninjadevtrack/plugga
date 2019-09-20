@@ -23,7 +23,6 @@ services:
       - db
     restart: on-failure
 
-
   frontend:
     build: ./frontend
     command: ["npm", "start"]
@@ -33,6 +32,3 @@ services:
       - "3000:3000"
     env_file:
       - ./frontend/frontend-dev.env
-
-volumes:
-  node-modules:
