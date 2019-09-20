@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -22,10 +24,6 @@ public class Deck {
 
     @Column(name = "date_created")
     private Timestamp dateCreated;
-
-    @OneToMany(mappedBy = "deck",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Pile> piles;
 
     @OneToMany(mappedBy = "deck",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -75,14 +73,7 @@ public class Deck {
         this.dateCreated = dateCreated;
     }
 
-    public List<Pile> getPiles() {
-        return piles;
-    }
-
-    public void setPiles(final List<Pile> piles) {
-        this.piles = piles;
-    }
-
+    @JsonIgnore
     public List<DeckCard> getCards() {
         return cards;
     }
@@ -91,6 +82,7 @@ public class Deck {
         this.cards = cards;
     }
 
+    @JsonIgnore
     public List<UserDeck> getUsers() {
         return users;
     }
@@ -107,13 +99,6 @@ public class Deck {
                 ", imageUrl='" + imageUrl + '\'' +
                 ", dateCreated=" + dateCreated +
                 '}';
-    }
-
-    public void addPile(Pile pile) {
-        if (piles == null) {
-            piles = new ArrayList<>();
-        }
-        piles.add(pile);
     }
 
     public void addCard(DeckCard card) {

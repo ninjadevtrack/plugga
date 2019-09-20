@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class Card {
         this.lastUsed = lastUsed;
     }
 
+    @JsonIgnore
     public List<Side> getSides() {
         return sides;
     }
@@ -56,6 +59,7 @@ public class Card {
         this.sides = sides;
     }
 
+    @JsonIgnore
     public List<DeckCard> getDecks() {
         return decks;
     }
