@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +20,7 @@ public class DeckCard {
     private Card card;
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "pile_id")
+    @JoinColumn(name = "pile_id", referencedColumnName = "pile_id")
     private Pile pile;
 
     public DeckCard() {

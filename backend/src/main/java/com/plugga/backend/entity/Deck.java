@@ -73,6 +73,7 @@ public class Deck {
         this.dateCreated = dateCreated;
     }
 
+    @JsonIgnore
     public List<DeckCard> getCards() {
         return cards;
     }

@@ -33,7 +33,6 @@ public class Pile {
         this.id = id;
     }
 
-
     public byte getRank() {
         return rank;
     }

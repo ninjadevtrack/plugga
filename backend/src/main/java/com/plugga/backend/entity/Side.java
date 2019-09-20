@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +14,7 @@ public class Side {
     private int id;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "card_id")
+    @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     private Card card;
 
     @Column(name = "image_url")
@@ -37,6 +39,7 @@ public class Side {
         this.id = id;
     }
 
+    @JsonIgnore
     public Card getCard() {
         return card;
     }

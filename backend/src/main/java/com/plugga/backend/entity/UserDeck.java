@@ -22,7 +22,6 @@ public class UserDeck {
     public UserDeck() {
     }
 
-    @JsonIgnore
     public User getUser() {
         return user;
     }
@@ -31,7 +30,6 @@ public class UserDeck {
         this.user = user;
     }
 
-    @JsonIgnore
     public Deck getDeck() {
         return deck;
     }
