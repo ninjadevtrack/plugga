@@ -32,7 +32,6 @@ public class User {
     private Timestamp lastLogin;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private List<UserDeck> decks;
 
     public User() {
@@ -94,6 +93,7 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
+    @JsonIgnore
     public List<UserDeck> getDecks() {
         return decks;
     }

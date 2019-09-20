@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class UserDeck {
     public UserDeck() {
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }
@@ -28,6 +31,7 @@ public class UserDeck {
         this.user = user;
     }
 
+    @JsonIgnore
     public Deck getDeck() {
         return deck;
     }

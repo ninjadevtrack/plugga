@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -79,6 +81,7 @@ public class Deck {
         this.cards = cards;
     }
 
+    @JsonIgnore
     public List<UserDeck> getUsers() {
         return users;
     }
