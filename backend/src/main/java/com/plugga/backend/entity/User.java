@@ -1,5 +1,7 @@
 package com.plugga.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class User {
     private Timestamp lastLogin;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserDeck> decks;
 
     public User() {

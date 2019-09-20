@@ -25,10 +25,6 @@ public class Deck {
 
     @OneToMany(mappedBy = "deck",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Pile> piles;
-
-    @OneToMany(mappedBy = "deck",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<DeckCard> cards;
 
     @OneToMany(mappedBy = "deck")
@@ -75,14 +71,6 @@ public class Deck {
         this.dateCreated = dateCreated;
     }
 
-    public List<Pile> getPiles() {
-        return piles;
-    }
-
-    public void setPiles(final List<Pile> piles) {
-        this.piles = piles;
-    }
-
     public List<DeckCard> getCards() {
         return cards;
     }
@@ -107,13 +95,6 @@ public class Deck {
                 ", imageUrl='" + imageUrl + '\'' +
                 ", dateCreated=" + dateCreated +
                 '}';
-    }
-
-    public void addPile(Pile pile) {
-        if (piles == null) {
-            piles = new ArrayList<>();
-        }
-        piles.add(pile);
     }
 
     public void addCard(DeckCard card) {
