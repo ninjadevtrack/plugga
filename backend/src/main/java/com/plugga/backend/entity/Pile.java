@@ -15,12 +15,12 @@ public class Pile {
     private byte rank;
 
     @Column(name = "freq")
-    private byte freq;
+    private int freq;
 
     public Pile() {
     }
 
-    public Pile(final byte rank, final byte freq) {
+    public Pile(final byte rank, final int freq) {
         this.rank = rank;
         this.freq = freq;
     }
@@ -41,11 +41,11 @@ public class Pile {
         this.rank = rank;
     }
 
-    public byte getFreq() {
+    public int getFreq() {
         return freq;
     }
 
-    public void setFreq(final byte freq) {
+    public void setFreq(final int freq) {
         this.freq = freq;
     }
 
