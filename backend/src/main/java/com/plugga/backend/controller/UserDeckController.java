@@ -1,6 +1,6 @@
 package com.plugga.backend.controller;
 
-import com.plugga.backend.entity.DeckCard;
+import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,24 +35,24 @@ public class UserDeckController {
         return userDeck;
     }
 
-//    @GetMapping(value = "", params = "deckId")
-//    public List<DeckCard> getByDeckId(@RequestParam("deckId") int deckId){
-//        List<DeckCard> deckCards = deckCardService.findByDeckId(deckId);
-//        if (deckCards == null){
-//            throw new RuntimeException("Could not find deckCards using deckId: " + deckId);
-//        }
-//        return deckCards;
-//    }
-//
-//    @GetMapping(value = "", params = "cardId")
-//    public List<DeckCard> getByCardId(@RequestParam("cardId") int cardId){
-//        List<DeckCard> deckCards = deckCardService.findByCardId(cardId);
-//        if (deckCards == null){
-//            throw new RuntimeException("Could not find deckCards using cardId: " + cardId);
-//        }
-//        return deckCards;
-//    }
-//
+    @GetMapping(value = "", params = "deckId")
+    public List<UserDeck> getByDeckId(@RequestParam("deckId") int deckId){
+        List<UserDeck> userDecks = userDeckService.findByDeckId(deckId);
+        if (userDecks == null){
+            throw new RuntimeException("Could not find userDecks using deckId: " + deckId);
+        }
+        return userDecks;
+    }
+
+    @GetMapping(value = "", params = "userId")
+    public List<UserDeck> getByUserId(@RequestParam("userId") int userId){
+        List<UserDeck> userDecks = userDeckService.findByUserId(userId);
+        if (userDecks == null){
+            throw new RuntimeException("Could not find userDecks using cardId: " + userId);
+        }
+        return userDecks;
+    }
+
 //    @PostMapping("/")
 //    public DeckCard addDeckCard(@RequestBody DeckCard deckCard){
 //        deckCard.setId(0);
