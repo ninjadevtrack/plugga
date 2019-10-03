@@ -1,9 +1,6 @@
 package com.plugga.backend.controller;
 
-import com.plugga.backend.entity.Card;
-import com.plugga.backend.entity.Deck;
 import com.plugga.backend.entity.DeckCard;
-import com.plugga.backend.entity.Pile;
 import com.plugga.backend.service.CardService;
 import com.plugga.backend.service.DeckCardService;
 import com.plugga.backend.service.DeckService;
@@ -45,7 +42,6 @@ public class DeckCardController {
         return deckCard;
     }
 
-    // "/api/deck_cards?deckId=200"
     @GetMapping(value = "", params = "deckId")
     public List<DeckCard> getByDeckId(@RequestParam("deckId") int deckId){
         List<DeckCard> deckCards = deckCardService.findByDeckId(deckId);
@@ -55,7 +51,6 @@ public class DeckCardController {
         return deckCards;
     }
 
-    // "/api/deck_cards?cardId=200"
     @GetMapping(value = "", params = "cardId")
     public List<DeckCard> getByCardId(@RequestParam("cardId") int cardId){
         List<DeckCard> deckCards = deckCardService.findByCardId(cardId);
@@ -84,13 +79,13 @@ public class DeckCardController {
         return deckCard;
     }
 
-//    @DeleteMapping("/{userId}")
-//    public String deleteUser(@PathVariable int userId){
-//        User tempUser = userService.findById(userId);
-//        if (tempUser == null){
-//            throw new RuntimeException("Could not find user using id: " + userId);
-//        }
-//        userService.deleteById(userId);
-//        return "Deleted user with id: " + userId;
-//    }
+    @DeleteMapping("/{deckCardId}")
+    public String deleteDeckCard(@PathVariable int deckCardId){
+        DeckCard tempDeckCard = deckCardService.findById(deckCardId);
+        if (tempDeckCard == null){
+            throw new RuntimeException("Could not find deckCard using id: " + deckCardId);
+        }
+        deckCardService.deleteById(deckCardId);
+        return "Deleted deckCard with id: " + deckCardId;
+    }
 }

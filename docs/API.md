@@ -42,7 +42,7 @@
     }
   ```
 ### PUT
-  * URL `/api/deck_cards`
+  * URL `/api/deck_cards/`
   * Request body. Each field below represents the respective id's `(deckCardId, deckId, cardId, pileId)`
   ```
     {
@@ -53,6 +53,8 @@
     }
   ```
 ### DELETE
+  * URL `/api/deck_cards/{deckCardId}`
+  * Returns `"Deleted deckCard with id: " + deckCardId`
 
 # `/api/decks/`
 # `/api/piles/`
