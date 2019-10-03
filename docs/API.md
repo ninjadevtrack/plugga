@@ -85,6 +85,14 @@
   * By userDeckId `/api/user_decks/{userDeckId}`
   
 ### POST
+  * URL `/api/user_decks/`
+  * Request body. Each field below represents the respective id's `(userId, deckId)`
+  ```
+    {
+      "user": 1,
+      "deck": 7
+    }
+  ```
 ### PUT
 ### DELETE
 

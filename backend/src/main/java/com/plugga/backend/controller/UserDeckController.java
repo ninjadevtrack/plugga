@@ -1,5 +1,6 @@
 package com.plugga.backend.controller;
 
+import com.plugga.backend.entity.DeckCard;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.service.*;
@@ -12,13 +13,14 @@ import java.util.List;
 @RequestMapping("/api/user_decks")
 public class UserDeckController {
     private UserDeckService userDeckService;
-//    private DeckService deckService;
-//    private CardService cardService;
-//    private PileService pileService;
+    private DeckService deckService;
+    private UserService userService;
 
     @Autowired
-    public UserDeckController(UserDeckService userDeckService){
+    public UserDeckController(UserDeckService userDeckService, DeckService deckService, UserService userService){
         this.userDeckService = userDeckService;
+        this.deckService = deckService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -53,16 +55,14 @@ public class UserDeckController {
         return userDecks;
     }
 
-//    @PostMapping("/")
-//    public DeckCard addDeckCard(@RequestBody DeckCard deckCard){
-//        deckCard.setId(0);
-//        deckCardService.save(deckCard);
-//        deckCard.setDeck(deckService.findById(deckCard.getDeck().getId()));
-//        deckCard.setCard(cardService.findById(deckCard.getCard().getId()));
-//        deckCard.setPile(pileService.findById(deckCard.getPile().getId()));
-//        return deckCard;
-//    }
-//
+    @PostMapping("/")
+    public UserDeck addUserDeck(@RequestBody UserDeck userDeck){
+        userDeckService.save(userDeck);
+        userDeck.setDeck(deckService.findById(userDeck.getDeck().getId()));
+        userDeck.setUser(userService.findById(userDeck.getUser().getId()));
+        return userDeck;
+    }
+
 //    @PutMapping("/")
 //    public DeckCard updateDeckCard(@RequestBody DeckCard deckCard){
 //        deckCardService.save(deckCard);
