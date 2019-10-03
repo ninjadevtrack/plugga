@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 @RestController
 public final class TestController {
 
-    @GetMapping
+    @GetMapping("/")
     public final String test() throws UnknownHostException {
         return "Hello from TestController!!!! My address is " + InetAddress.getLocalHost().getHostAddress();
     }

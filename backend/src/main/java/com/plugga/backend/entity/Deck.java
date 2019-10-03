@@ -35,6 +35,12 @@ public class Deck {
     public Deck() {
     }
 
+    public Deck(final int id) {
+        this.id = id;
+        this.name = "";
+        this.imageUrl = "";
+    }
+
     public Deck(String name, String imageUrl, Timestamp dateCreated) {
         this.name = name;
         this.imageUrl = imageUrl;

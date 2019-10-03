@@ -1,29 +1,37 @@
 package com.plugga.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "deck_card")
-@IdClass(DeckCardId.class)
 public class DeckCard {
 
     @Id
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "deck_card_id")
+    private int id;
+
+    @ManyToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "deck_id")
     private Deck deck;
 
-    @Id
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     private Card card;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToOne
     @JoinColumn(name = "pile_id", referencedColumnName = "pile_id")
     private Pile pile;
 
     public DeckCard() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public Deck getDeck() {
@@ -48,5 +56,15 @@ public class DeckCard {
 
     public void setPile(final Pile pile) {
         this.pile = pile;
+    }
+
+    @Override
+    public String toString() {
+        return "DeckCard{" +
+                "id=" + id +
+                ", deck=" + deck +
+                ", card=" + card +
+                ", pile=" + pile +
+                '}';
     }
 }

@@ -20,6 +20,10 @@ public class Pile {
     public Pile() {
     }
 
+    public Pile(final int id) {
+        this.id = id;
+    }
+
     public Pile(final byte rank, final int freq) {
         this.rank = rank;
         this.freq = freq;

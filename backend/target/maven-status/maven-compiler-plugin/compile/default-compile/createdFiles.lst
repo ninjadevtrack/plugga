@@ -1,7 +1,5 @@
-com\plugga\backend\entity\DeckCardId.class
 com\plugga\backend\entity\User.class
 com\plugga\backend\service\UserServiceImpl.class
-com\plugga\backend\entity\DeckCard.class
 com\plugga\backend\entity\Pile.class
 com\plugga\backend\BackendApplication.class
 com\plugga\backend\entity\Side.class

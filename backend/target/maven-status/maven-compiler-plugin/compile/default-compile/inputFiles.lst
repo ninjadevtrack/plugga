@@ -1,5 +1,7 @@
+C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\DeckCardServiceImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\SideService.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\TestController.java
+C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\DeckCardService.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\User.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\UserDeckDAO.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\CardController.java
@@ -14,7 +16,6 @@ C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\Deck.jav
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\UserController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\DeckController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\PileDAO.java
-C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\DeckCardId.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\DeckCard.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\CardService.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\UserDAOImpl.java
@@ -31,6 +32,7 @@ C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\DeckSer
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\UserServiceImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\Side.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\UserDeckId.java
+C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\DeckCardController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\SideDAO.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\PileServiceImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\BackendApplication.java
