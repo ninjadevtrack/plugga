@@ -1,6 +1,6 @@
 package com.plugga.backend.controller;
 
-import com.plugga.backend.entity.DeckCard;
+import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.service.*;
@@ -57,21 +57,21 @@ public class UserDeckController {
 
     @PostMapping("/")
     public UserDeck addUserDeck(@RequestBody UserDeck userDeck){
+        userDeck.setId(0);
         userDeckService.save(userDeck);
         userDeck.setDeck(deckService.findById(userDeck.getDeck().getId()));
         userDeck.setUser(userService.findById(userDeck.getUser().getId()));
         return userDeck;
     }
 
-//    @PutMapping("/")
-//    public DeckCard updateDeckCard(@RequestBody DeckCard deckCard){
-//        deckCardService.save(deckCard);
-//        deckCard.setDeck(deckService.findById(deckCard.getDeck().getId()));
-//        deckCard.setCard(cardService.findById(deckCard.getCard().getId()));
-//        deckCard.setPile(pileService.findById(deckCard.getPile().getId()));
-//        return deckCard;
-//    }
-//
+    @PutMapping("/")
+    public UserDeck updateUserDeck(@RequestBody UserDeck userDeck){
+        userDeckService.save(userDeck);
+        userDeck.setDeck(deckService.findById(userDeck.getDeck().getId()));
+        userDeck.setUser(userService.findById(userDeck.getUser().getId()));
+        return userDeck;
+    }
+
 //    @DeleteMapping("/{deckCardId}")
 //    public String deleteDeckCard(@PathVariable int deckCardId){
 //        DeckCard tempDeckCard = deckCardService.findById(deckCardId);

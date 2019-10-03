@@ -22,6 +22,14 @@ public class UserDeck {
     public UserDeck() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
     public User getUser() {
         return user;
     }
