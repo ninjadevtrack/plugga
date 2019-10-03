@@ -32,11 +32,21 @@ public class DeckCardController {
     }
 
     // "/api/deck_cards?deckId=200"
-    @GetMapping("")
+    @GetMapping(value = "", params = "deckId")
     public List<DeckCard> getByDeckId(@RequestParam("deckId") int deckId){
         List<DeckCard> deckCards = deckCardService.findByDeckId(deckId);
         if (deckCards == null){
             throw new RuntimeException("Could not find deckCards using deckId: " + deckId);
+        }
+        return deckCards;
+    }
+
+    // "/api/deck_cards?cardId=200"
+    @GetMapping(value = "", params = "cardId")
+    public List<DeckCard> getByCardId(@RequestParam("cardId") int cardId){
+        List<DeckCard> deckCards = deckCardService.findByCardId(cardId);
+        if (deckCards == null){
+            throw new RuntimeException("Could not find deckCards using cardId: " + cardId);
         }
         return deckCards;
     }
