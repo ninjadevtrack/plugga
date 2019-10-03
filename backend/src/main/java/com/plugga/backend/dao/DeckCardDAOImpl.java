@@ -34,7 +34,7 @@ public class DeckCardDAOImpl implements DeckCardDAO {
     @Override
     public List<DeckCard> findByDeckId(final int deckId) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<DeckCard> query = currentSession.createQuery("from DeckCard where deck=:deckId", DeckCard.class);
+        Query<DeckCard> query = currentSession.createQuery("from DeckCard where deck_id=:deckId", DeckCard.class);
         query.setParameter("deckId", deckId);
         return query.getResultList();
     }
@@ -42,7 +42,7 @@ public class DeckCardDAOImpl implements DeckCardDAO {
     @Override
     public List<DeckCard> findByCardId(final int cardId) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<DeckCard> query = currentSession.createQuery("from DeckCard where card=:cardId", DeckCard.class);
+        Query<DeckCard> query = currentSession.createQuery("from DeckCard where card_id=:cardId", DeckCard.class);
         query.setParameter("cardId", cardId);
         return query.getResultList();
     }

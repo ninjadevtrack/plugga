@@ -16,7 +16,6 @@ C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\Deck.jav
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\UserController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\DeckController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\PileDAO.java
-C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\DeckCardId.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\DeckCard.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\CardService.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\UserDAOImpl.java

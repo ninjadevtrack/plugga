@@ -1,4 +1,3 @@
-com\plugga\backend\entity\DeckCardId.class
 com\plugga\backend\entity\User.class
 com\plugga\backend\service\UserServiceImpl.class
 com\plugga\backend\entity\DeckCard.class

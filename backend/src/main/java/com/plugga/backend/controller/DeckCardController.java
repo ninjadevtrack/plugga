@@ -31,15 +31,15 @@ public class DeckCardController {
         return deckCard;
     }
 
-//    // "/api/deck_cards?deckId=200"
-//    @GetMapping("")
-//    public List<DeckCard> getByDeckId(@RequestParam("deckId") int deckId){
-//        List<DeckCard> deckCards = deckCardService.findByDeckId(deckId);
-//        if (deckCards == null){
-//            throw new RuntimeException("Could not find deckCards using deckId: " + deckId);
-//        }
-//        return deckCards;
-//    }
+    // "/api/deck_cards?deckId=200"
+    @GetMapping("")
+    public List<DeckCard> getByDeckId(@RequestParam("deckId") int deckId){
+        List<DeckCard> deckCards = deckCardService.findByDeckId(deckId);
+        if (deckCards == null){
+            throw new RuntimeException("Could not find deckCards using deckId: " + deckId);
+        }
+        return deckCards;
+    }
 
 //    @PostMapping("/")
 //    public User addUser(@RequestBody User user){
