@@ -38,4 +38,11 @@ public class UserDeck {
         this.deck = deck;
     }
 
+    @Override
+    public String toString() {
+        return "UserDeck{" +
+                "user=" + user +
+                ", deck=" + deck +
+                '}';
+    }
 }

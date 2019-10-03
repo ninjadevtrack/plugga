@@ -11,15 +11,15 @@ public class DeckCard {
     @Column(name = "deck_card_id")
     private int id;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "deck_id")
     private Deck deck;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     private Card card;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToOne
     @JoinColumn(name = "pile_id", referencedColumnName = "pile_id")
     private Pile pile;
 
@@ -56,5 +56,15 @@ public class DeckCard {
 
     public void setPile(final Pile pile) {
         this.pile = pile;
+    }
+
+    @Override
+    public String toString() {
+        return "DeckCard{" +
+                "id=" + id +
+                ", deck=" + deck +
+                ", card=" + card +
+                ", pile=" + pile +
+                '}';
     }
 }

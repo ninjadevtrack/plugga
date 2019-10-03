@@ -30,6 +30,13 @@ public class Card {
     public Card() {
     }
 
+    public Card(final int id) {
+        this.id = id;
+        this.lastUsed = null;
+        this.sides = null;
+        this.decks = null;
+    }
+
     public Card(final Timestamp lastUsed) {
         this.lastUsed = lastUsed;
     }

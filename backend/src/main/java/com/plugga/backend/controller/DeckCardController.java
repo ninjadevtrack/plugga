@@ -1,7 +1,13 @@
 package com.plugga.backend.controller;
 
+import com.plugga.backend.entity.Card;
+import com.plugga.backend.entity.Deck;
 import com.plugga.backend.entity.DeckCard;
+import com.plugga.backend.entity.Pile;
+import com.plugga.backend.service.CardService;
 import com.plugga.backend.service.DeckCardService;
+import com.plugga.backend.service.DeckService;
+import com.plugga.backend.service.PileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +17,18 @@ import java.util.List;
 @RequestMapping("/api/deck_cards")
 public class DeckCardController {
     private DeckCardService deckCardService;
+    private DeckService deckService;
+    private CardService cardService;
+    private PileService pileService;
 
     @Autowired
-    public DeckCardController(DeckCardService deckCardService){
+    public DeckCardController(DeckCardService deckCardService, DeckService deckService,
+            CardService cardService, PileService pileService){
+
         this.deckCardService = deckCardService;
+        this.deckService = deckService;
+        this.cardService = cardService;
+        this.pileService = pileService;
     }
 
     @GetMapping("/")
@@ -51,14 +65,16 @@ public class DeckCardController {
         return deckCards;
     }
 
-//    @PostMapping("/")
-//    public User addUser(@RequestBody User user){
-//        user.setId(0);
-//        user.setDateCreated(new Timestamp(System.currentTimeMillis()));
-//        userService.save(user);
-//        return user;
-//    }
-//
+    @PostMapping("/")
+    public DeckCard addDeckCard(@RequestBody DeckCard deckCard){
+        deckCard.setId(0);
+        deckCard.setDeck(deckService.findById(deckCard.getDeck().getId()));
+        deckCard.setCard(cardService.findById(deckCard.getCard().getId()));
+        deckCard.setPile(pileService.findById(deckCard.getPile().getId()));
+        deckCardService.save(deckCard);
+        return deckCard;
+    }
+
 //    @PutMapping("/")
 //    public User updateUser(@RequestBody User user){
 //        userService.save(user);
