@@ -1,7 +1,6 @@
 package com.plugga.backend.controller;
 
-import com.plugga.backend.entity.UserDeck;
-import com.plugga.backend.entity.UserDeck;
+import com.plugga.backend.entity.DeckCard;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,13 +71,13 @@ public class UserDeckController {
         return userDeck;
     }
 
-//    @DeleteMapping("/{deckCardId}")
-//    public String deleteDeckCard(@PathVariable int deckCardId){
-//        DeckCard tempDeckCard = deckCardService.findById(deckCardId);
-//        if (tempDeckCard == null){
-//            throw new RuntimeException("Could not find deckCard using id: " + deckCardId);
-//        }
-//        deckCardService.deleteById(deckCardId);
-//        return "Deleted deckCard with id: " + deckCardId;
-//    }
+    @DeleteMapping("/{userDeckId}")
+    public String deleteUserDeck(@PathVariable int userDeckId){
+        UserDeck tempUserDeck = userDeckService.findById(userDeckId);
+        if (tempUserDeck == null){
+            throw new RuntimeException("Could not find userDeck using id: " + userDeckId);
+        }
+        userDeckService.deleteById(userDeckId);
+        return "Deleted userDeck with id: " + userDeckId;
+    }
 }

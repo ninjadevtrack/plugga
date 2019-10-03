@@ -54,7 +54,7 @@
   ```
 ### DELETE
   * URL `/api/deck_cards/{deckCardId}`
-  * Returns `"Deleted deckCard with id: " + deckCardId`
+  * Returns `"Deleted deckCard with id: {deckCardId}"`
 
 # `/api/decks/`
 # `/api/piles/`
@@ -105,5 +105,7 @@
     }
   ```
 ### DELETE
+  * URL `/api/user_decks/{userDeckId}`
+  * Returns `"Deleted userDeck with id: {userDeckId}"`
 
 # `/api/users/`
