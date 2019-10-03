@@ -13,6 +13,7 @@ C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\DeckDAO.jav
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\Card.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\CardDAOImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\Deck.java
+C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\UserDeckController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\UserController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\DeckController.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\PileDAO.java
@@ -31,8 +32,9 @@ C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\SideDAOImpl
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\DeckService.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\UserServiceImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\Side.java
-C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\entity\UserDeckId.java
+C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\UserDeckService.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\controller\DeckCardController.java
+C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\UserDeckServiceImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\dao\SideDAO.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\service\PileServiceImpl.java
 C:\Users\Owner\Plugga\.\backend\src\main\java\com\plugga\backend\BackendApplication.java

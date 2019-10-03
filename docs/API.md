@@ -60,4 +60,32 @@
 # `/api/piles/`
 # `/api/sides/`
 # `/api/user_decks/`
+  * Returned body (will be in an array `[]` if more than one)
+  ```
+    {
+      "user": {
+          "id": 1,
+          "name": "Leslie",
+          "email": "leslie@plugga.com",
+          "dateCreated": "2019-07-12T00:55:46.000+0000",
+          "lastLogin": null
+      },
+      "deck": {
+          "id": 1,
+          "name": "Leslie's Deck",
+          "imageUrl": "http://plugga.com/somefakeimage.jp",
+          "dateCreated": "2019-09-05T22:55:02.000+0000"
+      }
+    }
+  ```
+### GET
+  * All objects `/api/user_decks/`
+  * All by deckId `/api/user_decks?deckId={deckId}`
+  * All by userId `/api/user_decks?userId={userId}`
+  * By userDeckId `/api/user_decks/{userDeckId}`
+  
+### POST
+### PUT
+### DELETE
+
 # `/api/users/`
