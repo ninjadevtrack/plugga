@@ -56,7 +56,7 @@
   `Build Module` and LiveReload will be triggered.
 * Optionally, to get IntelliJ to auto compile and build on saves, refer to the following 
   `https://stackoverflow.com/questions/12744303/intellij-idea-java-classes-not-auto-compiling-on-save` 
-* Note that this doesn't seem to work for Hibernate related stuff
+* Note that this doesn't seem to work for Hibernate / entity / bean related stuff
 
 ### Database
 #### Set up db module in IntelliJ

@@ -34,7 +34,7 @@ public class UserDeckDAOImpl implements UserDeckDAO {
     @Override
     public List<UserDeck> findByUserId(final int userId) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<UserDeck> query = currentSession.createQuery("from UserDeck where user=:userId", UserDeck.class);
+        Query<UserDeck> query = currentSession.createQuery("from UserDeck where user_id=:userId", UserDeck.class);
         query.setParameter("userId", userId);
         return query.getResultList();
     }
@@ -42,7 +42,7 @@ public class UserDeckDAOImpl implements UserDeckDAO {
     @Override
     public List<UserDeck> findByDeckId(final int deckId) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<UserDeck> query = currentSession.createQuery("from UserDeck where deck=:deckId", UserDeck.class);
+        Query<UserDeck> query = currentSession.createQuery("from UserDeck where deck_id=:deckId", UserDeck.class);
         query.setParameter("deckId", deckId);
         return query.getResultList();
     }

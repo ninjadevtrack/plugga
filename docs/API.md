@@ -36,9 +36,9 @@
   * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
   ```
     {
-        "deck": 2,
-        "card": 7,
-        "pile": 1
+      "deck": 2,
+      "card": 7,
+      "pile": 1
     }
   ```
 ### PUT
@@ -46,18 +46,66 @@
   * Request body. Each field below represents the respective id's `(deckCardId, deckId, cardId, pileId)`
   ```
     {
-        "id": 24,
-        "deck": 4,
-        "card": 7,
-        "pile": 1
+      "id": 24,
+      "deck": 4,
+      "card": 7,
+      "pile": 1
     }
   ```
 ### DELETE
   * URL `/api/deck_cards/{deckCardId}`
-  * Returns `"Deleted deckCard with id: " + deckCardId`
+  * Returns `"Deleted deckCard with id: {deckCardId}"`
 
 # `/api/decks/`
 # `/api/piles/`
 # `/api/sides/`
-# `/api/users/`
 # `/api/user_decks/`
+  * Returned body (will be in an array `[]` if more than one)
+  ```
+    {
+      "id": 1,
+      "user": {
+        "id": 1,
+        "name": "Leslie",
+        "email": "leslie@plugga.com",
+        "dateCreated": "2019-07-12T00:55:46.000+0000",
+        "lastLogin": null
+      },
+      "deck": {
+        "id": 1,
+        "name": "Leslie's Deck",
+        "imageUrl": "http://plugga.com/somefakeimage.jp",
+        "dateCreated": "2019-09-05T22:55:02.000+0000"
+      }
+    }
+  ```
+### GET
+  * All objects `/api/user_decks/`
+  * All by deckId `/api/user_decks?deckId={deckId}`
+  * All by userId `/api/user_decks?userId={userId}`
+  * By userDeckId `/api/user_decks/{userDeckId}`
+  
+### POST
+  * URL `/api/user_decks/`
+  * Request body. Each field below represents the respective id's `(userId, deckId)`
+  ```
+    {
+      "user": 1,
+      "deck": 7
+    }
+  ```
+### PUT
+  * URL `/api/user_decks/`
+  * Request body. Each field below represents the respective id's `(userDeckId, userId, deckId)`
+  ```
+    {
+	  "id": 1,
+	  "user": 1,
+	  "deck": 7
+    }
+  ```
+### DELETE
+  * URL `/api/user_decks/{userDeckId}`
+  * Returns `"Deleted userDeck with id: {userDeckId}"`
+
+# `/api/users/`
