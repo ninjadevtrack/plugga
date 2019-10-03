@@ -1,5 +1,6 @@
 package com.plugga.backend.controller;
 
+import com.plugga.backend.entity.DeckCard;
 import com.plugga.backend.entity.UserDeck;
 import com.plugga.backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,15 @@ public class UserDeckController {
         return userDeckService.findAll();
     }
 
-//    @GetMapping("/{deckCardId}")
-//    public DeckCard getDeckCard(@PathVariable int deckCardId){
-//        DeckCard deckCard = deckCardService.findById(deckCardId);
-//        if (deckCard == null){
-//            throw new RuntimeException("Could not find deckCard using id: " + deckCardId);
-//        }
-//        return deckCard;
-//    }
-//
+    @GetMapping("/{userDeckId}")
+    public UserDeck getUserDeck(@PathVariable int userDeckId){
+        UserDeck userDeck = userDeckService.findById(userDeckId);
+        if (userDeck == null){
+            throw new RuntimeException("Could not find userDeck using id: " + userDeckId);
+        }
+        return userDeck;
+    }
+
 //    @GetMapping(value = "", params = "deckId")
 //    public List<DeckCard> getByDeckId(@RequestParam("deckId") int deckId){
 //        List<DeckCard> deckCards = deckCardService.findByDeckId(deckId);
