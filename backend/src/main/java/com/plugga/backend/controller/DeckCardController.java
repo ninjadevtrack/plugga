@@ -68,19 +68,22 @@ public class DeckCardController {
     @PostMapping("/")
     public DeckCard addDeckCard(@RequestBody DeckCard deckCard){
         deckCard.setId(0);
+        deckCardService.save(deckCard);
         deckCard.setDeck(deckService.findById(deckCard.getDeck().getId()));
         deckCard.setCard(cardService.findById(deckCard.getCard().getId()));
         deckCard.setPile(pileService.findById(deckCard.getPile().getId()));
-        deckCardService.save(deckCard);
         return deckCard;
     }
 
-//    @PutMapping("/")
-//    public User updateUser(@RequestBody User user){
-//        userService.save(user);
-//        return user;
-//    }
-//
+    @PutMapping("/")
+    public DeckCard updateDeckCard(@RequestBody DeckCard deckCard){
+        deckCardService.save(deckCard);
+        deckCard.setDeck(deckService.findById(deckCard.getDeck().getId()));
+        deckCard.setCard(cardService.findById(deckCard.getCard().getId()));
+        deckCard.setPile(pileService.findById(deckCard.getPile().getId()));
+        return deckCard;
+    }
+
 //    @DeleteMapping("/{userId}")
 //    public String deleteUser(@PathVariable int userId){
 //        User tempUser = userService.findById(userId);
