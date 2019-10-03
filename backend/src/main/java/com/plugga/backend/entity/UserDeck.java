@@ -1,21 +1,21 @@
 package com.plugga.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_deck")
-@IdClass(UserDeckId.class)
 public class UserDeck {
 
     @Id
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_deck_id")
+    private int id;
+
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
-    @Id
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "deck_id")
     private Deck deck;
 
