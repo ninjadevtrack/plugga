@@ -1,20 +1,20 @@
 package com.plugga.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "deck_card")
-@IdClass(DeckCardId.class)
 public class DeckCard {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "deck_card_id")
+    private int id;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "deck_id", referencedColumnName = "deck_id")
     private Deck deck;
 
-    @Id
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     private Card card;
@@ -24,6 +24,14 @@ public class DeckCard {
     private Pile pile;
 
     public DeckCard() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public Deck getDeck() {
