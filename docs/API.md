@@ -59,5 +59,5 @@
 # `/api/decks/`
 # `/api/piles/`
 # `/api/sides/`
-# `/api/users/`
 # `/api/user_decks/`
+# `/api/users/`
