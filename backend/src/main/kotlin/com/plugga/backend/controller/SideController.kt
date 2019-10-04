@@ -2,6 +2,7 @@ package com.plugga.backend.controller
 
 
 import com.plugga.backend.entity.Side
+import com.plugga.backend.entity.UserDeck
 import com.plugga.backend.service.SideService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -19,6 +20,11 @@ constructor(private val sideService: SideService) {
     @GetMapping("/{sideId}")
     fun getSide(@PathVariable sideId: Int): Side {
         return sideService.findById(sideId) ?: throw RuntimeException("Could not find side using id: $sideId")
+    }
+
+    @GetMapping(value = [""], params = ["cardId"])
+    fun getByCardId(@RequestParam("cardId") cardId: Int): List<Side> {
+        return sideService.findByCardId(cardId)
     }
 
     @PostMapping("/")

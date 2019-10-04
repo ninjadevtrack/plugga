@@ -24,7 +24,7 @@ constructor(private val entityManager: EntityManager) : SideDAO {
 
     override fun findByCardId(cardId: Int): MutableList<Side> {
         val currentSession = entityManager.unwrap(Session::class.java)
-        val query = currentSession.createQuery("from Side where card=:cardId", Side::class.java)
+        val query = currentSession.createQuery("from Side where card_id=:cardId", Side::class.java)
         query.setParameter("cardId", cardId)
         return query.resultList
     }
