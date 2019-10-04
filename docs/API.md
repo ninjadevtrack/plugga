@@ -38,7 +38,7 @@
  
 ### PUT
  * URL `/api/cards/`
- * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+ * Request body. See POST section above
  
 ### DELETE
   * URL `/api/cards/{cardId}`
