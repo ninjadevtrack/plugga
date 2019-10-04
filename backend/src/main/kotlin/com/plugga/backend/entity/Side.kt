@@ -1,6 +1,11 @@
 package com.plugga.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
+import com.fasterxml.jackson.annotation.JsonIdentityReference
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.plugga.backend.jackson.EntityIdResolver
+import java.awt.SystemColor.text
 
 import javax.persistence.*
 
@@ -13,9 +18,9 @@ class Side {
     @Column(name = "side_id")
     var id: Int = 0
 
-    @ManyToOne(cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
+    @ManyToOne
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
-    @get:JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
     var card: Card? = null
 
     @Column(name = "image_url")
@@ -25,6 +30,10 @@ class Side {
     var text: String? = null
 
     constructor() {}
+
+    constructor(id: Int) {
+        this.id = id
+    }
 
     constructor(imageUrl: String, text: String) {
         this.imageUrl = imageUrl

@@ -3,7 +3,47 @@
 ## Making requests with tokens
 
 # `/api/cards/`
+  * Returned body (will be in an array `[]` if more than one). 
+    See section on `/api/sides/` for info on what is in 'sides' field.
+    See section on `/api/deck_cards/` for info on what is in 'decks' field.
+    
+    ```
+    {
+      "id": 1,
+      "lastUsed": "2019-09-06T15:10:39.000+0000",
+      "sides": [],
+      "decks": []
+    }
+    ```
 
+### GET
+  * All objects `/api/cards/`
+  * All by deckId `/api/cards?deckId={deckId}`
+  * By cardId `/api/cards/{cardId}`
+  
+### POST
+ * URL `/api/cards/`
+ * Request body. All fields are optional.
+   * `lastUsed` can be omitted, null, or a timestamp.
+   * `sides` can be omitted, an empty array `[]`, or populated with sideIds.
+   * `decks` can be omitted, an empty array `[]`, or populated with deckIds.
+   * If all three fields are omitted, simply send an empty object `{}`
+ ```
+{
+	"lastUsed": "2019-09-05T22:55:02.000+0000",
+	"sides": [1, 3],
+	"decks": [2, 7]
+}
+ ```
+ 
+### PUT
+ * URL `/api/cards/`
+ * Request body. See POST section above
+ 
+### DELETE
+  * URL `/api/cards/{cardId}`
+  * Returns `"Deleted card with id: {cardId}"`
+  
 # `/api/deck_cards/`
   * Returned body (will be in an array `[]` if more than one)
     ```
@@ -59,6 +99,47 @@
 # `/api/decks/`
 # `/api/piles/`
 # `/api/sides/`
+  * Returned body (will be in an array `[]` if more than one)
+  ```
+  {
+    "id": 33,
+    "card": 17,
+    "imageUrl": "http://plugga.com/static/some_card_image.gif",
+    "text": "Who was the second man to walk on the moon?"
+  }
+  ```
+
+### GET
+  * All objects `/api/sides/`
+  * All by cardId `/api/sides?cardId={cardId}`
+  * By sideId `/api/sides/{sideId}`
+
+### POST
+  * URL `/api/sides/`
+  * Request body. Each field below represents the respective id's `(cardId)`
+  ```
+  {
+    "card": 7,
+  	"imageUrl": "http://plugga.com/static/some_card_image.gif",
+  	"text": "side-text-here"
+  }
+  ```
+### PUT
+  * URL `/api/sides/`
+  * Request body. Each field below represents the respective id's `(sideId, cardId)`
+  ```
+  {
+	"id": 33,
+    "card": 7,
+    "imageUrl": "updated-url",
+    "text": "updated-text"
+  }
+  ```
+  
+### DELETE
+  * URL `/api/sides{sideId}`
+  * Returns `"Deleted side with id: {sidesId}"`
+  
 # `/api/user_decks/`
   * Returned body (will be in an array `[]` if more than one)
   ```

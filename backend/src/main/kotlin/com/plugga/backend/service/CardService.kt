@@ -7,6 +7,8 @@ interface CardService {
 
     fun findById(id: Int): Card?
 
+    fun findByDeckId(id: Int): MutableList<Card>
+
     fun save(card: Card)
 
     fun deleteById(id: Int)
