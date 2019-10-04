@@ -3,9 +3,9 @@ package com.plugga.backend.service
 import com.plugga.backend.entity.Deck
 
 interface DeckService {
-    fun findAll(): List<Deck>
+    fun findAll(): MutableList<Deck>
 
-    fun findById(id: Int): Deck
+    fun findById(id: Int): Deck?
 
     fun save(deck: Deck)
 

@@ -3,7 +3,7 @@ package com.plugga.backend.service
 import com.plugga.backend.entity.Card
 
 interface CardService {
-    fun findAll(): List<Card>
+    fun findAll(): MutableList<Card>
 
     fun findById(id: Int): Card?
 

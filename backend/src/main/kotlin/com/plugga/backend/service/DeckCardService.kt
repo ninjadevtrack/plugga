@@ -3,13 +3,13 @@ package com.plugga.backend.service
 import com.plugga.backend.entity.DeckCard
 
 interface DeckCardService {
-    fun findAll(): List<DeckCard>
+    fun findAll(): MutableList<DeckCard>
 
-    fun findById(id: Int): DeckCard
+    fun findById(id: Int): DeckCard?
 
-    fun findByDeckId(id: Int): List<DeckCard>
+    fun findByDeckId(id: Int): MutableList<DeckCard>
 
-    fun findByCardId(id: Int): List<DeckCard>
+    fun findByCardId(id: Int): MutableList<DeckCard>
 
     fun save(deckCard: DeckCard)
 
