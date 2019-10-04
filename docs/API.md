@@ -3,7 +3,34 @@
 ## Making requests with tokens
 
 # `/api/cards/`
+  * Returned body (will be in an array `[]` if more than one). 
+    See section on `/api/sides/` for info on what is in 'sides' field.
+    See section on `/api/deck_cards/` for info on what is in 'decks' field.
+    
+    ```
+    {
+      "id": 1,
+      "lastUsed": "2019-09-06T15:10:39.000+0000",
+      "sides": [],
+      "decks": []
+    }
+    ```
 
+### GET
+  * All objects `/api/cards/`
+  * All by deckId `/api/deck_cards?deckId={deckId}`
+  * All by cardId `/api/deck_cards?cardId={cardId}`
+  * By deckCardId `/api/deck_cards/{deckCardId}`
+### POST
+ * URL `/api/deck_cards/`
+ * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+### PUT
+ * URL `/api/deck_cards/`
+ * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+### DELETE
+  * URL `/api/deck_cards/{deckCardId}`
+  * Returns `"Deleted deckCard with id: {deckCardId}"`
+  
 # `/api/deck_cards/`
   * Returned body (will be in an array `[]` if more than one)
     ```

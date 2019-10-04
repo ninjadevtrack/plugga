@@ -1,12 +1,22 @@
 package com.plugga.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
+import com.fasterxml.jackson.annotation.JsonIdentityReference
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.plugga.backend.jackson.EntityIdResolver
 
 import javax.persistence.*
 import java.sql.Timestamp
 
 @Entity
 @Table(name = "deck")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator::class,
+        property = "id",
+        resolver = EntityIdResolver::class,
+        scope = Deck::class
+)
 class Deck {
 
     @Id
@@ -23,8 +33,8 @@ class Deck {
     @Column(name = "date_created")
     var dateCreated: Timestamp? = null
 
-    @OneToMany(mappedBy = "deck", cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
-    private var cards: MutableList<DeckCard>? = null
+    @OneToMany(mappedBy = "deck")
+    var cards: MutableList<DeckCard>? = null
 
     @OneToMany(mappedBy = "deck")
     @get:JsonIgnore
@@ -42,15 +52,6 @@ class Deck {
         this.name = name
         this.imageUrl = imageUrl
         this.dateCreated = dateCreated
-    }
-
-    @JsonIgnore
-    fun getCards(): MutableList<DeckCard>? {
-        return cards
-    }
-
-    fun setCards(cards: MutableList<DeckCard>) {
-        this.cards = cards
     }
 
     override fun toString(): String {

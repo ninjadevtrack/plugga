@@ -30,8 +30,8 @@ class Card {
     @OneToMany(mappedBy = "card", cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
     var sides: MutableList<Side>? = null
 
-    @OneToMany(mappedBy = "card", cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
-    @get:JsonIgnore
+    @OneToMany(mappedBy = "card")
+    @JsonIdentityReference(alwaysAsId = true)
     var decks: MutableList<DeckCard>? = null
 
     constructor() {}
