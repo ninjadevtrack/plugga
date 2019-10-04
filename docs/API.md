@@ -59,6 +59,24 @@
 # `/api/decks/`
 # `/api/piles/`
 # `/api/sides/`
+  * Returned body (will be in an array `[]` if more than one)
+  ```
+  {
+    "id": 3,
+    "imageUrl": "http://plugga.com/static/some_card_image.gif",
+    "text": "On which planet is the largest mountain in the solar system found?"
+  }
+  ```
+
+### GET
+  * All objects `/api/sides/`
+  * All by cardId `/api/sides?cardId={cardId}`
+  * By sideId `/api/sides/{sideId}`
+
+### POST
+### PUT
+### DELETE
+
 # `/api/user_decks/`
   * Returned body (will be in an array `[]` if more than one)
   ```

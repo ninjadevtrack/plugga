@@ -18,7 +18,6 @@ class Card {
     var lastUsed: Timestamp? = null
 
     @OneToMany(mappedBy = "card", cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
-    @get:JsonIgnore
     var sides: MutableList<Side>? = null
 
     @OneToMany(mappedBy = "card", cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
