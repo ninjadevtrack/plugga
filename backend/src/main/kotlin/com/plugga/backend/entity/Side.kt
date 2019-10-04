@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonIdentityReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.plugga.backend.jackson.EntityIdResolver
+import java.awt.SystemColor.text
 
 import javax.persistence.*
 
@@ -16,10 +18,9 @@ class Side {
     @Column(name = "side_id")
     var id: Int = 0
 
-    @ManyToOne(cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
+    @ManyToOne
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator::class, property="id")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
     var card: Card? = null
 
     @Column(name = "image_url")

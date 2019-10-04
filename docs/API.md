@@ -62,9 +62,10 @@
   * Returned body (will be in an array `[]` if more than one)
   ```
   {
-    "id": 3,
+    "id": 33,
+    "card": 17,
     "imageUrl": "http://plugga.com/static/some_card_image.gif",
-    "text": "On which planet is the largest mountain in the solar system found?"
+    "text": "Who was the second man to walk on the moon?"
   }
   ```
 
