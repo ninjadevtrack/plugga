@@ -35,7 +35,7 @@ constructor(private val pileService: PileService) {
 
     @DeleteMapping("/{pileId}")
     fun deletePile(@PathVariable pileId: Int): String {
-        val tempPile = pileService.findById(pileId) ?: throw RuntimeException("Could not find pile using id: $pileId")
+        pileService.findById(pileId) ?: throw RuntimeException("Could not find pile using id: $pileId")
         pileService.deleteById(pileId)
         return "Deleted pile with id: $pileId"
     }

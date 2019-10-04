@@ -35,7 +35,7 @@ constructor(private val cardService: CardService) {
 
     @DeleteMapping("/{cardId}")
     fun deleteCard(@PathVariable cardId: Int): String {
-        val tempCard = cardService.findById(cardId) ?: throw RuntimeException("Could not find card using id: $cardId")
+        cardService.findById(cardId) ?: throw RuntimeException("Could not find card using id: $cardId")
         cardService.deleteById(cardId)
         return "Deleted card with id: $cardId"
     }

@@ -46,7 +46,7 @@ constructor(private val userService: UserService) {
 
     @DeleteMapping("/{userId}")
     fun deleteUser(@PathVariable userId: Int): String {
-        val tempUser = userService.findById(userId) ?: throw RuntimeException("Could not find user using id: $userId")
+        userService.findById(userId) ?: throw RuntimeException("Could not find user using id: $userId")
         userService.deleteById(userId)
         return "Deleted user with id: $userId"
     }

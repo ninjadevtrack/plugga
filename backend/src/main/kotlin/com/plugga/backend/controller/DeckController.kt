@@ -38,7 +38,7 @@ constructor(private val deckService: DeckService) {
 
     @DeleteMapping("/{deckId}")
     fun deleteDeck(@PathVariable deckId: Int): String {
-        val tempDeck = deckService.findById(deckId) ?: throw RuntimeException("Could not find deck using id: $deckId")
+        deckService.findById(deckId) ?: throw RuntimeException("Could not find deck using id: $deckId")
         deckService.deleteById(deckId)
         return "Deleted user with id: $deckId"
     }

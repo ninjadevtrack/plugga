@@ -25,16 +25,14 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
                 ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
     }
 
-    @GetMapping(value = "", params = ["deckId"])
+    @GetMapping(value = [""], params = ["deckId"])
     fun getByDeckId(@RequestParam("deckId") deckId: Int): List<DeckCard> {
         return deckCardService.findByDeckId(deckId)
-                ?: throw RuntimeException("Could not find deckCards using deckId: $deckId")
     }
 
-    @GetMapping(value = "", params = ["cardId"])
+    @GetMapping(value = [""], params = ["cardId"])
     fun getByCardId(@RequestParam("cardId") cardId: Int): List<DeckCard> {
         return deckCardService.findByCardId(cardId)
-                ?: throw RuntimeException("Could not find deckCards using cardId: $cardId")
     }
 
     @PostMapping("/")
@@ -58,8 +56,7 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
 
     @DeleteMapping("/{deckCardId}")
     fun deleteDeckCard(@PathVariable deckCardId: Int): String {
-        val tempDeckCard = deckCardService.findById(deckCardId)
-                ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
+        deckCardService.findById(deckCardId) ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
         deckCardService.deleteById(deckCardId)
         return "Deleted deckCard with id: $deckCardId"
     }

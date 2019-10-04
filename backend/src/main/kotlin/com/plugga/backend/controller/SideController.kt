@@ -36,7 +36,7 @@ constructor(private val sideService: SideService) {
 
     @DeleteMapping("/{sideId}")
     fun deleteSide(@PathVariable sideId: Int): String {
-        val tempSide = sideService.findById(sideId) ?: throw RuntimeException("Could not find side using id: $sideId")
+        sideService.findById(sideId) ?: throw RuntimeException("Could not find side using id: $sideId")
         sideService.deleteById(sideId)
         return "Deleted side with id: $sideId"
     }

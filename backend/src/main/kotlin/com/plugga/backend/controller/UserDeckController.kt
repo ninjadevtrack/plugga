@@ -22,16 +22,14 @@ constructor(private val userDeckService: UserDeckService, private val deckServic
                 ?: throw RuntimeException("Could not find userDeck using id: $userDeckId")
     }
 
-    @GetMapping(value = "", params = ["deckId"])
+    @GetMapping(value = [""], params = ["deckId"])
     fun getByDeckId(@RequestParam("deckId") deckId: Int): List<UserDeck> {
         return userDeckService.findByDeckId(deckId)
-                ?: throw RuntimeException("Could not find userDecks using deckId: $deckId")
     }
 
-    @GetMapping(value = "", params = ["userId"])
+    @GetMapping(value = [""], params = ["userId"])
     fun getByUserId(@RequestParam("userId") userId: Int): List<UserDeck> {
         return userDeckService.findByUserId(userId)
-                ?: throw RuntimeException("Could not find userDecks using cardId: $userId")
     }
 
     @PostMapping("/")
@@ -53,8 +51,7 @@ constructor(private val userDeckService: UserDeckService, private val deckServic
 
     @DeleteMapping("/{userDeckId}")
     fun deleteUserDeck(@PathVariable userDeckId: Int): String {
-        val tempUserDeck = userDeckService.findById(userDeckId)
-                ?: throw RuntimeException("Could not find userDeck using id: $userDeckId")
+        userDeckService.findById(userDeckId)?: throw RuntimeException("Could not find userDeck using id: $userDeckId")
         userDeckService.deleteById(userDeckId)
         return "Deleted userDeck with id: $userDeckId"
     }
