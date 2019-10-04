@@ -2,7 +2,6 @@ package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Pile
 import org.hibernate.Session
-import org.hibernate.query.Query
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -12,13 +11,13 @@ import javax.persistence.EntityManager
 class PileDAOImpl @Autowired
 constructor(private val entityManager: EntityManager) : PileDAO {
 
-    override fun findAll(): List<Pile> {
+    override fun findAll(): MutableList<Pile> {
         val currentSession = entityManager.unwrap(Session::class.java)
         val query = currentSession.createQuery("from Pile", Pile::class.java)
         return query.resultList
     }
 
-    override fun findById(id: Int): Pile {
+    override fun findById(id: Int): Pile? {
         val currentSession = entityManager.unwrap(Session::class.java)
         return currentSession.get(Pile::class.java, id)
     }

@@ -2,7 +2,6 @@ package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Deck
 import org.hibernate.Session
-import org.hibernate.query.Query
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -12,13 +11,13 @@ import javax.persistence.EntityManager
 class DeckDAOImpl @Autowired
 constructor(private val entityManager: EntityManager) : DeckDAO {
 
-    override fun findAll(): List<Deck> {
+    override fun findAll(): MutableList<Deck> {
         val currentSession = entityManager.unwrap(Session::class.java)
         val query = currentSession.createQuery("from Deck", Deck::class.java)
         return query.resultList
     }
 
-    override fun findById(id: Int): Deck {
+    override fun findById(id: Int): Deck? {
         val currentSession = entityManager.unwrap(Session::class.java)
         return currentSession.get(Deck::class.java, id)
     }

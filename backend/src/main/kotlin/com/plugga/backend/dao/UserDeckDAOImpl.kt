@@ -2,7 +2,6 @@ package com.plugga.backend.dao
 
 import com.plugga.backend.entity.UserDeck
 import org.hibernate.Session
-import org.hibernate.query.Query
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -12,25 +11,25 @@ import javax.persistence.EntityManager
 class UserDeckDAOImpl @Autowired
 constructor(private val entityManager: EntityManager) : UserDeckDAO {
 
-    override fun findAll(): List<UserDeck> {
+    override fun findAll(): MutableList<UserDeck> {
         val currentSession = entityManager.unwrap(Session::class.java)
         val query = currentSession.createQuery("from UserDeck", UserDeck::class.java)
         return query.resultList
     }
 
-    override fun findById(id: Int): UserDeck {
+    override fun findById(id: Int): UserDeck? {
         val currentSession = entityManager.unwrap(Session::class.java)
         return currentSession.get(UserDeck::class.java, id)
     }
 
-    override fun findByUserId(userId: Int): List<UserDeck> {
+    override fun findByUserId(userId: Int): MutableList<UserDeck> {
         val currentSession = entityManager.unwrap(Session::class.java)
         val query = currentSession.createQuery("from UserDeck where user_id=:userId", UserDeck::class.java)
         query.setParameter("userId", userId)
         return query.resultList
     }
 
-    override fun findByDeckId(deckId: Int): List<UserDeck> {
+    override fun findByDeckId(deckId: Int): MutableList<UserDeck> {
         val currentSession = entityManager.unwrap(Session::class.java)
         val query = currentSession.createQuery("from UserDeck where deck_id=:deckId", UserDeck::class.java)
         query.setParameter("deckId", deckId)

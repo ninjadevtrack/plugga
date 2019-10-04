@@ -12,7 +12,7 @@ import javax.persistence.EntityManager
 class CardDAOImpl @Autowired
 constructor(private val entityManager: EntityManager) : CardDAO {
 
-    override fun findAll(): List<Card> {
+    override fun findAll(): MutableList<Card> {
         val currentSession = entityManager.unwrap(Session::class.java)
         val query = currentSession.createQuery("from Card", Card::class.java)
         return query.resultList
