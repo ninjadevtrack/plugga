@@ -28,6 +28,10 @@ class DeckCard {
 
     constructor() {}
 
+    constructor(id: Int) {
+        this.id = id
+    }
+
     override fun toString(): String {
         return "DeckCard{" +
                 "id=" + id +

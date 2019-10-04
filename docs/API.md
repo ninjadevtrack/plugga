@@ -20,15 +20,29 @@
   * All objects `/api/cards/`
   * All by deckId `/api/cards?deckId={deckId}`
   * By cardId `/api/cards/{cardId}`
+  
 ### POST
- * URL `/api/deck_cards/`
- * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+ * URL `/api/cards/`
+ * Request body. All fields are optional.
+   * `lastUsed` can be omitted, null, or a timestamp.
+   * `sides` can be omitted, an empty array `[]`, or populated with sideIds.
+   * `decks` can be omitted, an empty array `[]`, or populated with deckIds.
+   * If all three fields are omitted, simply send an empty object `{}`
+ ```
+{
+	"lastUsed": "2019-09-05T22:55:02.000+0000",
+	"sides": [1, 3],
+	"decks": [2, 7]
+}
+ ```
+ 
 ### PUT
- * URL `/api/deck_cards/`
+ * URL `/api/cards/`
  * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+ 
 ### DELETE
-  * URL `/api/deck_cards/{deckCardId}`
-  * Returns `"Deleted deckCard with id: {deckCardId}"`
+  * URL `/api/cards/{cardId}`
+  * Returns `"Deleted card with id: {cardId}"`
   
 # `/api/deck_cards/`
   * Returned body (will be in an array `[]` if more than one)

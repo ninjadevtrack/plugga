@@ -27,7 +27,7 @@ class Card {
     @Column(name = "last_used")
     var lastUsed: Timestamp? = null
 
-    @OneToMany(mappedBy = "card", cascade = [CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
+    @OneToMany(mappedBy = "card")
     var sides: MutableList<Side>? = null
 
     @OneToMany(mappedBy = "card")

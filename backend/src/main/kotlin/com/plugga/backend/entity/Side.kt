@@ -31,6 +31,10 @@ class Side {
 
     constructor() {}
 
+    constructor(id: Int) {
+        this.id = id
+    }
+
     constructor(imageUrl: String, text: String) {
         this.imageUrl = imageUrl
         this.text = text
