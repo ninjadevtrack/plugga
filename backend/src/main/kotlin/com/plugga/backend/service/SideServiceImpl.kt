@@ -12,17 +12,17 @@ class SideServiceImpl @Autowired
 constructor(private val sideDAO: SideDAO) : SideService {
 
     @Transactional
-    override fun findAll(): List<Side> {
+    override fun findAll(): MutableList<Side> {
         return sideDAO.findAll()
     }
 
     @Transactional
-    override fun findById(id: Int): Side {
+    override fun findById(id: Int): Side? {
         return sideDAO.findById(id)
     }
 
     @Transactional
-    override fun findByCardId(cardId: Int): List<Side> {
+    override fun findByCardId(cardId: Int): MutableList<Side> {
         return sideDAO.findByCardId(cardId)
     }
 

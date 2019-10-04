@@ -12,12 +12,12 @@ class PileServiceImpl @Autowired
 constructor(private val pileDAO: PileDAO) : PileService {
 
     @Transactional
-    override fun findAll(): List<Pile> {
+    override fun findAll(): MutableList<Pile> {
         return pileDAO.findAll()
     }
 
     @Transactional
-    override fun findById(id: Int): Pile {
+    override fun findById(id: Int): Pile? {
         return pileDAO.findById(id)
     }
 

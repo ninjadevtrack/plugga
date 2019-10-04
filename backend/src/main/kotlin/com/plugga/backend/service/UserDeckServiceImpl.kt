@@ -11,22 +11,22 @@ class UserDeckServiceImpl @Autowired
 constructor(private val userDeckDAO: UserDeckDAO) : UserDeckService {
 
     @Transactional
-    override fun findAll(): List<UserDeck> {
+    override fun findAll(): MutableList<UserDeck> {
         return userDeckDAO.findAll()
     }
 
     @Transactional
-    override fun findById(id: Int): UserDeck {
+    override fun findById(id: Int): UserDeck? {
         return userDeckDAO.findById(id)
     }
 
     @Transactional
-    override fun findByDeckId(id: Int): List<UserDeck> {
+    override fun findByDeckId(id: Int): MutableList<UserDeck> {
         return userDeckDAO.findByDeckId(id)
     }
 
     @Transactional
-    override fun findByUserId(id: Int): List<UserDeck> {
+    override fun findByUserId(id: Int): MutableList<UserDeck> {
         return userDeckDAO.findByUserId(id)
     }
 

@@ -12,12 +12,12 @@ class UserServiceImpl @Autowired
 constructor(private val userDAO: UserDAO) : UserService {
 
     @Transactional
-    override fun findAll(): List<User> {
+    override fun findAll(): MutableList<User> {
         return userDAO.findAll()
     }
 
     @Transactional
-    override fun findById(id: Int): User {
+    override fun findById(id: Int): User? {
         return userDAO.findById(id)
     }
 

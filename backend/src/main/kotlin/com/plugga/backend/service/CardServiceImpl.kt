@@ -11,7 +11,7 @@ class CardServiceImpl @Autowired
 constructor(private val cardDAO: CardDAO) : CardService {
 
     @Transactional
-    override fun findAll(): List<Card> {
+    override fun findAll(): MutableList<Card> {
         return cardDAO.findAll()
     }
 

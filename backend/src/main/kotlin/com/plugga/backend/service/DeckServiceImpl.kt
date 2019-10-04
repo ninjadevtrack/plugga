@@ -11,12 +11,12 @@ class DeckServiceImpl @Autowired
 constructor(private val deckDAO: DeckDAO) : DeckService {
 
     @Transactional
-    override fun findAll(): List<Deck> {
+    override fun findAll(): MutableList<Deck> {
         return deckDAO.findAll()
     }
 
     @Transactional
-    override fun findById(id: Int): Deck {
+    override fun findById(id: Int): Deck? {
         return deckDAO.findById(id)
     }
 
