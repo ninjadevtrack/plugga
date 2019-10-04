@@ -1,14 +1,16 @@
 package com.plugga.backend.service
 
 import com.plugga.backend.dao.CardDAO
+import com.plugga.backend.dao.DeckCardDAO
 import com.plugga.backend.entity.Card
+import com.plugga.backend.entity.DeckCard
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CardServiceImpl @Autowired
-constructor(private val cardDAO: CardDAO) : CardService {
+constructor(private val cardDAO: CardDAO, private val deckCardDAO: DeckCardDAO) : CardService {
 
     @Transactional
     override fun findAll(): MutableList<Card> {
@@ -18,6 +20,16 @@ constructor(private val cardDAO: CardDAO) : CardService {
     @Transactional
     override fun findById(id: Int): Card? {
         return cardDAO.findById(id)
+    }
+
+    @Transactional
+    override fun findByDeckId(id: Int): MutableList<Card> {
+        val deckCards: MutableList<DeckCard> = deckCardDAO.findByDeckId(id)
+        val cards: MutableList<Card> = mutableListOf()
+        for (deckCard in deckCards) {
+            cards.add(deckCard.card!!)
+        }
+        return cards
     }
 
     @Transactional

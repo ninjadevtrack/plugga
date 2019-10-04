@@ -18,9 +18,8 @@
 
 ### GET
   * All objects `/api/cards/`
-  * All by deckId `/api/deck_cards?deckId={deckId}`
-  * All by cardId `/api/deck_cards?cardId={cardId}`
-  * By deckCardId `/api/deck_cards/{deckCardId}`
+  * All by deckId `/api/cards?deckId={deckId}`
+  * By cardId `/api/cards/{cardId}`
 ### POST
  * URL `/api/deck_cards/`
  * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`

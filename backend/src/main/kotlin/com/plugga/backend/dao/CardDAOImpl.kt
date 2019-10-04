@@ -1,6 +1,7 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Card
+import com.plugga.backend.entity.DeckCard
 import org.hibernate.Session
 import org.hibernate.query.Query
 import org.springframework.beans.factory.annotation.Autowired

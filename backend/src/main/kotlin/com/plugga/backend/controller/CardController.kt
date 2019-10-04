@@ -1,6 +1,7 @@
 package com.plugga.backend.controller
 
 import com.plugga.backend.entity.Card
+import com.plugga.backend.entity.DeckCard
 import com.plugga.backend.service.CardService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -18,6 +19,11 @@ constructor(private val cardService: CardService) {
     @GetMapping("/{cardId}")
     fun getCard(@PathVariable cardId: Int): Card {
         return cardService.findById(cardId) ?: throw RuntimeException("Could not find card using id: $cardId")
+    }
+
+    @GetMapping(value = [""], params = ["deckId"])
+    fun getByDeckId(@RequestParam("deckId") deckId: Int): List<Card> {
+        return cardService.findByDeckId(deckId)
     }
 
     @PostMapping("/")
