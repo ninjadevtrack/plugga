@@ -75,9 +75,31 @@
   * By sideId `/api/sides/{sideId}`
 
 ### POST
+  * URL `/api/sides/`
+  * Request body. Each field below represents the respective id's `(cardId)`
+  ```
+  {
+    "card": 7,
+  	"imageUrl": "http://plugga.com/static/some_card_image.gif",
+  	"text": "side-text-here"
+  }
+  ```
 ### PUT
+  * URL `/api/sides/`
+  * Request body. Each field below represents the respective id's `(sideId, cardId)`
+  ```
+  {
+	"id": 33,
+    "card": 7,
+    "imageUrl": "updated-url",
+    "text": "updated-text"
+  }
+  ```
+  
 ### DELETE
-
+  * URL `/api/sides{sideId}`
+  * Returns `"Deleted side with id: {sidesId}"`
+  
 # `/api/user_decks/`
   * Returned body (will be in an array `[]` if more than one)
   ```
