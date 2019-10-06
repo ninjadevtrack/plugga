@@ -158,10 +158,10 @@
   * Request body. Each field below represents the respective id's `(sideId, cardId)`
   ```
   {
-	"id": 33,
-    "card": 7,
-    "imageUrl": "updated-url",
-    "text": "updated-text"
+    "id": 21,
+    "deck": 10,
+    "rank": 4,
+    "freq": 7
   }
   ```
   
