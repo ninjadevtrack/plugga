@@ -1,12 +1,10 @@
 package com.plugga.backend.dao
 
+import com.plugga.backend.entity.User
 import javax.persistence.EntityManager
-
 import org.hibernate.Session
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
-
-import com.plugga.backend.entity.User
 
 @Repository
 class UserDAOImpl @Autowired
@@ -37,5 +35,4 @@ constructor(private val entityManager: EntityManager) : UserDAO {
         query.setParameter("userId", id)
         query.executeUpdate()
     }
-
 }

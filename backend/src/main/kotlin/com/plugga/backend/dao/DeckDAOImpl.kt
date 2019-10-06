@@ -1,11 +1,10 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Deck
+import javax.persistence.EntityManager
 import org.hibernate.Session
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
-
-import javax.persistence.EntityManager
 
 @Repository
 class DeckDAOImpl @Autowired
