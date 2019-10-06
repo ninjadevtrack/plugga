@@ -61,7 +61,8 @@
   * By deckCardId `/api/deck_cards/{deckCardId}`
 ### POST
   * URL `/api/deck_cards/`
-  * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+  * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`.
+  * Pile is optional / nullable and doing so indicates that the card is in a deck but not in a pile (inactive)
   ```
     {
       "deck": 2,
@@ -72,6 +73,7 @@
 ### PUT
   * URL `/api/deck_cards/`
   * Request body. Each field below represents the respective id's `(deckCardId, deckId, cardId, pileId)`
+  * Pile is optional / nullable and a null value indicates that the card is in a deck but not in a pile (inactive)
   ```
     {
       "id": 24,
@@ -83,7 +85,6 @@
 ### DELETE
   * URL `/api/deck_cards/{deckCardId}`
   * Returns `"Deleted deckCard with id: {deckCardId}"`
-
 # `/api/decks/`
   * Returned body (will be in an array `[]` if more than one). 
     

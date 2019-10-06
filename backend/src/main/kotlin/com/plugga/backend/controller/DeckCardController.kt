@@ -39,18 +39,14 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
     fun addDeckCard(@RequestBody deckCard: DeckCard): DeckCard {
         deckCard.id = 0
         deckCardService.save(deckCard)
-        deckCard.deck = deckService.findById(deckCard.deck!!.id)
-        deckCard.card = cardService.findById(deckCard.card!!.id)
-        deckCard.pile = pileService.findById(deckCard.pile!!.id)
+        updateReturnDeckCard(deckCard)
         return deckCard
     }
 
     @PutMapping("/")
     fun updateDeckCard(@RequestBody deckCard: DeckCard): DeckCard {
         deckCardService.save(deckCard)
-        deckCard.deck = deckService.findById(deckCard.deck!!.id)
-        deckCard.card = cardService.findById(deckCard.card!!.id)
-        deckCard.pile = pileService.findById(deckCard.pile!!.id)
+        updateReturnDeckCard(deckCard)
         return deckCard
     }
 
@@ -59,5 +55,13 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
         deckCardService.findById(deckCardId) ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
         deckCardService.deleteById(deckCardId)
         return "Deleted deckCard with id: $deckCardId"
+    }
+
+    private fun updateReturnDeckCard(deckCard: DeckCard) {
+        deckCard.deck = deckService.findById(deckCard.deck!!.id)
+        deckCard.card = cardService.findById(deckCard.card!!.id)
+        deckCard.pile?.let {
+            deckCard.pile = pileService.findById(it.id)
+        }
     }
 }
