@@ -45,6 +45,6 @@ constructor(private val deckService: DeckService) {
     fun deleteDeck(@PathVariable deckId: Int): String {
         deckService.findById(deckId) ?: throw RuntimeException("Could not find deck using id: $deckId")
         deckService.deleteById(deckId)
-        return "Deleted user with id: $deckId"
+        return "Deleted deck with id: $deckId"
     }
 }

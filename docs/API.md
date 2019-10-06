@@ -136,8 +136,8 @@
   ```
  
 ### DELETE
-  * URL `/api/cards/{cardId}`
-  * Returns `"Deleted card with id: {cardId}"`
+  * URL `/api/decks/{deckId}`
+  * Returns `"Deleted deck with id: {deckId}"`
   
 # `/api/piles/`
 # `/api/sides/`
