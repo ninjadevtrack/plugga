@@ -40,6 +40,10 @@ class Deck {
     @get:JsonIgnore
     var users: MutableList<UserDeck>? = null
 
+    @OneToMany(mappedBy = "deck")
+    @get:JsonIgnore
+    var piles: MutableList<Pile>? = null
+
     constructor() {}
 
     constructor(id: Int) {

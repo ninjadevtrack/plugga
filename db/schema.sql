@@ -76,9 +76,12 @@ DROP TABLE IF EXISTS `pile`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pile` (
   `pile_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `deck_id` int(10) unsigned NOT NULL,
   `rank` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `freq` smallint(5) unsigned NOT NULL DEFAULT '7',
-  PRIMARY KEY (`pile_id`)
+  PRIMARY KEY (`pile_id`),
+  KEY `deck_id_idx` (`deck_id`),
+  CONSTRAINT `deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -146,4 +149,4 @@ CREATE TABLE `user_deck` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-06 12:01:38
+-- Dump completed on 2019-10-06  7:14:36
