@@ -1,5 +1,6 @@
 package com.plugga.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference
 import javax.persistence.*
 
 @Entity
@@ -13,10 +14,12 @@ class UserDeck {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonIdentityReference(alwaysAsId = true)
     var user: User? = null
 
     @ManyToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "deck_id")
+    @JsonIdentityReference(alwaysAsId = true)
     var deck: Deck? = null
 
     override fun toString(): String {

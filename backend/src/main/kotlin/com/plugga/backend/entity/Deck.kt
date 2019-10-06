@@ -1,7 +1,6 @@
 package com.plugga.backend.entity
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
-import com.fasterxml.jackson.annotation.JsonIdentityReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import com.plugga.backend.jackson.EntityIdResolver
@@ -40,6 +39,10 @@ class Deck {
     @OneToMany(mappedBy = "deck")
     @get:JsonIgnore
     var users: MutableList<UserDeck>? = null
+
+    @OneToMany(mappedBy = "deck")
+    @get:JsonIgnore
+    var piles: MutableList<Pile>? = null
 
     constructor() {}
 

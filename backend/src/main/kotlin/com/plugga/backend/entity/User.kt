@@ -1,14 +1,22 @@
 package com.plugga.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.plugga.backend.jackson.EntityIdResolver
 
 import java.sql.Timestamp
-import java.util.ArrayList
 
 import javax.persistence.*
 
 @Entity
 @Table(name = "user")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator::class,
+        property = "id",
+        resolver = EntityIdResolver::class,
+        scope = User::class
+)
 class User {
 
     @Id
@@ -33,6 +41,7 @@ class User {
     var lastLogin: Timestamp? = null
 
     @OneToMany(mappedBy = "user")
+    @get:JsonIgnore
     private var decks: MutableList<UserDeck>? = null
 
     constructor() {}

@@ -7,6 +7,8 @@ interface PileDAO {
 
     fun findById(id: Int): Pile?
 
+    fun findByDeckId(id: Int): MutableList<Pile>
+
     fun save(pile: Pile)
 
     fun deleteById(id: Int)

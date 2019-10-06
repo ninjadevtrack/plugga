@@ -1,6 +1,7 @@
 package com.plugga.backend.service
 
 import com.plugga.backend.dao.PileDAO
+import com.plugga.backend.entity.DeckCard
 import com.plugga.backend.entity.Pile
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -19,6 +20,11 @@ constructor(private val pileDAO: PileDAO) : PileService {
     @Transactional
     override fun findById(id: Int): Pile? {
         return pileDAO.findById(id)
+    }
+
+    @Transactional
+    override fun findByDeckId(id: Int): MutableList<Pile> {
+        return pileDAO.findByDeckId(id)
     }
 
     @Transactional

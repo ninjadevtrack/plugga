@@ -49,21 +49,9 @@
     ```
       {
         "id": 1,
-        "deck": {
-          "id": 1,
-          "name": "Leslie's Deck",
-          "imageUrl": "http://plugga.com/somefakeimage.jp",
-          "dateCreated": "2019-09-05T22:55:02.000+0000"
-        },
-        "card": {
-          "id": 1,
-          "lastUsed": "2019-09-06T15:10:39.000+0000"
-        },
-        "pile": {
-          "id": 1,
-          "rank": 1,
-          "freq": 1
-        }
+        "deck": 1,
+        "card": 1,
+        "pile": 1
       }
     ```
 ### GET
@@ -140,6 +128,47 @@
   * Returns `"Deleted deck with id: {deckId}"`
   
 # `/api/piles/`
+* Returned body (will be in an array `[]` if more than one)
+  ```
+  {
+    "id": 1,
+    "deck": 1,
+    "rank": 1,
+    "freq": 1
+  }
+  ```
+
+### GET
+  * All objects `/api/piles/`
+  * All by deckId `/api/piles?deckId={deckId}`
+  * By pileId `/api/piles/{pileId}`
+
+### POST
+  * URL `/api/piles/`
+  * Request body. 'deck' field represents 'deckId'
+  ```
+  {
+    "deck": 10,
+    "rank": 1,
+    "freq": 7
+  }
+  ```
+### PUT
+  * URL `/api/piles/`
+  * Request body. 'deck' field represents 'deckId'
+  ```
+  {
+    "id": 21,
+    "deck": 10,
+    "rank": 4,
+    "freq": 7
+  }
+  ```
+  
+### DELETE
+  * URL `/api/piles{pileId}`
+  * Returns `"Deleted pile with id: {pileId}"`
+  
 # `/api/sides/`
   * Returned body (will be in an array `[]` if more than one)
   ```

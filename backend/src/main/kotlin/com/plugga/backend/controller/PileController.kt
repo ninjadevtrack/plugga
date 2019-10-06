@@ -20,6 +20,11 @@ constructor(private val pileService: PileService) {
         return pileService.findById(pileId) ?: throw RuntimeException("Could not find pile using id: $pileId")
     }
 
+    @GetMapping(value = [""], params = ["deckId"])
+    fun getByDeckId(@RequestParam("deckId") deckId: Int): List<Pile> {
+        return pileService.findByDeckId(deckId)
+    }
+
     @PostMapping("/")
     fun addPile(@RequestBody pile: Pile): Pile {
         pile.id = 0
