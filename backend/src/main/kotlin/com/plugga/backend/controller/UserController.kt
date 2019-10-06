@@ -1,7 +1,8 @@
 package com.plugga.backend.controller
 
+import com.plugga.backend.entity.User
+import com.plugga.backend.service.UserService
 import java.sql.Timestamp
-
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,9 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-
-import com.plugga.backend.entity.User
-import com.plugga.backend.service.UserService
 
 @RestController
 @RequestMapping("/api/users")

@@ -56,7 +56,7 @@ CREATE TABLE `deck_card` (
   `deck_card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `card_id` int(10) unsigned NOT NULL,
-  `pile_id` int(10) unsigned NOT NULL,
+  `pile_id` int(10) unsigned,
   PRIMARY KEY (`deck_card_id`),
   KEY `deck_card_id_idx` (`card_id`),
   KEY `card_deck_id_idx` (`deck_id`),

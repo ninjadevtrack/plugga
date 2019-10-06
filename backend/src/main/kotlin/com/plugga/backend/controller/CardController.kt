@@ -1,21 +1,22 @@
 package com.plugga.backend.controller
 
 import com.plugga.backend.entity.Card
-import com.plugga.backend.entity.Deck
-import com.plugga.backend.entity.DeckCard
-import com.plugga.backend.entity.Side
 import com.plugga.backend.service.CardService
-import com.plugga.backend.service.DeckCardService
-import com.plugga.backend.service.DeckService
-import com.plugga.backend.service.SideService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/cards")
 class CardController @Autowired
-constructor(private val cardService: CardService,
-            private val deckCardService: DeckCardService, private val sideService: SideService) {
+constructor(private val cardService: CardService) {
 
     @GetMapping("/")
     fun findAll(): List<Card> {

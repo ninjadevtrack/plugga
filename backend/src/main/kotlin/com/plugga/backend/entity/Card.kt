@@ -4,17 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import com.plugga.backend.jackson.EntityIdResolver
-
-import javax.persistence.*
 import java.sql.Timestamp
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "card")
 @JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator::class,
-        property = "id",
-        resolver = EntityIdResolver::class,
-        scope = Card::class
+    generator = ObjectIdGenerators.PropertyGenerator::class,
+    property = "id",
+    resolver = EntityIdResolver::class,
+    scope = Card::class
 )
 class Card {
 
@@ -45,9 +50,9 @@ class Card {
 
     override fun toString(): String {
         return "Card{" +
-                "id=" + id +
-                ", lastUsed=" + lastUsed +
-                '}'.toString()
+            "id=" + id +
+            ", lastUsed=" + lastUsed +
+            '}'.toString()
     }
 
     fun addSide(side: Side) {

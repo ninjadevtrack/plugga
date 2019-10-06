@@ -1,11 +1,10 @@
 package com.plugga.backend.service
 
+import com.plugga.backend.dao.UserDAO
+import com.plugga.backend.entity.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-
-import com.plugga.backend.dao.UserDAO
-import com.plugga.backend.entity.User
 
 @Service
 class UserServiceImpl @Autowired
@@ -30,5 +29,4 @@ constructor(private val userDAO: UserDAO) : UserService {
     override fun deleteById(id: Int) {
         userDAO.deleteById(id)
     }
-
 }

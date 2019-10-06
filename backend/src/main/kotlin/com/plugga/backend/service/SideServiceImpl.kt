@@ -2,10 +2,9 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.SideDAO
 import com.plugga.backend.entity.Side
+import javax.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-
-import javax.transaction.Transactional
 
 @Service
 class SideServiceImpl @Autowired

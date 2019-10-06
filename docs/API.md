@@ -61,7 +61,8 @@
   * By deckCardId `/api/deck_cards/{deckCardId}`
 ### POST
   * URL `/api/deck_cards/`
-  * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`
+  * Request body. Each field below represents the respective id's `(deckId, cardId, pileId)`.
+  * Pile is optional / nullable and doing so indicates that the card is in a deck but not in a pile (inactive)
   ```
     {
       "deck": 2,
@@ -72,6 +73,7 @@
 ### PUT
   * URL `/api/deck_cards/`
   * Request body. Each field below represents the respective id's `(deckCardId, deckId, cardId, pileId)`
+  * Pile is optional / nullable and a null value indicates that the card is in a deck but not in a pile (inactive)
   ```
     {
       "id": 24,
@@ -83,7 +85,6 @@
 ### DELETE
   * URL `/api/deck_cards/{deckCardId}`
   * Returns `"Deleted deckCard with id: {deckCardId}"`
-
 # `/api/decks/`
   * Returned body (will be in an array `[]` if more than one). 
     
@@ -259,5 +260,43 @@
 ### DELETE
   * URL `/api/user_decks/{userDeckId}`
   * Returns `"Deleted userDeck with id: {userDeckId}"`
-
 # `/api/users/`
+  * Returned body (will be in an array `[]` if more than one)
+  ```
+    {
+      "id": 1,
+      "name": "Leslie",
+      "email": "leslie@plugga.com",
+      "dateCreated": "2019-07-12T00:55:46.000+0000",
+      "lastLogin": null
+    }
+  ```
+### GET
+  * All objects `/api/users/`
+  * By userId `/api/users/{userId}`
+  
+### POST
+  * URL `/api/users/`
+  * Request body.
+  ```
+    {
+      "name": "hank",
+      "email": "hank.hill@plugga.com",
+      "password": "propane"
+    }
+  ```
+### PUT
+  * URL `/api/users/`
+  * Request body.
+  ```
+    {
+      "id": 6,
+      "name": "not-hank",
+      "email": "hank.hill9@plugga.com",
+      "password": "tastethemeatnottheheat"
+    }
+  ```
+  * In the returned object, 'dateCreated' will be null due to `updatable = false` being set 
+### DELETE
+  * URL `/api/users/{userId}`
+  * Returns `"Deleted user with id: {userId}"`

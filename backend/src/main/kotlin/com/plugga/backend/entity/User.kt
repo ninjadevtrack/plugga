@@ -2,20 +2,25 @@ package com.plugga.backend.entity
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import com.plugga.backend.jackson.EntityIdResolver
-
 import java.sql.Timestamp
-
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "user")
 @JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator::class,
-        property = "id",
-        resolver = EntityIdResolver::class,
-        scope = User::class
+    generator = ObjectIdGenerators.PropertyGenerator::class,
+    property = "id",
+    resolver = EntityIdResolver::class,
+    scope = User::class
 )
 class User {
 
@@ -31,7 +36,7 @@ class User {
     var email: String? = null
 
     @Column(name = "password")
-    @get:JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     var password: String? = null
 
     @Column(name = "date_created", updatable = false)
@@ -58,24 +63,15 @@ class User {
         this.lastLogin = null
     }
 
-    @JsonIgnore
-    fun getDecks(): MutableList<UserDeck>? {
-        return decks
-    }
-
-    fun setDecks(decks: MutableList<UserDeck>) {
-        this.decks = decks
-    }
-
     override fun toString(): String {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\''.toString() +
-                ", email='" + email + '\''.toString() +
-                ", password='" + password + '\''.toString() +
-                ", dateCreated=" + dateCreated +
-                ", lastLogin=" + lastLogin +
-                '}'.toString()
+            "id=" + id +
+            ", name='" + name + '\''.toString() +
+            ", email='" + email + '\''.toString() +
+            ", password='" + password + '\''.toString() +
+            ", dateCreated=" + dateCreated +
+            ", lastLogin=" + lastLogin +
+            '}'.toString()
     }
 
     fun addDeck(deck: UserDeck) {

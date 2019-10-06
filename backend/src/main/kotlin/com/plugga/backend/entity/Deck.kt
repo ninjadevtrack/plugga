@@ -4,17 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import com.plugga.backend.jackson.EntityIdResolver
-
-import javax.persistence.*
 import java.sql.Timestamp
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "deck")
 @JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator::class,
-        property = "id",
-        resolver = EntityIdResolver::class,
-        scope = Deck::class
+    generator = ObjectIdGenerators.PropertyGenerator::class,
+    property = "id",
+    resolver = EntityIdResolver::class,
+    scope = Deck::class
 )
 class Deck {
 
@@ -60,11 +65,11 @@ class Deck {
 
     override fun toString(): String {
         return "Deck{" +
-                "id=" + id +
-                ", name='" + name + '\''.toString() +
-                ", imageUrl='" + imageUrl + '\''.toString() +
-                ", dateCreated=" + dateCreated +
-                '}'.toString()
+            "id=" + id +
+            ", name='" + name + '\''.toString() +
+            ", imageUrl='" + imageUrl + '\''.toString() +
+            ", dateCreated=" + dateCreated +
+            '}'.toString()
     }
 
     fun addCard(card: DeckCard) {

@@ -6,13 +6,25 @@ import com.plugga.backend.service.DeckCardService
 import com.plugga.backend.service.DeckService
 import com.plugga.backend.service.PileService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/deck_cards")
 class DeckCardController @Autowired
-constructor(private val deckCardService: DeckCardService, private val deckService: DeckService,
-            private val cardService: CardService, private val pileService: PileService) {
+constructor(
+    private val deckCardService: DeckCardService,
+    private val deckService: DeckService,
+    private val cardService: CardService,
+    private val pileService: PileService
+) {
 
     @GetMapping("/")
     fun findAll(): List<DeckCard> {
@@ -22,7 +34,7 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
     @GetMapping("/{deckCardId}")
     fun getDeckCard(@PathVariable deckCardId: Int): DeckCard {
         return deckCardService.findById(deckCardId)
-                ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
+            ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
     }
 
     @GetMapping(value = [""], params = ["deckId"])
@@ -39,18 +51,14 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
     fun addDeckCard(@RequestBody deckCard: DeckCard): DeckCard {
         deckCard.id = 0
         deckCardService.save(deckCard)
-        deckCard.deck = deckService.findById(deckCard.deck!!.id)
-        deckCard.card = cardService.findById(deckCard.card!!.id)
-        deckCard.pile = pileService.findById(deckCard.pile!!.id)
+        updateReturnDeckCard(deckCard)
         return deckCard
     }
 
     @PutMapping("/")
     fun updateDeckCard(@RequestBody deckCard: DeckCard): DeckCard {
         deckCardService.save(deckCard)
-        deckCard.deck = deckService.findById(deckCard.deck!!.id)
-        deckCard.card = cardService.findById(deckCard.card!!.id)
-        deckCard.pile = pileService.findById(deckCard.pile!!.id)
+        updateReturnDeckCard(deckCard)
         return deckCard
     }
 
@@ -59,5 +67,13 @@ constructor(private val deckCardService: DeckCardService, private val deckServic
         deckCardService.findById(deckCardId) ?: throw RuntimeException("Could not find deckCard using id: $deckCardId")
         deckCardService.deleteById(deckCardId)
         return "Deleted deckCard with id: $deckCardId"
+    }
+
+    private fun updateReturnDeckCard(deckCard: DeckCard) {
+        deckCard.deck = deckService.findById(deckCard.deck!!.id)
+        deckCard.card = cardService.findById(deckCard.card!!.id)
+        deckCard.pile?.let {
+            deckCard.pile = pileService.findById(it.id)
+        }
     }
 }
