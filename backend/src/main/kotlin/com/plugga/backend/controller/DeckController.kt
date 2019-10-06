@@ -1,6 +1,7 @@
 package com.plugga.backend.controller
 
 import com.plugga.backend.entity.Deck
+import com.plugga.backend.model.DeckWithCardObjects
 import com.plugga.backend.service.DeckService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -21,6 +22,25 @@ constructor(private val deckService: DeckService) {
     fun getDeck(@PathVariable deckId: Int): Deck {
         return deckService.findById(deckId) ?: throw RuntimeException("Could not find deck using id: $deckId")
     }
+
+    @GetMapping("/{deckId}/cardObjects")
+    fun getDeckWithCardObjects(@PathVariable deckId: Int): DeckWithCardObjects {
+        val deck = deckService.findById(deckId) ?: throw RuntimeException("Could not find deck using id: $deckId")
+        val deckWithCardObjects = DeckWithCardObjects(deck.id, deck.name, deck.imageUrl, deck.dateCreated)
+        deck.cards?.forEach {
+            it.card?.let { it1 ->
+                it1.decks = null
+                deckWithCardObjects.cards?.add(it1)
+            }
+            deckWithCardObjects.deckCards.add(it)
+        }
+        return deckWithCardObjects
+    }
+
+//    @GetMapping(value = [""], params = ["userId"])
+//    fun getByUserId(@RequestParam("userId") userId: Int): List<Deck> {
+//        return deckService.findByUserId(userId)
+//    }
 
     @PostMapping("/")
     fun addDeck(@RequestBody deck: Deck): Deck {

@@ -97,6 +97,126 @@
   * Returns `"Deleted deckCard with id: {deckCardId}"`
 
 # `/api/decks/`
+  * Returned body (will be in an array `[]` if more than one). 
+    See section on `/api/deck_cards/` for info on what is in 'cards' field.
+    
+    ```
+    { 
+      "id": 1,
+      "name": "Leslie's Deck",
+      "imageUrl": "http://plugga.com/somefakeimage.jp",
+      "dateCreated": "2019-09-05T22:55:02.000+0000",
+      "cards": []
+    }
+    ```
+
+### GET
+  * All objects `/api/decks/`
+  * All by deckId `/api/cards?deckId={deckId}`
+  * By deckId `/api/decks/{deckId}`
+  * By deckId with Card objects `/api/decks/{deckId}/cardObjects/`
+    * This field is used to get all the DeckCard, Card and Side information for a specified Deck in one request
+    * Returns Card objects (and its nested Side objects) in the "cards" field instead of
+      the normal DeckCard intermediary objects.
+    * Each Card object returned this way will have their "decks" field as null as it normally
+      contain DeckCard objects for all decks associated with said Card
+    * DeckCard objects are returned instead in the "deckCards" field and only contain the DeckCard
+      objects for the deck with specified `{deckId}`
+    * Returns
+    ```
+    { 
+      "id":1,
+      "name":"Leslie's Deck",
+      "imageUrl":"http://plugga.com/somefakeimage.jp",
+      "dateCreated":"2019-09-05T22:55:02.000+0000",
+      "cards":[ 
+        { 
+          "id":1,
+          "lastUsed":"2019-09-06T15:10:39.000+0000",
+          "sides":[ 
+            { 
+              "id":1,
+              "card":1,
+              "imageUrl":"http://plugga.com/static/some_card_image.gif",
+              "text":"How many hearts do octopuses have?"
+            },
+            { 
+              "id":2,
+              "card":1,
+              "imageUrl":"http://plugga.com/static/some_card_image.gif",
+              "text":"Three"
+            }
+          ],
+          "decks":null
+        },
+        { 
+          "id":2,
+          "lastUsed":"2019-09-06T15:10:40.000+0000",
+          "sides":[ 
+            { 
+              "id":3,
+              "card":2,
+              "imageUrl":"http://plugga.com/static/some_card_image.gif",
+              "text":"On which planet is the largest mountain in the solar system found?"
+            },
+            { 
+              "id":4,
+              "card":2,
+              "imageUrl":"http://plugga.com/static/some_card_image.gif",
+              "text":"Mars: the mountain is called Olympus Mons."
+            }
+          ],
+          "decks":null
+        }
+      ],
+      "deckCards":[ 
+        { 
+          "id":1,
+          "deck":1,
+          "card":1,
+          "pile":{ 
+            "id":1,
+            "rank":1,
+            "freq":1
+          }
+        },
+        { 
+          "id":2,
+          "deck":1,
+          "card":2,
+          "pile":{ 
+            "id":2,
+            "rank":1,
+            "freq":7
+          }
+        }
+      ]
+    }
+    ```
+  
+### POST
+ * URL `/api/cards/`
+ * Request body. All fields are optional.
+   * `lastUsed` can be omitted, null, or a timestamp.
+   * `sides` can be omitted, an empty array `[]`, or populated with sideIds.
+   * `decks` can be omitted, an empty array `[]`, or populated with deckIds.
+   * If all three fields are omitted, simply send an empty object `{}`
+ ```
+{
+	"lastUsed": "2019-09-05T22:55:02.000+0000",
+	"sides": [1, 3],
+	"decks": [2, 7]
+}
+ ```
+ 
+### PUT
+ * URL `/api/cards/`
+ * Request body. See POST section above
+ 
+### DELETE
+  * URL `/api/cards/{cardId}`
+  * Returns `"Deleted card with id: {cardId}"`
+  
 # `/api/piles/`
 # `/api/sides/`
   * Returned body (will be in an array `[]` if more than one)
