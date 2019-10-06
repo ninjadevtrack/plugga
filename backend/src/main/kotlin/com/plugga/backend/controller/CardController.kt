@@ -36,29 +36,6 @@ constructor(private val cardService: CardService,
     fun addCard(@RequestBody card: Card): Card {
         card.id = 0
         cardService.save(card)
-
-        val updatedSides: MutableList<Side> = mutableListOf()
-        if (card.sides != null) {
-            for (side in card.sides!!) {
-                val tempSide = sideService.findById(side.id)
-                if (tempSide != null) {
-                    updatedSides.add(tempSide)
-                }
-            }
-        }
-
-        val updatedDeckCards: MutableList<DeckCard> = mutableListOf()
-        if (card.decks != null) {
-            for (deckCard in card.decks!!) {
-                val tempDeckCard = deckCardService.findById(deckCard.id)
-                if (tempDeckCard != null) {
-                    updatedDeckCards.add(tempDeckCard)
-                }
-            }
-        }
-
-        card.sides = updatedSides
-        card.decks = updatedDeckCards
         return card
     }
 

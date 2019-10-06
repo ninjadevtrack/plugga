@@ -97,6 +97,48 @@
   * Returns `"Deleted deckCard with id: {deckCardId}"`
 
 # `/api/decks/`
+  * Returned body (will be in an array `[]` if more than one). 
+    
+    ```
+    { 
+      "id": 1,
+      "name": "Leslie's Deck",
+      "imageUrl": "http://plugga.com/somefakeimage.jp",
+      "dateCreated": "2019-09-05T22:55:02.000+0000",
+    }
+    ```
+
+### GET
+  * All objects `/api/decks/`
+  * All by userId `/api/decks?userId={userId}`
+  * By deckId `/api/decks/{deckId}`
+  
+### POST
+  * URL `/api/decks/`
+  * Request body. All fields are optional.
+    * If all fields are omitted, simply send an empty object `{}`
+  ```
+  {
+    "name": "Deck Name",
+    "imageUrl": null
+  }
+  ```
+ 
+### PUT
+ * URL `/api/decks/`
+ * Request body. Note that 'dateCreated' cannot be updated
+  ```
+  {
+  	"id": 16,
+  	"name": "New name",
+  	"imageUrl": "updated-url"
+  }
+  ```
+ 
+### DELETE
+  * URL `/api/decks/{deckId}`
+  * Returns `"Deleted deck with id: {deckId}"`
+  
 # `/api/piles/`
 # `/api/sides/`
   * Returned body (will be in an array `[]` if more than one)

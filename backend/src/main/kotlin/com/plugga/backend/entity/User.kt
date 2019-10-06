@@ -26,7 +26,7 @@ class User {
     @get:JsonIgnore
     var password: String? = null
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", updatable = false)
     var dateCreated: Timestamp? = null
 
     @Column(name = "last_login")

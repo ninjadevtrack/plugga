@@ -28,10 +28,11 @@ class Card {
     var lastUsed: Timestamp? = null
 
     @OneToMany(mappedBy = "card")
+    @get:JsonIgnore
     var sides: MutableList<Side>? = null
 
     @OneToMany(mappedBy = "card")
-    @JsonIdentityReference(alwaysAsId = true)
+    @get:JsonIgnore
     var decks: MutableList<DeckCard>? = null
 
     constructor() {}
