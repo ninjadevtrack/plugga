@@ -114,17 +114,13 @@
   * By deckId `/api/decks/{deckId}`
   
 ### POST
- * URL `/api/cards/`
+ * URL `/api/decks/`
  * Request body. All fields are optional.
-   * `lastUsed` can be omitted, null, or a timestamp.
-   * `sides` can be omitted, an empty array `[]`, or populated with sideIds.
-   * `decks` can be omitted, an empty array `[]`, or populated with deckIds.
-   * If all three fields are omitted, simply send an empty object `{}`
+   * If all fields are omitted, simply send an empty object `{}`
  ```
 {
-	"lastUsed": "2019-09-05T22:55:02.000+0000",
-	"sides": [1, 3],
-	"decks": [2, 7]
+	"name": "Deck Name",
+    "imageUrl": null
 }
  ```
  
