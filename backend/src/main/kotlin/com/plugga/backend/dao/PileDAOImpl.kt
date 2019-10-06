@@ -22,6 +22,13 @@ constructor(private val entityManager: EntityManager) : PileDAO {
         return currentSession.get(Pile::class.java, id)
     }
 
+    override fun findByDeckId(deckId: Int): MutableList<Pile> {
+        val currentSession = entityManager.unwrap(Session::class.java)
+        val query = currentSession.createQuery("from Pile where deck_id=:deckId", Pile::class.java)
+        query.setParameter("deckId", deckId)
+        return query.resultList
+    }
+
     override fun save(pile: Pile) {
         val currentSession = entityManager.unwrap(Session::class.java)
         currentSession.saveOrUpdate(pile)
