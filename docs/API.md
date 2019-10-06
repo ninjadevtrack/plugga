@@ -154,8 +154,8 @@
   }
   ```
 ### PUT
-  * URL `/api/sides/`
-  * Request body. Each field below represents the respective id's `(sideId, cardId)`
+  * URL `/api/piles/`
+  * Request body. 'deck' field represents 'deckId'
   ```
   {
     "id": 21,
@@ -166,8 +166,8 @@
   ```
   
 ### DELETE
-  * URL `/api/sides{sideId}`
-  * Returns `"Deleted side with id: {sidesId}"`
+  * URL `/api/piles{pileId}`
+  * Returns `"Deleted pile with id: {pileId}"`
   
 # `/api/sides/`
   * Returned body (will be in an array `[]` if more than one)
