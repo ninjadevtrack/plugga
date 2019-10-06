@@ -260,5 +260,40 @@
 ### DELETE
   * URL `/api/user_decks/{userDeckId}`
   * Returns `"Deleted userDeck with id: {userDeckId}"`
-
 # `/api/users/`
+  * Returned body (will be in an array `[]` if more than one)
+  ```
+    {
+      "id": 1,
+      "name": "Leslie",
+      "email": "leslie@plugga.com",
+      "dateCreated": "2019-07-12T00:55:46.000+0000",
+      "lastLogin": null
+    }
+  ```
+### GET
+  * All objects `/api/users/`
+  * By userId `/api/users/{userId}`
+  
+### POST
+  * URL `/api/user_decks/`
+  * Request body. Each field below represents the respective id's `(userId, deckId)`
+  ```
+    {
+      "user": 1,
+      "deck": 7
+    }
+  ```
+### PUT
+  * URL `/api/user_decks/`
+  * Request body. Each field below represents the respective id's `(userDeckId, userId, deckId)`
+  ```
+    {
+	  "id": 1,
+	  "user": 1,
+	  "deck": 7
+    }
+  ```
+### DELETE
+  * URL `/api/user_decks/{userDeckId}`
+  * Returns `"Deleted userDeck with id: {userDeckId}"`

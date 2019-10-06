@@ -16,10 +16,10 @@ import javax.persistence.Table
 @Entity
 @Table(name = "user")
 @JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator::class,
-        property = "id",
-        resolver = EntityIdResolver::class,
-        scope = User::class
+    generator = ObjectIdGenerators.PropertyGenerator::class,
+    property = "id",
+    resolver = EntityIdResolver::class,
+    scope = User::class
 )
 class User {
 
