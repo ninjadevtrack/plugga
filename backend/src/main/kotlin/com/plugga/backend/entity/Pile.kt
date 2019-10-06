@@ -26,7 +26,7 @@ class Pile {
     @JsonIdentityReference(alwaysAsId = true)
     var deck: Deck? = null
 
-    @Column(name = "rank")
+    @Column(name = "`rank`")
     var rank: Byte = 0
 
     @Column(name = "freq")
@@ -38,7 +38,8 @@ class Pile {
         this.id = id
     }
 
-    constructor(rank: Byte, freq: Int) {
+    constructor(deck: Deck, rank: Byte, freq: Int) {
+        this.deck = deck
         this.rank = rank
         this.freq = freq
     }

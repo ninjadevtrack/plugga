@@ -26,7 +26,7 @@ constructor(private val cardDAO: CardDAO, private val deckCardDAO: DeckCardDAO) 
     override fun findByDeckId(id: Int): MutableList<Card> {
         val deckCards: MutableList<DeckCard> = deckCardDAO.findByDeckId(id)
         val cards: MutableList<Card> = mutableListOf()
-        deckCards?.forEach {
+        deckCards.forEach {
             it.card?.let { it1 -> cards.add(it1) }
         }
         return cards

@@ -144,13 +144,13 @@
   * By pileId `/api/piles/{pileId}`
 
 ### POST
-  * URL `/api/sides/`
-  * Request body. Each field below represents the respective id's `(cardId)`
+  * URL `/api/piles/`
+  * Request body. 'deck' field represents 'deckId'
   ```
   {
-    "card": 7,
-  	"imageUrl": "http://plugga.com/static/some_card_image.gif",
-  	"text": "side-text-here"
+    "deck": 10,
+    "rank": 1,
+    "freq": 7
   }
   ```
 ### PUT
