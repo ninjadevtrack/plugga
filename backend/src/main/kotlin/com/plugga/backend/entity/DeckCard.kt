@@ -43,10 +43,10 @@ class DeckCard {
 
     override fun toString(): String {
         return "DeckCard{" +
-                "id=" + id +
-                ", deck=" + deck +
-                ", card=" + card +
-                ", pile=" + pile +
-                '}'.toString()
+            "id=" + id +
+            ", deck=" + deck +
+            ", card=" + card +
+            ", pile=" + pile +
+            '}'.toString()
     }
 }

@@ -43,10 +43,10 @@ class Side {
 
     override fun toString(): String {
         return "Side{" +
-                "id=" + id +
-                ", card=" + card +
-                ", imageUrl='" + imageUrl + '\''.toString() +
-                ", text='" + text + '\''.toString() +
-                '}'.toString()
+            "id=" + id +
+            ", card=" + card +
+            ", imageUrl='" + imageUrl + '\''.toString() +
+            ", text='" + text + '\''.toString() +
+            '}'.toString()
     }
 }

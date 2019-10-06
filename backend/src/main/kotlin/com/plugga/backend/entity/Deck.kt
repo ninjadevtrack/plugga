@@ -65,11 +65,11 @@ class Deck {
 
     override fun toString(): String {
         return "Deck{" +
-                "id=" + id +
-                ", name='" + name + '\''.toString() +
-                ", imageUrl='" + imageUrl + '\''.toString() +
-                ", dateCreated=" + dateCreated +
-                '}'.toString()
+            "id=" + id +
+            ", name='" + name + '\''.toString() +
+            ", imageUrl='" + imageUrl + '\''.toString() +
+            ", dateCreated=" + dateCreated +
+            '}'.toString()
     }
 
     fun addCard(card: DeckCard) {

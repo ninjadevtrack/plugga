@@ -53,9 +53,9 @@ class Pile {
 
     override fun toString(): String {
         return "Pile{" +
-                "id=" + id +
-                ", rank=" + rank +
-                ", freq=" + freq +
-                '}'.toString()
+            "id=" + id +
+            ", rank=" + rank +
+            ", freq=" + freq +
+            '}'.toString()
     }
 }

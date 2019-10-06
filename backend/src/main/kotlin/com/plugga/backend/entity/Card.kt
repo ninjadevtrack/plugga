@@ -50,9 +50,9 @@ class Card {
 
     override fun toString(): String {
         return "Card{" +
-                "id=" + id +
-                ", lastUsed=" + lastUsed +
-                '}'.toString()
+            "id=" + id +
+            ", lastUsed=" + lastUsed +
+            '}'.toString()
     }
 
     fun addSide(side: Side) {

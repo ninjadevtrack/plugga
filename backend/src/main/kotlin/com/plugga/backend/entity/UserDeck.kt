@@ -31,8 +31,8 @@ class UserDeck {
 
     override fun toString(): String {
         return "UserDeck{" +
-                "user=" + user +
-                ", deck=" + deck +
-                '}'.toString()
+            "user=" + user +
+            ", deck=" + deck +
+            '}'.toString()
     }
 }

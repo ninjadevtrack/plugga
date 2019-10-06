@@ -276,7 +276,7 @@
   * By userId `/api/users/{userId}`
   
 ### POST
-  * URL `/api/user_decks/`
+  * URL `/api/users/`
   * Request body. Each field below represents the respective id's `(userId, deckId)`
   ```
     {
