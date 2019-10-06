@@ -30,7 +30,7 @@ class Deck {
     @Column(name = "image_url")
     var imageUrl: String? = null
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", updatable = false)
     var dateCreated: Timestamp? = null
 
     @OneToMany(mappedBy = "deck")

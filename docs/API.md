@@ -114,19 +114,26 @@
   * By deckId `/api/decks/{deckId}`
   
 ### POST
- * URL `/api/decks/`
- * Request body. All fields are optional.
-   * If all fields are omitted, simply send an empty object `{}`
- ```
-{
-	"name": "Deck Name",
+  * URL `/api/decks/`
+  * Request body. All fields are optional.
+    * If all fields are omitted, simply send an empty object `{}`
+  ```
+  {
+    "name": "Deck Name",
     "imageUrl": null
-}
- ```
+  }
+  ```
  
 ### PUT
- * URL `/api/cards/`
- * Request body. See POST section above
+ * URL `/api/decks/`
+ * Request body. Note that 'dateCreated' cannot be updated
+  ```
+  {
+  	"id": 16,
+  	"name": "New name",
+  	"imageUrl": "updated-url"
+  }
+  ```
  
 ### DELETE
   * URL `/api/cards/{cardId}`
