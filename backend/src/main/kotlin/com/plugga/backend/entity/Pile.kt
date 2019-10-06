@@ -1,10 +1,19 @@
 package com.plugga.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonIdentityReference
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.plugga.backend.jackson.EntityIdResolver
 import javax.persistence.*
 
 @Entity
 @Table(name = "pile")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator::class,
+        property = "id",
+        resolver = EntityIdResolver::class,
+        scope = Pile::class
+)
 class Pile {
 
     @Id

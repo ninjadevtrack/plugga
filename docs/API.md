@@ -49,21 +49,9 @@
     ```
       {
         "id": 1,
-        "deck": {
-          "id": 1,
-          "name": "Leslie's Deck",
-          "imageUrl": "http://plugga.com/somefakeimage.jp",
-          "dateCreated": "2019-09-05T22:55:02.000+0000"
-        },
-        "card": {
-          "id": 1,
-          "lastUsed": "2019-09-06T15:10:39.000+0000"
-        },
-        "pile": {
-          "id": 1,
-          "rank": 1,
-          "freq": 1
-        }
+        "deck": 1,
+        "card": 1,
+        "pile": 1
       }
     ```
 ### GET
@@ -140,6 +128,47 @@
   * Returns `"Deleted deck with id: {deckId}"`
   
 # `/api/piles/`
+* Returned body (will be in an array `[]` if more than one)
+  ```
+  {
+    "id": 1,
+    "deck": 1,
+    "rank": 1,
+    "freq": 1
+  }
+  ```
+
+### GET
+  * All objects `/api/piles/`
+  * All by deckId `/api/piles?deckId={deckId}`
+  * By pileId `/api/piles/{pileId}`
+
+### POST
+  * URL `/api/sides/`
+  * Request body. Each field below represents the respective id's `(cardId)`
+  ```
+  {
+    "card": 7,
+  	"imageUrl": "http://plugga.com/static/some_card_image.gif",
+  	"text": "side-text-here"
+  }
+  ```
+### PUT
+  * URL `/api/sides/`
+  * Request body. Each field below represents the respective id's `(sideId, cardId)`
+  ```
+  {
+	"id": 33,
+    "card": 7,
+    "imageUrl": "updated-url",
+    "text": "updated-text"
+  }
+  ```
+  
+### DELETE
+  * URL `/api/sides{sideId}`
+  * Returns `"Deleted side with id: {sidesId}"`
+  
 # `/api/sides/`
   * Returned body (will be in an array `[]` if more than one)
   ```

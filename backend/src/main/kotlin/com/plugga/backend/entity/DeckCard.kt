@@ -24,6 +24,7 @@ class DeckCard {
 
     @OneToOne
     @JoinColumn(name = "pile_id", referencedColumnName = "pile_id")
+    @JsonIdentityReference(alwaysAsId = true)
     var pile: Pile? = null
 
     constructor() {}
