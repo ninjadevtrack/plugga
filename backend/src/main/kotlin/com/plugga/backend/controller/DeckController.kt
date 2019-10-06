@@ -22,10 +22,10 @@ constructor(private val deckService: DeckService) {
         return deckService.findById(deckId) ?: throw RuntimeException("Could not find deck using id: $deckId")
     }
 
-//    @GetMapping(value = [""], params = ["userId"])
-//    fun getByUserId(@RequestParam("userId") userId: Int): List<Deck> {
-//        return deckService.findByUserId(userId)
-//    }
+    @GetMapping(value = [""], params = ["userId"])
+    fun getByUserId(@RequestParam("userId") userId: Int): List<Deck> {
+        return deckService.findByUserId(userId)
+    }
 
     @PostMapping("/")
     fun addDeck(@RequestBody deck: Deck): Deck {

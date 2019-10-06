@@ -98,7 +98,6 @@
 
 # `/api/decks/`
   * Returned body (will be in an array `[]` if more than one). 
-    See section on `/api/deck_cards/` for info on what is in 'cards' field.
     
     ```
     { 
@@ -106,13 +105,12 @@
       "name": "Leslie's Deck",
       "imageUrl": "http://plugga.com/somefakeimage.jp",
       "dateCreated": "2019-09-05T22:55:02.000+0000",
-      "cards": []
     }
     ```
 
 ### GET
   * All objects `/api/decks/`
-  * All by deckId `/api/cards?deckId={deckId}`
+  * All by userId `/api/decks?userId={userId}`
   * By deckId `/api/decks/{deckId}`
   
 ### POST

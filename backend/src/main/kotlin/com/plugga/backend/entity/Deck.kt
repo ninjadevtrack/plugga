@@ -34,6 +34,7 @@ class Deck {
     var dateCreated: Timestamp? = null
 
     @OneToMany(mappedBy = "deck")
+    @get:JsonIgnore
     var cards: MutableList<DeckCard>? = null
 
     @OneToMany(mappedBy = "deck")
