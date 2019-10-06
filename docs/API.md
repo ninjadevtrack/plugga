@@ -277,23 +277,26 @@
   
 ### POST
   * URL `/api/users/`
-  * Request body. Each field below represents the respective id's `(userId, deckId)`
+  * Request body.
   ```
     {
-      "user": 1,
-      "deck": 7
+      "name": "hank",
+      "email": "hank.hill@plugga.com",
+      "password": "propane"
     }
   ```
 ### PUT
-  * URL `/api/user_decks/`
-  * Request body. Each field below represents the respective id's `(userDeckId, userId, deckId)`
+  * URL `/api/users/`
+  * Request body.
   ```
     {
-	  "id": 1,
-	  "user": 1,
-	  "deck": 7
+      "id": 6,
+      "name": "not-hank",
+      "email": "hank.hill9@plugga.com",
+      "password": "tastethemeatnottheheat"
     }
   ```
+  * In the returned object, 'dateCreated' will be null due to `updatable = false` being set 
 ### DELETE
-  * URL `/api/user_decks/{userDeckId}`
-  * Returns `"Deleted userDeck with id: {userDeckId}"`
+  * URL `/api/users/{userId}`
+  * Returns `"Deleted user with id: {userId}"`
