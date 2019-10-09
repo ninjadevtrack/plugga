@@ -32,7 +32,7 @@ class User {
     @Column(name = "name")
     var name: String? = null
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     var email: String? = null
 
     @Column(name = "password")
