@@ -26,11 +26,11 @@ private class SecurityConfig(
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
             .withUser(environment?.getProperty("ROOT_ADMIN_USERNAME"))
-            .password(encoder().encode(environment?.getProperty("ROOT_ADMIN_PASSWORD")))
+            .password(passwordEncoder().encode(environment?.getProperty("ROOT_ADMIN_PASSWORD")))
             .roles("ADMIN")
             .and()
             .withUser(environment?.getProperty("TEST_USER_USERNAME"))
-            .password(encoder().encode(environment?.getProperty("TEST_USER_PASSWORD")))
+            .password(passwordEncoder().encode(environment?.getProperty("TEST_USER_PASSWORD")))
             .roles("USER")
     }
 
@@ -65,7 +65,7 @@ private class SecurityConfig(
     }
 
     @Bean
-    fun encoder(): PasswordEncoder {
+    fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 }
