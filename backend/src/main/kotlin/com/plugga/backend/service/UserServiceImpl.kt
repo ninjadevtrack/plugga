@@ -5,10 +5,14 @@ import com.plugga.backend.entity.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @Service
 class UserServiceImpl @Autowired
 constructor(private val userDAO: UserDAO) : UserService {
+
+    @Autowired
+    private val passwordEncoder: PasswordEncoder? = null
 
     @Transactional
     override fun findAll(): MutableList<User> {
@@ -22,6 +26,9 @@ constructor(private val userDAO: UserDAO) : UserService {
 
     @Transactional
     override fun save(user: User) {
+        user.password?.let {
+            user.password = passwordEncoder!!.encode(it)
+        }
         userDAO.save(user)
     }
 

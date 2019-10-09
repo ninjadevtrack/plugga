@@ -3,15 +3,12 @@ version: '3.7'
 services:
   db:
     build: ./db
-    container_name: plugga_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: plugga
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
+    container_name: plugga_db
+    restart: always
+    env_file:
+      - ./db/db-dev.env
 
   backend:
     build: ./backend
@@ -22,13 +19,15 @@ services:
     depends_on:
       - db
     restart: on-failure
+    env_file:
+      - ./backend/backend-dev.env
 
   frontend:
     build: ./frontend
     command: ["npm", "start"]
-    volumes:
-      - ./frontend:/app/frontend
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app/frontend
     env_file:
       - ./frontend/frontend-dev.env

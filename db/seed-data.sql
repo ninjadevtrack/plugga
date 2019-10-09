@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Leslie','leslie@plugga.com','{bcrypt}$2a$04$WG3OFFCMts4XFhveEzh5lu/UrlaYFt25TsK4Yw.sRoBrzPMk.swQ.','2019-07-12 00:55:46',NULL),(2,'Knope','knope@plugga.com','{bcrypt}$2a$04$56l2q4SSgogthTelarpnve43lqOx5zGgBFriE4gyvjxyDWPAqqrWO','2019-07-12 00:55:46',NULL),(3,'Neo','neo@plugga.com','{bcrypt}$2a$04$HmERLmZb.yg5WX3VUM0c0u7eF.ASN7SaTFf.2/XJo28FA1pQYGI6i','2019-07-12 00:55:46',NULL),(4,'Matina','matina@plugga.com','{bcrypt}$2a$04$2LGkBB0JDWFbAmI13sjPau8zthlgstgx6oZcKHc6rWPHekfqesd9y','2019-07-12 00:55:46',NULL),(5,'Bulbasaur','bulbasaur@plugga.com','{bcrypt}$2a$04$IeW.VCpSY7OwSCZxZYeN/Oy1b5ze3MIxCsIqKohQbaur/5btTmgki','2019-07-12 00:55:46',NULL);
+INSERT INTO `user` VALUES (1,'Leslie','leslie@plugga.com','$2a$04$WG3OFFCMts4XFhveEzh5lu/UrlaYFt25TsK4Yw.sRoBrzPMk.swQ.','2019-07-12 00:55:46',NULL),(2,'Knope','knope@plugga.com','$2a$04$56l2q4SSgogthTelarpnve43lqOx5zGgBFriE4gyvjxyDWPAqqrWO','2019-07-12 00:55:46',NULL),(3,'Neo','neo@plugga.com','$2a$04$HmERLmZb.yg5WX3VUM0c0u7eF.ASN7SaTFf.2/XJo28FA1pQYGI6i','2019-07-12 00:55:46',NULL),(4,'Matina','matina@plugga.com','$2a$04$2LGkBB0JDWFbAmI13sjPau8zthlgstgx6oZcKHc6rWPHekfqesd9y','2019-07-12 00:55:46',NULL),(5,'Bulbasaur','bulbasaur@plugga.com','$2a$04$IeW.VCpSY7OwSCZxZYeN/Oy1b5ze3MIxCsIqKohQbaur/5btTmgki','2019-07-12 00:55:46',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
