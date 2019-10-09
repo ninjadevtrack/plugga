@@ -1,17 +1,17 @@
 package com.plugga.backend.config
 
 import com.plugga.backend.authentication.RestAuthenticationEntryPoint
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-
-
 
 @Configuration
 @EnableWebSecurity
@@ -19,13 +19,20 @@ private class SecurityConfig(
     private val restAuthenticationEntryPoint: RestAuthenticationEntryPoint
 ) : WebSecurityConfigurerAdapter() {
 
-//    @Throws(Exception::class)
-//    override fun configure(auth: AuthenticationManagerBuilder) {
-//        auth.inMemoryAuthentication()
-//            .withUser("admin").password(encoder().encode("password")).roles("ADMIN")
-//            .and()
-//            .withUser("user").password(encoder().encode("password")).roles("USER")
-//    }
+    @Autowired
+    private val environment: Environment? = null
+
+    @Throws(Exception::class)
+    override fun configure(auth: AuthenticationManagerBuilder) {
+        auth.inMemoryAuthentication()
+            .withUser(environment?.getProperty("ROOT_ADMIN_USERNAME"))
+            .password(encoder().encode(environment?.getProperty("ROOT_ADMIN_PASSWORD")))
+            .roles("ADMIN")
+            .and()
+            .withUser(environment?.getProperty("TEST_USER_USERNAME"))
+            .password(encoder().encode(environment?.getProperty("TEST_USER_PASSWORD")))
+            .roles("USER")
+    }
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
@@ -57,8 +64,8 @@ private class SecurityConfig(
             .formLogin().disable()
     }
 
-//    @Bean
-//    fun encoder(): PasswordEncoder {
-//        return BCryptPasswordEncoder()
-//    }
+    @Bean
+    fun encoder(): PasswordEncoder {
+        return BCryptPasswordEncoder()
+    }
 }
