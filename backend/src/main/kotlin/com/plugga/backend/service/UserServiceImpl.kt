@@ -25,11 +25,25 @@ constructor(private val userDAO: UserDAO) : UserService {
     }
 
     @Transactional
-    override fun save(user: User) {
+    override fun save(user: User): User? {
         user.password?.let {
             user.password = passwordEncoder!!.encode(it)
         }
-        userDAO.save(user)
+        return if (user.id != 0) {
+            val fetchedUser = userDAO.findById(user.id)
+            if (fetchedUser != null) {
+                fetchedUser.name = if (user.name == null) fetchedUser.name else user.name
+                fetchedUser.email = if (user.email == null) fetchedUser.email else user.email
+                fetchedUser.password = if (user.password == null) fetchedUser.password else user.password
+                fetchedUser.dateCreated = if (user.dateCreated == null) fetchedUser.dateCreated else user.dateCreated
+                fetchedUser.lastLogin = if (user.lastLogin == null) fetchedUser.lastLogin else user.lastLogin
+                userDAO.save(fetchedUser)
+                fetchedUser
+            } else null
+        } else {
+            userDAO.save(user)
+            user
+        }
     }
 
     @Transactional

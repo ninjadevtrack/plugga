@@ -11,7 +11,7 @@ interface UserDeckService {
 
     fun findByUserId(id: Int): MutableList<UserDeck>
 
-    fun save(userCard: UserDeck)
+    fun save(userDeck: UserDeck)
 
     fun deleteById(id: Int)
 }

@@ -7,7 +7,7 @@ interface UserService {
 
     fun findById(id: Int): User?
 
-    fun save(user: User)
+    fun save(user: User): User?
 
     fun deleteById(id: Int)
 }
