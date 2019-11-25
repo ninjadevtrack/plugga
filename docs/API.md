@@ -286,17 +286,17 @@
     }
   ```
 ### PUT
-  * URL `/api/users/`
-  * Request body.
+  * URL `/api/users/{userId}`
+  * Request body. Omit any field that is not being updated.
   ```
     {
-      "id": 6,
       "name": "not-hank",
       "email": "hank.hill9@plugga.com",
       "password": "tastethemeatnottheheat"
+      "lastLogin": null
     }
   ```
-  * In the returned object, 'dateCreated' will be null due to `updatable = false` being set 
+  * dateCreated cannot be updated
 ### DELETE
   * URL `/api/users/{userId}`
   * Returns `"Deleted user with id: {userId}"`

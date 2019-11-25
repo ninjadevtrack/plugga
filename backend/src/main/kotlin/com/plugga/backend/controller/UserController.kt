@@ -36,10 +36,14 @@ constructor(private val userService: UserService) {
         return user
     }
 
-    @PutMapping("/")
-    fun updateUser(@RequestBody user: User): User {
-        userService.save(user)
-        return user
+    @PutMapping("/{userId}")
+    fun updateUser(@PathVariable userId: Int, @RequestBody user: User): User {
+        if (user.dateCreated != null) {
+            throw java.lang.RuntimeException("dateCreated cannot be updated")
+        }
+        user.id = userId
+        val updatedUser = userService.save(user)
+        return updatedUser ?: throw java.lang.RuntimeException("Error updating")
     }
 
     @DeleteMapping("/{userId}")
