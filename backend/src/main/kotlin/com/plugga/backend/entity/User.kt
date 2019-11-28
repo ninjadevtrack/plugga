@@ -63,6 +63,15 @@ class User {
         this.lastLogin = null
     }
 
+    constructor(id: Int, name: String, email: String, password: String, dateCreated: Timestamp, lastLogin: Timestamp) {
+        this.id = id
+        this.name = name
+        this.email = email
+        this.password = password
+        this.dateCreated = dateCreated
+        this.lastLogin = lastLogin
+    }
+
     override fun toString(): String {
         return "User{" +
             "id=" + id +
