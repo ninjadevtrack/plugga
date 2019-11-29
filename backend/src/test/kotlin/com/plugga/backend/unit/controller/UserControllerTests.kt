@@ -69,7 +69,6 @@ class UserControllerTests {
 
         mockMvc.perform(get("/api/users/${validUser.id}"))
             .andExpect(status().isOk)
-            .andDo(MockMvcResultHandlers.print())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id", `is`(validUser.id)))
             .andExpect(jsonPath("$.name", `is`(validUser.name)))

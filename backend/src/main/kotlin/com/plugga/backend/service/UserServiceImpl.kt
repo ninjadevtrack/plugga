@@ -9,10 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserServiceImpl @Autowired
-constructor(private val userDAO: UserDAO) : UserService {
-
-    @Autowired
-    private val passwordEncoder: PasswordEncoder? = null
+constructor(private val userDAO: UserDAO, private val passwordEncoder: PasswordEncoder) : UserService {
 
     @Transactional
     override fun findAll(): MutableList<User> {
@@ -27,7 +24,7 @@ constructor(private val userDAO: UserDAO) : UserService {
     @Transactional
     override fun save(user: User): User? {
         user.password?.let {
-            user.password = passwordEncoder!!.encode(it)
+            user.password = passwordEncoder.encode(it)
         }
         if (user.id == 0) {
             userDAO.save(user)
