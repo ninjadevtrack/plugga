@@ -3,9 +3,9 @@ package com.plugga.backend.service
 import com.plugga.backend.dao.UserDAO
 import com.plugga.backend.entity.User
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.security.crypto.password.PasswordEncoder
 
 @Service
 class UserServiceImpl @Autowired
@@ -29,21 +29,24 @@ constructor(private val userDAO: UserDAO) : UserService {
         user.password?.let {
             user.password = passwordEncoder!!.encode(it)
         }
-        return if (user.id != 0) {
-            val fetchedUser = userDAO.findById(user.id)
-            if (fetchedUser != null) {
-                fetchedUser.name = if (user.name == null) fetchedUser.name else user.name
-                fetchedUser.email = if (user.email == null) fetchedUser.email else user.email
-                fetchedUser.password = if (user.password == null) fetchedUser.password else user.password
-                fetchedUser.dateCreated = if (user.dateCreated == null) fetchedUser.dateCreated else user.dateCreated
-                fetchedUser.lastLogin = if (user.lastLogin == null) fetchedUser.lastLogin else user.lastLogin
-                userDAO.save(fetchedUser)
-                fetchedUser
-            } else null
-        } else {
+        if (user.id == 0) {
             userDAO.save(user)
-            user
+            return user
         }
+        val existingUser = userDAO.findById(user.id)
+        if (existingUser != null) {
+            userDAO.save(updateExistingUserFields(existingUser, user))
+        }
+        return existingUser
+    }
+
+    private fun updateExistingUserFields(existingUser: User, user: User): User {
+        existingUser.name = if (user.name == null) existingUser.name else user.name
+        existingUser.email = if (user.email == null) existingUser.email else user.email
+        existingUser.password = if (user.password == null) existingUser.password else user.password
+        existingUser.dateCreated = if (user.dateCreated == null) existingUser.dateCreated else user.dateCreated
+        existingUser.lastLogin = if (user.lastLogin == null) existingUser.lastLogin else user.lastLogin
+        return existingUser
     }
 
     @Transactional
