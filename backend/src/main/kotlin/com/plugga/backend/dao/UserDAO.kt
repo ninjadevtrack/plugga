@@ -1,13 +1,8 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.User
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.stereotype.Repository
 
-interface UserDAO {
-    fun findAll(): MutableList<User>
-
-    fun findById(id: Int): User?
-
-    fun save(user: User)
-
-    fun deleteById(id: Int)
-}
+@Repository
+interface UserDAO : PagingAndSortingRepository<User, Int>

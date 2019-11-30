@@ -272,7 +272,8 @@
     }
   ```
 ### GET
-  * All objects `/api/users/`
+  * All objects `/api/users?page=0&size=30&sort=id`
+    * page, size and sort are all optional fields and any can be omitted
   * By userId `/api/users/{userId}`
   
 ### POST

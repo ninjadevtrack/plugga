@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.plugga.backend.controller.UserController
 import com.plugga.backend.entity.User
 import com.plugga.backend.service.UserService
+import java.sql.Timestamp
 import org.hamcrest.core.Is.`is`
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
@@ -18,13 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import java.sql.Timestamp
-
 
 @ExtendWith(MockitoExtension::class)
 class UserControllerTests {

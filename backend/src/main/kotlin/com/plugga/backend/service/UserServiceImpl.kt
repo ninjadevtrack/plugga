@@ -2,7 +2,10 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.UserDAO
 import com.plugga.backend.entity.User
+import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -12,17 +15,18 @@ class UserServiceImpl @Autowired
 constructor(private val userDAO: UserDAO, private val passwordEncoder: PasswordEncoder) : UserService {
 
     @Transactional
-    override fun findAll(): MutableList<User> {
-        return userDAO.findAll()
+    override fun findAll(pageable: Pageable): Page<User> {
+        return userDAO.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): User? {
-        return userDAO.findById(id)
+        val queryResult: Optional<User> = userDAO.findById(id)
+        return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
-    override fun save(user: User): User? {
+    override fun saveUser(user: User): User? {
         user.password?.let {
             user.password = passwordEncoder.encode(it)
         }
@@ -30,11 +34,13 @@ constructor(private val userDAO: UserDAO, private val passwordEncoder: PasswordE
             userDAO.save(user)
             return user
         }
-        val existingUser = userDAO.findById(user.id)
-        if (existingUser != null) {
+        val queryResult: Optional<User> = userDAO.findById(user.id)
+        if (queryResult.isPresent) {
+            val existingUser = queryResult.get()
             userDAO.save(updateExistingUserFields(existingUser, user))
+            return existingUser
         }
-        return existingUser
+        return null
     }
 
     private fun updateExistingUserFields(existingUser: User, user: User): User {
