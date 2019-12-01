@@ -4,8 +4,10 @@ import com.plugga.backend.entity.User
 import com.plugga.backend.service.UserService
 import java.sql.Timestamp
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -21,8 +23,8 @@ class UserController @Autowired
 constructor(private val userService: UserService) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable): Page<User> {
-        return userService.findAll(pageable)
+    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<User>): PagedModel<EntityModel<User>> {
+        return pagedResourcesAssembler.toModel(userService.findAll(pageable))
     }
 
     @GetMapping("/{userId}")
