@@ -41,6 +41,10 @@
   * `prev` and `next` fields will not exist for the first and last pages respectively
   * `href` params `page` and `size` are dependent on the original query
   * `content` field will contain the entries for that page, the format of which is dependent on the entity
+  * Each request made to paginated sources have three optional queries that can be added on to the url
+        * `page=0` returns the page number
+        * `size=4` returns the size of the `content` field - the number of entities returned per page
+        * `sort=name` sorts based on field (the options available for this is therefore different for each entity)
 # `/api/cards/`
   * Returned body (will be in an array `[]` if more than one). 
     See section on `/api/sides/` for info on what is in 'sides' field.
@@ -311,8 +315,7 @@
     }
   ```
 ### GET
-  * All objects `/api/users?page=0&size=30&sort=id`
-    * page, size and sort are all optional fields and any can be omitted
+  * All objects `/api/users`
   * By userId `/api/users/{userId}`
   
 ### POST
