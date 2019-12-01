@@ -1,17 +1,19 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.DeckCard
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.stereotype.Repository
 
-interface DeckCardDAO {
-    fun findAll(): MutableList<DeckCard>
+@Repository
+interface DeckCardDAO : PagingAndSortingRepository<DeckCard, Int> {
 
-    fun findById(id: Int): DeckCard?
+    fun findByDeckId(deckId: Int): List<DeckCard>
 
-    fun findByDeckId(deckId: Int): MutableList<DeckCard>
+    fun findByDeckId(pageable: Pageable, deckId: Int): Page<DeckCard>
 
-    fun findByCardId(cardId: Int): MutableList<DeckCard>
+    fun findByCardId(cardId: Int): List<DeckCard>
 
-    fun save(deckCard: DeckCard)
-
-    fun deleteById(id: Int)
+    fun findByCardId(pageable: Pageable, cardId: Int): Page<DeckCard>
 }

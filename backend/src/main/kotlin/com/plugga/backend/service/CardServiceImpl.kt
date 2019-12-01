@@ -2,9 +2,13 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.CardDAO
 import com.plugga.backend.dao.DeckCardDAO
+import com.plugga.backend.dao.util.subListForRequestedPage
 import com.plugga.backend.entity.Card
-import com.plugga.backend.entity.DeckCard
+import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,23 +17,24 @@ class CardServiceImpl @Autowired
 constructor(private val cardDAO: CardDAO, private val deckCardDAO: DeckCardDAO) : CardService {
 
     @Transactional
-    override fun findAll(): MutableList<Card> {
-        return cardDAO.findAll()
+    override fun findAll(pageable: Pageable): Page<Card> {
+        return cardDAO.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): Card? {
-        return cardDAO.findById(id)
+        val queryResult: Optional<Card> = cardDAO.findById(id)
+        return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
-    override fun findByDeckId(id: Int): MutableList<Card> {
-        val deckCards: MutableList<DeckCard> = deckCardDAO.findByDeckId(id)
-        val cards: MutableList<Card> = mutableListOf()
-        deckCards.forEach {
-            it.card?.let { it1 -> cards.add(it1) }
+    override fun findByDeckId(pageable: Pageable, id: Int): Page<Card> {
+        val deckCardList = deckCardDAO.findByDeckId(id)
+        val cardList: MutableList<Card> = mutableListOf()
+        deckCardList.forEach {
+            it.card?.let { it1 -> cardList.add(it1) }
         }
-        return cards
+        return PageImpl<Card>(subListForRequestedPage(pageable, cardList), pageable, cardList.size.toLong())
     }
 
     @Transactional

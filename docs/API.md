@@ -2,6 +2,49 @@
 ## Obtaining tokens
 ## Making requests with tokens
 
+# Paginated data
+  * Endpoints that return more than one entity will be of the following form
+  ```
+    {
+      "links": [
+        {
+          "rel": "first",
+          "href": "http://localhost:5000/api/users?page=0&size=20"
+        },
+        {
+          "rel": "prev",
+          "href": "http://localhost:5000/api/users?page=0&size=20"
+        },
+        {
+          "rel": "self",
+          "href": "http://localhost:5000/api/users?page=1&size=20"
+        },
+        {
+          "rel": "next",
+          "href": "http://localhost:5000/api/users?page=2&size=20"
+        },
+        {
+          "rel": "last",
+          "href": "http://localhost:5000/api/users?page=2&size=20"
+        }
+      ],
+      "content": [
+      ],
+      "page": {
+        "size": 20,
+        "totalElements": 60,
+        "totalPages": 3,
+        "number": 0
+      }
+    }
+  ```
+  * `prev` and `next` fields will not exist for the first and last pages respectively
+  * `href` params `page` and `size` are dependent on the original query
+  * `content` field will contain the entries for that page, the format of which is dependent on the entity
+  * Each request made to paginated sources have three optional queries that can be added on to the url
+        * `page=0` returns the page number
+        * `size=4` returns the size of the `content` field - the number of entities returned per page
+        * `sort=name` sorts based on field (the options available for this is therefore different for each entity)
 # `/api/cards/`
   * Returned body (will be in an array `[]` if more than one). 
     See section on `/api/sides/` for info on what is in 'sides' field.
@@ -272,7 +315,7 @@
     }
   ```
 ### GET
-  * All objects `/api/users/`
+  * All objects `/api/users`
   * By userId `/api/users/{userId}`
   
 ### POST

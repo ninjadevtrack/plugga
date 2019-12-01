@@ -1,15 +1,15 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Pile
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.stereotype.Repository
 
-interface PileDAO {
-    fun findAll(): MutableList<Pile>
+@Repository
+interface PileDAO : PagingAndSortingRepository<Pile, Int> {
 
-    fun findById(id: Int): Pile?
+    fun findByDeckId(deckId: Int): List<Pile>
 
-    fun findByDeckId(deckId: Int): MutableList<Pile>
-
-    fun save(pile: Pile)
-
-    fun deleteById(id: Int)
+    fun findByDeckId(pageable: Pageable, deckId: Int): Page<Pile>
 }

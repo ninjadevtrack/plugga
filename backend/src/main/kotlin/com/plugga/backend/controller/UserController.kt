@@ -4,6 +4,10 @@ import com.plugga.backend.entity.User
 import com.plugga.backend.service.UserService
 import java.sql.Timestamp
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController
 class UserController @Autowired
 constructor(private val userService: UserService) {
 
-    @GetMapping("/")
-    fun findAll(): List<User> {
-        return userService.findAll()
+    @GetMapping("")
+    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<User>): PagedModel<EntityModel<User>> {
+        return pagedResourcesAssembler.toModel(userService.findAll(pageable))
     }
 
     @GetMapping("/{userId}")
@@ -28,11 +32,11 @@ constructor(private val userService: UserService) {
         return userService.findById(userId) ?: throw RuntimeException("Could not find user using id: $userId")
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun addUser(@RequestBody user: User): User {
         user.id = 0
         user.dateCreated = Timestamp(System.currentTimeMillis())
-        userService.save(user)
+        userService.saveUser(user)
         return user
     }
 
@@ -42,7 +46,7 @@ constructor(private val userService: UserService) {
             throw java.lang.RuntimeException("dateCreated cannot be updated")
         }
         user.id = userId
-        val updatedUser = userService.save(user)
+        val updatedUser = userService.saveUser(user)
         return updatedUser ?: throw java.lang.RuntimeException("Error updating")
     }
 

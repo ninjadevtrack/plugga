@@ -1,13 +1,16 @@
 package com.plugga.backend.service
 
 import com.plugga.backend.entity.User
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 interface UserService {
-    fun findAll(): MutableList<User>
+
+    fun findAll(pageable: Pageable): Page<User>
 
     fun findById(id: Int): User?
 
-    fun save(user: User): User?
+    fun saveUser(user: User): User?
 
     fun deleteById(id: Int)
 }

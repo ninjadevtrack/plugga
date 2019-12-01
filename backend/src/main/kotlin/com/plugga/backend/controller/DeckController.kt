@@ -4,6 +4,10 @@ import com.plugga.backend.entity.Deck
 import com.plugga.backend.service.DeckService
 import java.sql.Timestamp
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController
 class DeckController @Autowired
 constructor(private val deckService: DeckService) {
 
-    @GetMapping("/")
-    fun findAll(): List<Deck> {
-        return deckService.findAll()
+    @GetMapping("")
+    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Deck>): PagedModel<EntityModel<Deck>> {
+        return pagedResourcesAssembler.toModel(deckService.findAll(pageable))
     }
 
     @GetMapping("/{deckId}")
@@ -30,11 +34,11 @@ constructor(private val deckService: DeckService) {
     }
 
     @GetMapping(value = [""], params = ["userId"])
-    fun getByUserId(@RequestParam("userId") userId: Int): List<Deck> {
-        return deckService.findByUserId(userId)
+    fun getByUserId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Deck>, @RequestParam("userId") userId: Int): PagedModel<EntityModel<Deck>> {
+        return pagedResourcesAssembler.toModel(deckService.findByUserId(pageable, userId))
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun addDeck(@RequestBody deck: Deck): Deck {
         deck.id = 0
         deck.dateCreated = Timestamp(System.currentTimeMillis())

@@ -6,6 +6,10 @@ import com.plugga.backend.service.DeckCardService
 import com.plugga.backend.service.DeckService
 import com.plugga.backend.service.PileService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -26,9 +30,9 @@ constructor(
     private val pileService: PileService
 ) {
 
-    @GetMapping("/")
-    fun findAll(): List<DeckCard> {
-        return deckCardService.findAll()
+    @GetMapping("")
+    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>): PagedModel<EntityModel<DeckCard>> {
+        return pagedResourcesAssembler.toModel(deckCardService.findAll(pageable))
     }
 
     @GetMapping("/{deckCardId}")
@@ -38,16 +42,16 @@ constructor(
     }
 
     @GetMapping(value = [""], params = ["deckId"])
-    fun getByDeckId(@RequestParam("deckId") deckId: Int): List<DeckCard> {
-        return deckCardService.findByDeckId(deckId)
+    fun getByDeckId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>, @RequestParam("deckId") deckId: Int): PagedModel<EntityModel<DeckCard>> {
+        return pagedResourcesAssembler.toModel(deckCardService.findByDeckId(pageable, deckId))
     }
 
     @GetMapping(value = [""], params = ["cardId"])
-    fun getByCardId(@RequestParam("cardId") cardId: Int): List<DeckCard> {
-        return deckCardService.findByCardId(cardId)
+    fun getByCardId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>, @RequestParam("cardId") cardId: Int): PagedModel<EntityModel<DeckCard>> {
+        return pagedResourcesAssembler.toModel(deckCardService.findByCardId(pageable, cardId))
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun addDeckCard(@RequestBody deckCard: DeckCard): DeckCard {
         deckCard.id = 0
         deckCardService.save(deckCard)

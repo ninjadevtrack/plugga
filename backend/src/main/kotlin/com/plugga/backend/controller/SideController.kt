@@ -3,6 +3,10 @@ package com.plugga.backend.controller
 import com.plugga.backend.entity.Side
 import com.plugga.backend.service.SideService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController
 class SideController @Autowired
 constructor(private val sideService: SideService) {
 
-    @GetMapping("/")
-    fun findAll(): List<Side> {
-        return sideService.findAll()
+    @GetMapping("")
+    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Side>): PagedModel<EntityModel<Side>> {
+        return pagedResourcesAssembler.toModel(sideService.findAll(pageable))
     }
 
     @GetMapping("/{sideId}")
@@ -29,11 +33,11 @@ constructor(private val sideService: SideService) {
     }
 
     @GetMapping(value = [""], params = ["cardId"])
-    fun getByCardId(@RequestParam("cardId") cardId: Int): List<Side> {
-        return sideService.findByCardId(cardId)
+    fun getByCardId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Side>, @RequestParam("cardId") cardId: Int): PagedModel<EntityModel<Side>> {
+        return pagedResourcesAssembler.toModel(sideService.findByCardId(pageable, cardId))
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun addSide(@RequestBody side: Side): Side {
         side.id = 0
         sideService.save(side)
