@@ -2,8 +2,11 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.SideDAO
 import com.plugga.backend.entity.Side
+import java.util.Optional
 import javax.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -11,18 +14,19 @@ class SideServiceImpl @Autowired
 constructor(private val sideDAO: SideDAO) : SideService {
 
     @Transactional
-    override fun findAll(): MutableList<Side> {
-        return sideDAO.findAll()
+    override fun findAll(pageable: Pageable): Page<Side> {
+        return sideDAO.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): Side? {
-        return sideDAO.findById(id)
+        val queryResult: Optional<Side> = sideDAO.findById(id)
+        return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
-    override fun findByCardId(cardId: Int): MutableList<Side> {
-        return sideDAO.findByCardId(cardId)
+    override fun findByCardId(pageable: Pageable, cardId: Int): Page<Side> {
+        return sideDAO.findByCardId(pageable, cardId)
     }
 
     @Transactional

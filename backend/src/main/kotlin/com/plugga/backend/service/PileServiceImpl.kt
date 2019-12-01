@@ -2,8 +2,11 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.PileDAO
 import com.plugga.backend.entity.Pile
+import java.util.Optional
 import javax.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -11,18 +14,19 @@ class PileServiceImpl @Autowired
 constructor(private val pileDAO: PileDAO) : PileService {
 
     @Transactional
-    override fun findAll(): MutableList<Pile> {
-        return pileDAO.findAll()
+    override fun findAll(pageable: Pageable): Page<Pile> {
+        return pileDAO.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): Pile? {
-        return pileDAO.findById(id)
+        val queryResult: Optional<Pile> = pileDAO.findById(id)
+        return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
-    override fun findByDeckId(id: Int): MutableList<Pile> {
-        return pileDAO.findByDeckId(id)
+    override fun findByDeckId(pageable: Pageable, id: Int): Page<Pile> {
+        return pileDAO.findByDeckId(pageable, id)
     }
 
     @Transactional

@@ -1,15 +1,15 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Side
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.stereotype.Repository
 
-interface SideDAO {
-    fun findAll(): MutableList<Side>
+@Repository
+interface SideDAO : PagingAndSortingRepository<Side, Int> {
 
-    fun findById(id: Int): Side?
+    fun findByCardId(cardId: Int): List<Side>
 
-    fun findByCardId(cardId: Int): MutableList<Side>
-
-    fun save(side: Side)
-
-    fun deleteById(id: Int)
+    fun findByCardId(pageable: Pageable, cardId: Int): Page<Side>
 }

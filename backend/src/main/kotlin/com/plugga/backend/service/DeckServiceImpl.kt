@@ -2,9 +2,13 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.DeckDAO
 import com.plugga.backend.dao.UserDeckDAO
+import com.plugga.backend.dao.util.subListForRequestedPage
 import com.plugga.backend.entity.Deck
-import com.plugga.backend.entity.UserDeck
+import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,23 +17,24 @@ class DeckServiceImpl @Autowired
 constructor(private val deckDAO: DeckDAO, private val userDeckDAO: UserDeckDAO) : DeckService {
 
     @Transactional
-    override fun findAll(): MutableList<Deck> {
-        return deckDAO.findAll()
+    override fun findAll(pageable: Pageable): Page<Deck> {
+        return deckDAO.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): Deck? {
-        return deckDAO.findById(id)
+        val queryResult: Optional<Deck> = deckDAO.findById(id)
+        return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
-    override fun findByUserId(id: Int): MutableList<Deck> {
-        val userDecks: MutableList<UserDeck> = userDeckDAO.findByUserId(id)
-        val decks: MutableList<Deck> = mutableListOf()
-        userDecks.forEach {
-            it.deck?.let { it1 -> decks.add(it1) }
+    override fun findByUserId(pageable: Pageable, id: Int): Page<Deck> {
+        val userDeckList = userDeckDAO.findByUserId(id)
+        val deckList: MutableList<Deck> = mutableListOf()
+        userDeckList.forEach {
+            it.deck?.let { it1 -> deckList.add(it1) }
         }
-        return decks
+        return PageImpl<Deck>(subListForRequestedPage(pageable, deckList), pageable, deckList.size.toLong())
     }
 
     @Transactional

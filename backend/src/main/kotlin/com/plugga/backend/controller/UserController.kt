@@ -32,7 +32,7 @@ constructor(private val userService: UserService) {
         return userService.findById(userId) ?: throw RuntimeException("Could not find user using id: $userId")
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun addUser(@RequestBody user: User): User {
         user.id = 0
         user.dateCreated = Timestamp(System.currentTimeMillis())

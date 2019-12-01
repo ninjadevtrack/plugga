@@ -3,6 +3,10 @@ package com.plugga.backend.controller
 import com.plugga.backend.entity.Pile
 import com.plugga.backend.service.PileService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController
 class PileController @Autowired
 constructor(private val pileService: PileService) {
 
-    @GetMapping("/")
-    fun findAll(): List<Pile> {
-        return pileService.findAll()
+    @GetMapping("")
+    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Pile>): PagedModel<EntityModel<Pile>> {
+        return pagedResourcesAssembler.toModel(pileService.findAll(pageable))
     }
 
     @GetMapping("/{pileId}")
@@ -29,11 +33,11 @@ constructor(private val pileService: PileService) {
     }
 
     @GetMapping(value = [""], params = ["deckId"])
-    fun getByDeckId(@RequestParam("deckId") deckId: Int): List<Pile> {
-        return pileService.findByDeckId(deckId)
+    fun getByDeckId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Pile>, @RequestParam("deckId") deckId: Int): PagedModel<EntityModel<Pile>> {
+        return pagedResourcesAssembler.toModel(pileService.findByDeckId(pageable, deckId))
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun addPile(@RequestBody pile: Pile): Pile {
         pile.id = 0
         pileService.save(pile)

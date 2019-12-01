@@ -1,13 +1,8 @@
 package com.plugga.backend.dao
 
 import com.plugga.backend.entity.Card
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.stereotype.Repository
 
-interface CardDAO {
-    fun findAll(): MutableList<Card>
-
-    fun findById(id: Int): Card?
-
-    fun save(card: Card)
-
-    fun deleteById(id: Int)
-}
+@Repository
+interface CardDAO : PagingAndSortingRepository<Card, Int>

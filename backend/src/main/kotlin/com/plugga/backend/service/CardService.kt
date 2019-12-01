@@ -1,13 +1,15 @@
 package com.plugga.backend.service
 
 import com.plugga.backend.entity.Card
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 interface CardService {
-    fun findAll(): MutableList<Card>
+    fun findAll(pageable: Pageable): Page<Card>
 
     fun findById(id: Int): Card?
 
-    fun findByDeckId(id: Int): MutableList<Card>
+    fun findByDeckId(pageable: Pageable, id: Int): Page<Card>
 
     fun save(card: Card)
 

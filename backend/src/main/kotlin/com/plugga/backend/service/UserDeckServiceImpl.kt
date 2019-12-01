@@ -2,7 +2,10 @@ package com.plugga.backend.service
 
 import com.plugga.backend.dao.UserDeckDAO
 import com.plugga.backend.entity.UserDeck
+import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
@@ -11,23 +14,24 @@ class UserDeckServiceImpl @Autowired
 constructor(private val userDeckDAO: UserDeckDAO) : UserDeckService {
 
     @Transactional
-    override fun findAll(): MutableList<UserDeck> {
-        return userDeckDAO.findAll()
+    override fun findAll(pageable: Pageable): Page<UserDeck> {
+        return userDeckDAO.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): UserDeck? {
-        return userDeckDAO.findById(id)
+        val queryResult: Optional<UserDeck> = userDeckDAO.findById(id)
+        return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
-    override fun findByDeckId(id: Int): MutableList<UserDeck> {
-        return userDeckDAO.findByDeckId(id)
+    override fun findByDeckId(pageable: Pageable, id: Int): Page<UserDeck> {
+        return userDeckDAO.findByDeckId(pageable, id)
     }
 
     @Transactional
-    override fun findByUserId(id: Int): MutableList<UserDeck> {
-        return userDeckDAO.findByUserId(id)
+    override fun findByUserId(pageable: Pageable, id: Int): Page<UserDeck> {
+        return userDeckDAO.findByUserId(pageable, id)
     }
 
     @Transactional
