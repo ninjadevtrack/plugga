@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/cards")
-class CardController @Autowired
+class CardController
+@Autowired
 constructor(private val cardService: CardService) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Card>): PagedModel<EntityModel<Card>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Card>
+    ): PagedModel<EntityModel<Card>> {
         return pagedResourcesAssembler.toModel(cardService.findAll(pageable))
     }
 
@@ -33,7 +37,11 @@ constructor(private val cardService: CardService) {
     }
 
     @GetMapping(value = [""], params = ["deckId"])
-    fun getByDeckId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Card>, @RequestParam("deckId") deckId: Int): PagedModel<EntityModel<Card>> {
+    fun getByDeckId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Card>,
+        @RequestParam("deckId") deckId: Int
+    ): PagedModel<EntityModel<Card>> {
         return pagedResourcesAssembler.toModel(cardService.findByDeckId(pageable, deckId))
     }
 
@@ -44,8 +52,9 @@ constructor(private val cardService: CardService) {
         return card
     }
 
-    @PutMapping("/")
-    fun updateCard(@RequestBody card: Card): Card {
+    @PutMapping("/{cardId}")
+    fun updateCard(@PathVariable cardId: Int, @RequestBody card: Card): Card {
+        card.id = cardId
         cardService.save(card)
         return card
     }

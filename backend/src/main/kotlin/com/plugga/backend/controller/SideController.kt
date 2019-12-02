@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/sides")
-class SideController @Autowired
+class SideController
+@Autowired
 constructor(private val sideService: SideService) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Side>): PagedModel<EntityModel<Side>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Side>
+    ): PagedModel<EntityModel<Side>> {
         return pagedResourcesAssembler.toModel(sideService.findAll(pageable))
     }
 
@@ -33,7 +37,11 @@ constructor(private val sideService: SideService) {
     }
 
     @GetMapping(value = [""], params = ["cardId"])
-    fun getByCardId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Side>, @RequestParam("cardId") cardId: Int): PagedModel<EntityModel<Side>> {
+    fun getByCardId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Side>,
+        @RequestParam("cardId") cardId: Int
+    ): PagedModel<EntityModel<Side>> {
         return pagedResourcesAssembler.toModel(sideService.findByCardId(pageable, cardId))
     }
 
@@ -44,8 +52,9 @@ constructor(private val sideService: SideService) {
         return side
     }
 
-    @PutMapping("/")
-    fun updateSide(@RequestBody side: Side): Side {
+    @PutMapping("/{sideId}")
+    fun updateSide(@PathVariable sideId: Int, @RequestBody side: Side): Side {
+        side.id = sideId
         sideService.save(side)
         return side
     }

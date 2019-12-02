@@ -37,7 +37,7 @@ class Pile {
     var rank: Byte = 0
 
     @Column(name = "freq")
-    var freq: Int = 0
+    var freqInMinutes: Int = 0
 
     constructor() {}
 
@@ -48,14 +48,14 @@ class Pile {
     constructor(deck: Deck, rank: Byte, freq: Int) {
         this.deck = deck
         this.rank = rank
-        this.freq = freq
+        this.freqInMinutes = freq
     }
 
     override fun toString(): String {
         return "Pile{" +
             "id=" + id +
             ", rank=" + rank +
-            ", freq=" + freq +
+            ", freqInMinutes=" + freqInMinutes +
             '}'.toString()
     }
 }

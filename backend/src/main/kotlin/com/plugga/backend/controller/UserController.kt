@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/users")
-class UserController @Autowired
+class UserController
+@Autowired
 constructor(private val userService: UserService) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<User>): PagedModel<EntityModel<User>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<User>
+    ): PagedModel<EntityModel<User>> {
         return pagedResourcesAssembler.toModel(userService.findAll(pageable))
     }
 

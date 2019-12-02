@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/decks")
-class DeckController @Autowired
+class DeckController
+@Autowired
 constructor(private val deckService: DeckService) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Deck>): PagedModel<EntityModel<Deck>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Deck>
+    ): PagedModel<EntityModel<Deck>> {
         return pagedResourcesAssembler.toModel(deckService.findAll(pageable))
     }
 
@@ -34,7 +38,11 @@ constructor(private val deckService: DeckService) {
     }
 
     @GetMapping(value = [""], params = ["userId"])
-    fun getByUserId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Deck>, @RequestParam("userId") userId: Int): PagedModel<EntityModel<Deck>> {
+    fun getByUserId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Deck>,
+        @RequestParam("userId") userId: Int
+    ): PagedModel<EntityModel<Deck>> {
         return pagedResourcesAssembler.toModel(deckService.findByUserId(pageable, userId))
     }
 
@@ -46,8 +54,9 @@ constructor(private val deckService: DeckService) {
         return deck
     }
 
-    @PutMapping("/")
-    fun updateDeck(@RequestBody deck: Deck): Deck {
+    @PutMapping("/{deckId}")
+    fun updateDeck(@PathVariable deckId: Int, @RequestBody deck: Deck): Deck {
+        deck.id = deckId
         deckService.save(deck)
         return deck
     }
