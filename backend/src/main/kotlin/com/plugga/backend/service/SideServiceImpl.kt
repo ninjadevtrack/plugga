@@ -1,6 +1,6 @@
 package com.plugga.backend.service
 
-import com.plugga.backend.dao.SideDAO
+import com.plugga.backend.repository.SideRepository
 import com.plugga.backend.entity.Side
 import java.util.Optional
 import javax.transaction.Transactional
@@ -11,31 +11,31 @@ import org.springframework.stereotype.Service
 
 @Service
 class SideServiceImpl @Autowired
-constructor(private val sideDAO: SideDAO) : SideService {
+constructor(private val sideRepository: SideRepository) : SideService {
 
     @Transactional
     override fun findAll(pageable: Pageable): Page<Side> {
-        return sideDAO.findAll(pageable)
+        return sideRepository.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): Side? {
-        val queryResult: Optional<Side> = sideDAO.findById(id)
+        val queryResult: Optional<Side> = sideRepository.findById(id)
         return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
     override fun findByCardId(pageable: Pageable, cardId: Int): Page<Side> {
-        return sideDAO.findByCardId(pageable, cardId)
+        return sideRepository.findByCardId(pageable, cardId)
     }
 
     @Transactional
     override fun save(side: Side) {
-        sideDAO.save(side)
+        sideRepository.save(side)
     }
 
     @Transactional
     override fun deleteById(id: Int) {
-        sideDAO.deleteById(id)
+        sideRepository.deleteById(id)
     }
 }

@@ -1,6 +1,6 @@
 package com.plugga.backend.service
 
-import com.plugga.backend.dao.UserDAO
+import com.plugga.backend.repository.UserRepository
 import com.plugga.backend.entity.User
 import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,16 +12,16 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserServiceImpl @Autowired
-constructor(private val userDAO: UserDAO, private val passwordEncoder: PasswordEncoder) : UserService {
+constructor(private val userRepository: UserRepository, private val passwordEncoder: PasswordEncoder) : UserService {
 
     @Transactional
     override fun findAll(pageable: Pageable): Page<User> {
-        return userDAO.findAll(pageable)
+        return userRepository.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): User? {
-        val queryResult: Optional<User> = userDAO.findById(id)
+        val queryResult: Optional<User> = userRepository.findById(id)
         return if (queryResult.isPresent) queryResult.get() else null
     }
 
@@ -31,13 +31,13 @@ constructor(private val userDAO: UserDAO, private val passwordEncoder: PasswordE
             user.password = passwordEncoder.encode(it)
         }
         if (user.id == 0) {
-            userDAO.save(user)
+            userRepository.save(user)
             return user
         }
-        val queryResult: Optional<User> = userDAO.findById(user.id)
+        val queryResult: Optional<User> = userRepository.findById(user.id)
         if (queryResult.isPresent) {
             val existingUser = queryResult.get()
-            userDAO.save(updateExistingUserFields(existingUser, user))
+            userRepository.save(updateExistingUserFields(existingUser, user))
             return existingUser
         }
         return null
@@ -54,6 +54,6 @@ constructor(private val userDAO: UserDAO, private val passwordEncoder: PasswordE
 
     @Transactional
     override fun deleteById(id: Int) {
-        userDAO.deleteById(id)
+        userRepository.deleteById(id)
     }
 }
