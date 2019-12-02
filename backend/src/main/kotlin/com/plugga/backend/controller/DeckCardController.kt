@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/deck_cards")
-class DeckCardController @Autowired
+class DeckCardController
+@Autowired
 constructor(
     private val deckCardService: DeckCardService,
     private val deckService: DeckService,
@@ -31,7 +32,10 @@ constructor(
 ) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>): PagedModel<EntityModel<DeckCard>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>
+    ): PagedModel<EntityModel<DeckCard>> {
         return pagedResourcesAssembler.toModel(deckCardService.findAll(pageable))
     }
 
@@ -42,12 +46,20 @@ constructor(
     }
 
     @GetMapping(value = [""], params = ["deckId"])
-    fun getByDeckId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>, @RequestParam("deckId") deckId: Int): PagedModel<EntityModel<DeckCard>> {
+    fun getByDeckId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>,
+        @RequestParam("deckId") deckId: Int
+    ): PagedModel<EntityModel<DeckCard>> {
         return pagedResourcesAssembler.toModel(deckCardService.findByDeckId(pageable, deckId))
     }
 
     @GetMapping(value = [""], params = ["cardId"])
-    fun getByCardId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>, @RequestParam("cardId") cardId: Int): PagedModel<EntityModel<DeckCard>> {
+    fun getByCardId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<DeckCard>,
+        @RequestParam("cardId") cardId: Int
+    ): PagedModel<EntityModel<DeckCard>> {
         return pagedResourcesAssembler.toModel(deckCardService.findByCardId(pageable, cardId))
     }
 
@@ -59,8 +71,9 @@ constructor(
         return deckCard
     }
 
-    @PutMapping("/")
-    fun updateDeckCard(@RequestBody deckCard: DeckCard): DeckCard {
+    @PutMapping("/{deckCardId}")
+    fun updateDeckCard(@PathVariable deckCardId: Int, @RequestBody deckCard: DeckCard): DeckCard {
+        deckCard.id = deckCardId
         deckCardService.save(deckCard)
         updateReturnDeckCard(deckCard)
         return deckCard

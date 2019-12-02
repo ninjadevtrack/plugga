@@ -41,6 +41,7 @@
   * `prev` and `next` fields will not exist for the first and last pages respectively
   * `href` params `page` and `size` are dependent on the original query
   * `content` field will contain the entries for that page, the format of which is dependent on the entity
+    * Each entry in the `content` field will have an extra `links` array in addition to its normal fields
   * Each request made to paginated sources have three optional queries that can be added on to the url
         * `page=0` returns the page number
         * `size=4` returns the size of the `content` field - the number of entities returned per page
@@ -80,8 +81,8 @@
  ```
  
 ### PUT
- * URL `/api/cards/`
- * Request body. See POST section above
+ * URL `/api/cards/{cardId}`
+ * Request body. See POST section above and omit `id` field from the body
  
 ### DELETE
   * URL `/api/cards/{cardId}`
@@ -114,12 +115,11 @@
     }
   ```
 ### PUT
-  * URL `/api/deck_cards/`
+  * URL `/api/deck_cards/{deckCardId}`
   * Request body. Each field below represents the respective id's `(deckCardId, deckId, cardId, pileId)`
   * Pile is optional / nullable and a null value indicates that the card is in a deck but not in a pile (inactive)
   ```
     {
-      "id": 24,
       "deck": 4,
       "card": 7,
       "pile": 1
@@ -157,11 +157,10 @@
   ```
  
 ### PUT
- * URL `/api/decks/`
+ * URL `/api/decks/{deckId}`
  * Request body. Note that 'dateCreated' cannot be updated
   ```
   {
-  	"id": 16,
   	"name": "New name",
   	"imageUrl": "updated-url"
   }
@@ -178,7 +177,7 @@
     "id": 1,
     "deck": 1,
     "rank": 1,
-    "freq": 1
+    "freqInMinutes": 1
   }
   ```
 
@@ -194,23 +193,22 @@
   {
     "deck": 10,
     "rank": 1,
-    "freq": 7
+    "freqInMinutes": 7
   }
   ```
 ### PUT
-  * URL `/api/piles/`
+  * URL `/api/piles/{pileId}`
   * Request body. 'deck' field represents 'deckId'
   ```
   {
-    "id": 21,
     "deck": 10,
     "rank": 4,
-    "freq": 7
+    "freqInMinutes": 7
   }
   ```
   
 ### DELETE
-  * URL `/api/piles{pileId}`
+  * URL `/api/piles/{pileId}`
   * Returns `"Deleted pile with id: {pileId}"`
   
 # `/api/sides/`
@@ -240,11 +238,10 @@
   }
   ```
 ### PUT
-  * URL `/api/sides/`
+  * URL `/api/sides/{sideId}`
   * Request body. Each field below represents the respective id's `(sideId, cardId)`
   ```
   {
-	"id": 33,
     "card": 7,
     "imageUrl": "updated-url",
     "text": "updated-text"
@@ -252,7 +249,7 @@
   ```
   
 ### DELETE
-  * URL `/api/sides{sideId}`
+  * URL `/api/sides/{sideId}`
   * Returns `"Deleted side with id: {sidesId}"`
   
 # `/api/user_decks/`
@@ -291,11 +288,10 @@
     }
   ```
 ### PUT
-  * URL `/api/user_decks/`
+  * URL `/api/user_decks/{userDeckId}`
   * Request body. Each field below represents the respective id's `(userDeckId, userId, deckId)`
   ```
     {
-	  "id": 1,
 	  "user": 1,
 	  "deck": 7
     }

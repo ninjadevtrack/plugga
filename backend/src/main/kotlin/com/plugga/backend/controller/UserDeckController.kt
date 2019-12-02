@@ -21,11 +21,19 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/user_decks")
-class UserDeckController @Autowired
-constructor(private val userDeckService: UserDeckService, private val deckService: DeckService, private val userService: UserService) {
+class UserDeckController
+@Autowired
+constructor(
+    private val userDeckService: UserDeckService,
+    private val deckService: DeckService,
+    private val userService: UserService
+) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<UserDeck>): PagedModel<EntityModel<UserDeck>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<UserDeck>
+    ): PagedModel<EntityModel<UserDeck>> {
         return pagedResourcesAssembler.toModel(userDeckService.findAll(pageable))
     }
 
@@ -36,12 +44,20 @@ constructor(private val userDeckService: UserDeckService, private val deckServic
     }
 
     @GetMapping(value = [""], params = ["deckId"])
-    fun getByDeckId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<UserDeck>, @RequestParam("deckId") deckId: Int): PagedModel<EntityModel<UserDeck>> {
+    fun getByDeckId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<UserDeck>,
+        @RequestParam("deckId") deckId: Int
+    ): PagedModel<EntityModel<UserDeck>> {
         return pagedResourcesAssembler.toModel(userDeckService.findByDeckId(pageable, deckId))
     }
 
     @GetMapping(value = [""], params = ["userId"])
-    fun getByUserId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<UserDeck>, @RequestParam("userId") userId: Int): PagedModel<EntityModel<UserDeck>> {
+    fun getByUserId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<UserDeck>,
+        @RequestParam("userId") userId: Int
+    ): PagedModel<EntityModel<UserDeck>> {
         return pagedResourcesAssembler.toModel(userDeckService.findByUserId(pageable, userId))
     }
 
@@ -54,8 +70,9 @@ constructor(private val userDeckService: UserDeckService, private val deckServic
         return userDeck
     }
 
-    @PutMapping("/")
-    fun updateUserDeck(@RequestBody userDeck: UserDeck): UserDeck {
+    @PutMapping("/{userDeckId}")
+    fun updateUserDeck(@PathVariable userDeckId: Int, @RequestBody userDeck: UserDeck): UserDeck {
+        userDeck.id = userDeckId
         userDeckService.save(userDeck)
         userDeck.deck = deckService.findById(userDeck.deck!!.id)
         userDeck.user = userService.findById(userDeck.user!!.id)

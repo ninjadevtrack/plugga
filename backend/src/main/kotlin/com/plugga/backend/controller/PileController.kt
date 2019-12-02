@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/piles")
-class PileController @Autowired
+class PileController
+@Autowired
 constructor(private val pileService: PileService) {
 
     @GetMapping("")
-    fun findAll(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Pile>): PagedModel<EntityModel<Pile>> {
+    fun findAll(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Pile>
+    ): PagedModel<EntityModel<Pile>> {
         return pagedResourcesAssembler.toModel(pileService.findAll(pageable))
     }
 
@@ -33,7 +37,11 @@ constructor(private val pileService: PileService) {
     }
 
     @GetMapping(value = [""], params = ["deckId"])
-    fun getByDeckId(pageable: Pageable, pagedResourcesAssembler: PagedResourcesAssembler<Pile>, @RequestParam("deckId") deckId: Int): PagedModel<EntityModel<Pile>> {
+    fun getByDeckId(
+        pageable: Pageable,
+        pagedResourcesAssembler: PagedResourcesAssembler<Pile>,
+        @RequestParam("deckId") deckId: Int
+    ): PagedModel<EntityModel<Pile>> {
         return pagedResourcesAssembler.toModel(pileService.findByDeckId(pageable, deckId))
     }
 
@@ -44,8 +52,9 @@ constructor(private val pileService: PileService) {
         return pile
     }
 
-    @PutMapping("/")
-    fun updatePile(@RequestBody pile: Pile): Pile {
+    @PutMapping("/{pileId}")
+    fun updatePile(@PathVariable pileId: Int, @RequestBody pile: Pile): Pile {
+        pile.id = pileId
         pileService.save(pile)
         return pile
     }
