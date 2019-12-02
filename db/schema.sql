@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: plugga
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -56,7 +56,7 @@ CREATE TABLE `deck_card` (
   `deck_card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `card_id` int(10) unsigned NOT NULL,
-  `pile_id` int(10) unsigned,
+  `pile_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`deck_card_id`),
   KEY `deck_card_id_idx` (`card_id`),
   KEY `card_deck_id_idx` (`deck_id`),
@@ -64,7 +64,7 @@ CREATE TABLE `deck_card` (
   CONSTRAINT `card_deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`),
   CONSTRAINT `deck_card_id` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`),
   CONSTRAINT `deck_card_pile_id` FOREIGN KEY (`pile_id`) REFERENCES `pile` (`pile_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `pile` (
   `pile_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `deck_id` int(10) unsigned NOT NULL,
   `rank` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `freq` smallint(5) unsigned NOT NULL DEFAULT '7',
+  `freq` int(10) unsigned NOT NULL DEFAULT '10080',
   PRIMARY KEY (`pile_id`),
   KEY `deck_id_idx` (`deck_id`),
   CONSTRAINT `deck_id` FOREIGN KEY (`deck_id`) REFERENCES `deck` (`deck_id`)
@@ -113,12 +113,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(16) NOT NULL,
-  `email` varchar(50) NOT NULL UNIQUE,
+  `email` varchar(50) NOT NULL,
   `password` char(68) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,4 +150,4 @@ CREATE TABLE `user_deck` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-06  7:14:36
+-- Dump completed on 2019-12-02 12:46:23
