@@ -8,12 +8,18 @@ import java.sql.Timestamp
 import org.hamcrest.core.Is.`is`
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.ArgumentCaptor
 import org.mockito.BDDMockito.given
+import org.mockito.Captor
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.data.domain.PageRequest
+import org.springframework.hateoas.EntityModel
 import org.springframework.http.MediaType
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -75,4 +81,23 @@ class UserControllerTests {
             .andExpect(jsonPath("$.dateCreated", `is`(validUser.dateCreated!!.time)))
             .andExpect(jsonPath("$.lastLogin", `is`(validUser.lastLogin!!.time)))
     }
+
+//    @DisplayName("List Ops - ")
+//    @Nested
+//    inner class TestListOperations {
+//
+//        @Captor
+//        val userNameCaptor: ArgumentCaptor<String>
+//
+//        @Captor
+//        val pageRequestCaptor: ArgumentCaptor<PageRequest>
+//
+//        val userEntityModel: EntityModel<User>
+//
+//        @BeforeEach
+//        fun setUp() {
+//            val users = mutableListOf<User>()
+//            users.add(validUser)
+//        }
+//    }
 }
