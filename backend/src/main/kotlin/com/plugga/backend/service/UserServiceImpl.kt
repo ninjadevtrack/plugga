@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.sql.Timestamp
 
 @Service
 class UserServiceImpl @Autowired
@@ -31,6 +32,7 @@ constructor(private val userRepository: UserRepository, private val passwordEnco
             user.password = passwordEncoder.encode(it)
         }
         if (user.id == 0) {
+            user.dateCreated = Timestamp(System.currentTimeMillis())
             userRepository.save(user)
             return user
         }

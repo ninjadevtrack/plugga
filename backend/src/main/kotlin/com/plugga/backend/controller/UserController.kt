@@ -39,7 +39,6 @@ constructor(private val userService: UserService) {
     @PostMapping("")
     fun addUser(@RequestBody user: User): User {
         user.id = 0
-        user.dateCreated = Timestamp(System.currentTimeMillis())
         userService.saveUser(user)
         return user
     }
