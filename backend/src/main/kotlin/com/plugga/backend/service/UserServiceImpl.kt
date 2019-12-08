@@ -27,7 +27,7 @@ constructor(private val userRepository: UserRepository, private val passwordEnco
     }
 
     @Transactional
-    override fun saveUser(user: User): User? {
+    override fun save(user: User): User? {
         user.password?.let {
             user.password = passwordEncoder.encode(it)
         }
@@ -45,13 +45,33 @@ constructor(private val userRepository: UserRepository, private val passwordEnco
         return null
     }
 
-    private fun updateExistingUserFields(existingUser: User, user: User): User {
-        existingUser.name = if (user.name == null) existingUser.name else user.name
-        existingUser.email = if (user.email == null) existingUser.email else user.email
-        existingUser.password = if (user.password == null) existingUser.password else user.password
-        existingUser.dateCreated = if (user.dateCreated == null) existingUser.dateCreated else user.dateCreated
-        existingUser.lastLogin = if (user.lastLogin == null) existingUser.lastLogin else user.lastLogin
+    fun updateExistingUserFields(existingUser: User, newUserData: User): User {
+        updateExistingUserName(existingUser, newUserData)
+        updateExistingUserEmail(existingUser, newUserData)
+        updateExistingUserPassword(existingUser, newUserData)
+        updateExistingUserDateCreated(existingUser, newUserData)
+        updateExistingUserLastLogin(existingUser, newUserData)
         return existingUser
+    }
+
+    fun updateExistingUserName(existingUser: User, newUserData: User) {
+        existingUser.name = if (newUserData.name == null) existingUser.name else newUserData.name
+    }
+
+    fun updateExistingUserEmail(existingUser: User, newUserData: User) {
+        existingUser.email = if (newUserData.email == null) existingUser.email else newUserData.email
+    }
+
+    fun updateExistingUserPassword(existingUser: User, newUserData: User) {
+        existingUser.password = if (newUserData.password == null) existingUser.password else newUserData.password
+    }
+
+    fun updateExistingUserDateCreated(existingUser: User, newUserData: User) {
+        existingUser.dateCreated = if (newUserData.dateCreated == null) existingUser.dateCreated else newUserData.dateCreated
+    }
+
+    fun updateExistingUserLastLogin(existingUser: User, newUserData: User) {
+        existingUser.lastLogin = if (newUserData.lastLogin == null) existingUser.lastLogin else newUserData.lastLogin
     }
 
     @Transactional
