@@ -78,4 +78,11 @@ constructor(private val userRepository: UserRepository, private val passwordEnco
     override fun deleteById(id: Int) {
         userRepository.deleteById(id)
     }
+
+//    companion object {
+//        fun getCompanion(): Companion {
+//            return this
+//        }
+//
+//    }
 }

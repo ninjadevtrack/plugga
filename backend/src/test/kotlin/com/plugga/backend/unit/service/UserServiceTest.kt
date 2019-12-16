@@ -1,5 +1,8 @@
 package com.plugga.backend.unit.service
 
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.anyOrNull
+import com.nhaarman.mockito_kotlin.anyVararg
 import com.nhaarman.mockito_kotlin.reset
 import com.plugga.backend.entity.User
 import com.plugga.backend.repository.UserRepository
@@ -11,8 +14,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
@@ -105,60 +108,59 @@ internal class UserServiceTest {
     }
 
     @Test
-    fun updateExistingUserFields() {
-        val userServiceImpl = UserServiceImpl(userRepository, passwordEncoder)
-        val updatedUser = userServiceImpl.updateExistingUserFields(any(User::class.java), any(User::class.java))
-
-        verify(userServiceImpl).updateExistingUserName(any(User::class.java), any(User::class.java))
-        verify(userServiceImpl).updateExistingUserEmail(any(User::class.java), any(User::class.java))
-        verify(userServiceImpl).updateExistingUserPassword(any(User::class.java), any(User::class.java))
-        verify(userServiceImpl).updateExistingUserDateCreated(any(User::class.java), any(User::class.java))
-        verify(userServiceImpl).updateExistingUserLastLogin(any(User::class.java), any(User::class.java))
-
-        assertThat(updatedUser).isNotNull
-    }
-
-    @Nested
-    class TestUpdateExistingFields {
-
-        lateinit var existingUser: User
-        lateinit var newUserData: User
-
-        @BeforeEach
-        fun setup() {
-            existingUser = User()
-            newUserData = User()
-        }
-
-        @Test
-        fun updateExistingUserName() {
-            //TODO
-        }
-
-        @Test
-        fun updateExistingUserEmail() {
-            //TODO
-        }
-
-        @Test
-        fun updateExistingUserPassword() {
-            //TODO
-        }
-
-        @Test
-        fun updateExistingUserDateCreated() {
-            //TODO
-        }
-
-        @Test
-        fun updateExistingUserLastLogin() {
-            //TODO
-        }
-    }
-
-    @Test
     fun `test UserService delete user by id`() {
         userService.deleteById(anyInt())
         verify(userRepository).deleteById(anyInt())
+    }
+
+    @Nested
+    inner class TestUpdateExistingFields {
+
+        @Mock
+        lateinit var existingUser: User
+
+        @Mock
+        lateinit var newUserData: User
+
+        @Mock
+        lateinit var userServiceImpl: UserServiceImpl
+
+//        @Test
+//        fun `test updateExistingUserFields`() {
+////            val userServiceImpl = UserServiceImpl(userRepository, passwordEncoder)
+////            userServiceImpl.updateExistingUserFields(existingUser, newUserData)
+//            userServiceImpl.updateExistingUserFields(existingUser, newUserData)
+//
+//            verify(userServiceImpl).updateExistingUserName(any(), any())
+//            verify(userServiceImpl).updateExistingUserEmail(any(), any())
+//            verify(userServiceImpl).updateExistingUserPassword(any(), any())
+//            verify(userServiceImpl).updateExistingUserDateCreated(any(), any())
+//            verify(userServiceImpl).updateExistingUserLastLogin(any(), any())
+//        }
+
+        @Test
+        fun `test updateExistingUserName`() {
+            //TODO
+        }
+
+        @Test
+        fun `test updateExistingUserEmail`() {
+            //TODO
+        }
+
+        @Test
+        fun `test updateExistingUserPassword`() {
+            //TODO
+        }
+
+        @Test
+        fun `test updateExistingUserDateCreated`() {
+            //TODO
+        }
+
+        @Test
+        fun `test updateExistingUserLastLogin`() {
+            //TODO
+        }
     }
 }
