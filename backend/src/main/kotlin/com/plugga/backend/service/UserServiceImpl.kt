@@ -45,44 +45,37 @@ constructor(private val userRepository: UserRepository, private val passwordEnco
         return null
     }
 
-    fun updateExistingUserFields(existingUser: User, newUserData: User): User {
-        updateExistingUserName(existingUser, newUserData)
-        updateExistingUserEmail(existingUser, newUserData)
-        updateExistingUserPassword(existingUser, newUserData)
-        updateExistingUserDateCreated(existingUser, newUserData)
-        updateExistingUserLastLogin(existingUser, newUserData)
+    fun updateExistingUserFields(existingUser: User, inputUserData: User): User {
+        updateExistingUserName(existingUser, inputUserData)
+        updateExistingUserEmail(existingUser, inputUserData)
+        updateExistingUserPassword(existingUser, inputUserData)
+        updateExistingUserDateCreated(existingUser, inputUserData)
+        updateExistingUserLastLogin(existingUser, inputUserData)
         return existingUser
     }
 
-    fun updateExistingUserName(existingUser: User, newUserData: User) {
-        existingUser.name = if (newUserData.name == null) existingUser.name else newUserData.name
+    fun updateExistingUserName(existingUser: User, inputUserData: User) {
+        existingUser.name = if (inputUserData.name == null) existingUser.name else inputUserData.name
     }
 
-    fun updateExistingUserEmail(existingUser: User, newUserData: User) {
-        existingUser.email = if (newUserData.email == null) existingUser.email else newUserData.email
+    fun updateExistingUserEmail(existingUser: User, inputUserData: User) {
+        existingUser.email = if (inputUserData.email == null) existingUser.email else inputUserData.email
     }
 
-    fun updateExistingUserPassword(existingUser: User, newUserData: User) {
-        existingUser.password = if (newUserData.password == null) existingUser.password else newUserData.password
+    fun updateExistingUserPassword(existingUser: User, inputUserData: User) {
+        existingUser.password = if (inputUserData.password == null) existingUser.password else inputUserData.password
     }
 
-    fun updateExistingUserDateCreated(existingUser: User, newUserData: User) {
-        existingUser.dateCreated = if (newUserData.dateCreated == null) existingUser.dateCreated else newUserData.dateCreated
+    fun updateExistingUserDateCreated(existingUser: User, inputUserData: User) {
+        existingUser.dateCreated = if (inputUserData.dateCreated == null) existingUser.dateCreated else inputUserData.dateCreated
     }
 
-    fun updateExistingUserLastLogin(existingUser: User, newUserData: User) {
-        existingUser.lastLogin = if (newUserData.lastLogin == null) existingUser.lastLogin else newUserData.lastLogin
+    fun updateExistingUserLastLogin(existingUser: User, inputUserData: User) {
+        existingUser.lastLogin = if (inputUserData.lastLogin == null) existingUser.lastLogin else inputUserData.lastLogin
     }
 
     @Transactional
     override fun deleteById(id: Int) {
         userRepository.deleteById(id)
     }
-
-//    companion object {
-//        fun getCompanion(): Companion {
-//            return this
-//        }
-//
-//    }
 }

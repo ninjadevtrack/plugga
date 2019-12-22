@@ -1,8 +1,5 @@
 package com.plugga.backend.unit.service
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.anyOrNull
-import com.nhaarman.mockito_kotlin.anyVararg
 import com.nhaarman.mockito_kotlin.reset
 import com.plugga.backend.entity.User
 import com.plugga.backend.repository.UserRepository
@@ -10,12 +7,12 @@ import com.plugga.backend.service.UserService
 import com.plugga.backend.service.UserServiceImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
@@ -24,6 +21,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import java.sql.Timestamp
 import java.util.*
 
 @ExtendWith(MockitoExtension::class)
@@ -90,8 +88,6 @@ internal class UserServiceTest {
         verify(passwordEncoder).encode(rawPassword)
         verify(userRepository).save(newUser)
 
-        //TODO: verify that updateExistingUserFields() was not called
-
         assertThat(returnedUser).isNotNull
         if (returnedUser != null) {
             assertThat(returnedUser.name).isEqualTo(insertedName)
@@ -116,14 +112,16 @@ internal class UserServiceTest {
     @Nested
     inner class TestUpdateExistingFields {
 
-        @Mock
         lateinit var existingUser: User
 
-        @Mock
-        lateinit var newUserData: User
+        lateinit var inputUserData: User
 
-        @Mock
         lateinit var userServiceImpl: UserServiceImpl
+
+        private val existingName = "name"
+        private val existingEmail = "test@test.com"
+        private val existingPassword = "Passw0rd"
+        private val timeInMilli: Long = System.currentTimeMillis()
 
 //        @Test
 //        fun `test updateExistingUserFields`() {
@@ -138,29 +136,88 @@ internal class UserServiceTest {
 //            verify(userServiceImpl).updateExistingUserLastLogin(any(), any())
 //        }
 
-        @Test
-        fun `test updateExistingUserName`() {
-            //TODO
+        @BeforeEach
+        fun setup() {
+            userServiceImpl = UserServiceImpl(userRepository, passwordEncoder)
+
+            existingUser = User()
+            existingUser.name = existingName
+            existingUser.email = existingEmail
+            existingUser.password = existingPassword
+            existingUser.dateCreated = Timestamp(timeInMilli)
+            existingUser.lastLogin = Timestamp(timeInMilli)
+
+            inputUserData = User()
         }
 
         @Test
-        fun `test updateExistingUserEmail`() {
-            //TODO
+        fun `test updateExistingUserName assert name does not change when input name is null`() {
+            userServiceImpl.updateExistingUserName(existingUser, inputUserData)
+            assertEquals(existingName, existingUser.name)
         }
 
         @Test
-        fun `test updateExistingUserPassword`() {
-            //TODO
+        fun `test updateExistingUserName assert name changes when input is not null`() {
+            val newName = "newName"
+            inputUserData.name = newName
+            userServiceImpl.updateExistingUserName(existingUser, inputUserData)
+            assertEquals(newName, existingUser.name)
         }
 
         @Test
-        fun `test updateExistingUserDateCreated`() {
-            //TODO
+        fun `test updateExistingUserEmail assert email does not change when input is null`() {
+            userServiceImpl.updateExistingUserEmail(existingUser, inputUserData)
+            assertEquals(existingEmail, existingUser.email)
         }
 
         @Test
-        fun `test updateExistingUserLastLogin`() {
-            //TODO
+        fun `test updateExistingUserEmail assert email changes when input is not null`() {
+            val newEmail = "new@email.com"
+            inputUserData.email = newEmail
+            userServiceImpl.updateExistingUserEmail(existingUser, inputUserData)
+            assertEquals(newEmail, existingUser.email)
+        }
+
+        @Test
+        fun `test updateExistingUserPassword assert password does not change when input is null`() {
+            userServiceImpl.updateExistingUserPassword(existingUser, inputUserData)
+            assertEquals(existingPassword, existingUser.password)
+        }
+
+        @Test
+        fun `test updateExistingUserPassword assert password changes when input is not null`() {
+            val newPassword = "newPassword"
+            inputUserData.password = newPassword
+            userServiceImpl.updateExistingUserPassword(existingUser, inputUserData)
+            assertEquals(newPassword, existingUser.password)
+        }
+
+        @Test
+        fun `test updateExistingUserDateCreated assert dateCreated does not change when input is null`() {
+            userServiceImpl.updateExistingUserDateCreated(existingUser, inputUserData)
+            assertEquals(timeInMilli, existingUser.dateCreated!!.time)
+        }
+
+        @Test
+        fun `test updateExistingUserDateCreated assert dateCreated changes when input is not null`() {
+            val newDateCreated = Timestamp(System.currentTimeMillis())
+            inputUserData.dateCreated = newDateCreated
+            userServiceImpl.updateExistingUserDateCreated(existingUser, inputUserData)
+            assertEquals(newDateCreated.time, existingUser.dateCreated!!.time)
+        }
+
+        @Test
+        fun `test updateExistingUserLastLogin assert lastLogin does not change when input is null`() {
+            userServiceImpl.updateExistingUserLastLogin(existingUser, inputUserData)
+            assertEquals(timeInMilli, existingUser.dateCreated!!.time)
+        }
+
+        @Test
+        fun `test updateExistingUserLastLogin assert lastLogin changes when input is not null`() {
+            val newLastLogin = Timestamp(System.currentTimeMillis())
+            inputUserData.lastLogin = newLastLogin
+            userServiceImpl.updateExistingUserLastLogin(existingUser, inputUserData)
+            assertEquals(newLastLogin.time, existingUser.lastLogin!!.time)
         }
     }
 }
