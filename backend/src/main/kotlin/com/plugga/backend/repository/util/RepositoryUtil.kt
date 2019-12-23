@@ -1,4 +1,4 @@
-package com.plugga.backend.dao.util
+package com.plugga.backend.repository.util
 
 import org.springframework.data.domain.Pageable
 

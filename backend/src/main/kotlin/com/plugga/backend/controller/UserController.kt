@@ -2,7 +2,6 @@ package com.plugga.backend.controller
 
 import com.plugga.backend.entity.User
 import com.plugga.backend.service.UserService
-import java.sql.Timestamp
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PagedResourcesAssembler
@@ -39,8 +38,7 @@ constructor(private val userService: UserService) {
     @PostMapping("")
     fun addUser(@RequestBody user: User): User {
         user.id = 0
-        user.dateCreated = Timestamp(System.currentTimeMillis())
-        userService.saveUser(user)
+        userService.save(user)
         return user
     }
 
@@ -50,7 +48,7 @@ constructor(private val userService: UserService) {
             throw java.lang.RuntimeException("dateCreated cannot be updated")
         }
         user.id = userId
-        val updatedUser = userService.saveUser(user)
+        val updatedUser = userService.save(user)
         return updatedUser ?: throw java.lang.RuntimeException("Error updating")
     }
 

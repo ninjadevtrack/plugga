@@ -1,9 +1,9 @@
 package com.plugga.backend.service
 
-import com.plugga.backend.dao.CardDAO
-import com.plugga.backend.dao.DeckCardDAO
-import com.plugga.backend.dao.util.subListForRequestedPage
 import com.plugga.backend.entity.Card
+import com.plugga.backend.repository.CardRepository
+import com.plugga.backend.repository.DeckCardRepository
+import com.plugga.backend.repository.util.subListForRequestedPage
 import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -14,22 +14,22 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CardServiceImpl @Autowired
-constructor(private val cardDAO: CardDAO, private val deckCardDAO: DeckCardDAO) : CardService {
+constructor(private val cardRepository: CardRepository, private val deckCardRepository: DeckCardRepository) : CardService {
 
     @Transactional
     override fun findAll(pageable: Pageable): Page<Card> {
-        return cardDAO.findAll(pageable)
+        return cardRepository.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): Card? {
-        val queryResult: Optional<Card> = cardDAO.findById(id)
+        val queryResult: Optional<Card> = cardRepository.findById(id)
         return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
     override fun findByDeckId(pageable: Pageable, id: Int): Page<Card> {
-        val deckCardList = deckCardDAO.findByDeckId(id)
+        val deckCardList = deckCardRepository.findByDeckId(id)
         val cardList: MutableList<Card> = mutableListOf()
         deckCardList.forEach {
             it.card?.let { it1 -> cardList.add(it1) }
@@ -39,11 +39,11 @@ constructor(private val cardDAO: CardDAO, private val deckCardDAO: DeckCardDAO) 
 
     @Transactional
     override fun save(card: Card) {
-        cardDAO.save(card)
+        cardRepository.save(card)
     }
 
     @Transactional
     override fun deleteById(id: Int) {
-        cardDAO.deleteById(id)
+        cardRepository.deleteById(id)
     }
 }

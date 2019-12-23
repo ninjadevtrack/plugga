@@ -7,7 +7,6 @@ import javax.persistence.EntityManager
 /**
  * @author fta on 20.12.15.
  */
-
 class EntityIdResolver(private val entityManager: EntityManager) : ObjectIdResolver {
 
     override fun bindItem(id: ObjectIdGenerator.IdKey, pojo: Any) {

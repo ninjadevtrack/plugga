@@ -1,7 +1,7 @@
 package com.plugga.backend.service
 
-import com.plugga.backend.dao.DeckCardDAO
 import com.plugga.backend.entity.DeckCard
+import com.plugga.backend.repository.DeckCardRepository
 import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -11,36 +11,36 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class DeckCardServiceImpl @Autowired
-constructor(private val deckCardDAO: DeckCardDAO) : DeckCardService {
+constructor(private val deckCardRepository: DeckCardRepository) : DeckCardService {
 
     @Transactional
     override fun findAll(pageable: Pageable): Page<DeckCard> {
-        return deckCardDAO.findAll(pageable)
+        return deckCardRepository.findAll(pageable)
     }
 
     @Transactional
     override fun findById(id: Int): DeckCard? {
-        val queryResult: Optional<DeckCard> = deckCardDAO.findById(id)
+        val queryResult: Optional<DeckCard> = deckCardRepository.findById(id)
         return if (queryResult.isPresent) queryResult.get() else null
     }
 
     @Transactional
     override fun findByDeckId(pageable: Pageable, id: Int): Page<DeckCard> {
-        return deckCardDAO.findByDeckId(pageable, id)
+        return deckCardRepository.findByDeckId(pageable, id)
     }
 
     @Transactional
     override fun findByCardId(pageable: Pageable, id: Int): Page<DeckCard> {
-        return deckCardDAO.findByCardId(pageable, id)
+        return deckCardRepository.findByCardId(pageable, id)
     }
 
     @Transactional
     override fun save(deckCard: DeckCard) {
-        deckCardDAO.save(deckCard)
+        deckCardRepository.save(deckCard)
     }
 
     @Transactional
     override fun deleteById(id: Int) {
-        deckCardDAO.deleteById(id)
+        deckCardRepository.deleteById(id)
     }
 }

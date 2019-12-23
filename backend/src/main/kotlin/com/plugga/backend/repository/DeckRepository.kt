@@ -1,8 +1,8 @@
-package com.plugga.backend.dao
+package com.plugga.backend.repository
 
 import com.plugga.backend.entity.Deck
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DeckDAO : PagingAndSortingRepository<Deck, Int>
+interface DeckRepository : PagingAndSortingRepository<Deck, Int>

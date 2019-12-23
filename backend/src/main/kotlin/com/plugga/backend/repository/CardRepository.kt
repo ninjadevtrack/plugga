@@ -1,8 +1,8 @@
-package com.plugga.backend.dao
+package com.plugga.backend.repository
 
 import com.plugga.backend.entity.Card
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CardDAO : PagingAndSortingRepository<Card, Int>
+interface CardRepository : PagingAndSortingRepository<Card, Int>

@@ -1,4 +1,4 @@
-package com.plugga.backend.dao
+package com.plugga.backend.repository
 
 import com.plugga.backend.entity.DeckCard
 import org.springframework.data.domain.Page
@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DeckCardDAO : PagingAndSortingRepository<DeckCard, Int> {
+interface DeckCardRepository : PagingAndSortingRepository<DeckCard, Int> {
 
     fun findByDeckId(deckId: Int): List<DeckCard>
 

@@ -75,4 +75,23 @@ class UserControllerTests {
             .andExpect(jsonPath("$.dateCreated", `is`(validUser.dateCreated!!.time)))
             .andExpect(jsonPath("$.lastLogin", `is`(validUser.lastLogin!!.time)))
     }
+
+//    @DisplayName("List Ops - ")
+//    @Nested
+//    inner class TestListOperations {
+//
+//        @Captor
+//        val userNameCaptor: ArgumentCaptor<String>
+//
+//        @Captor
+//        val pageRequestCaptor: ArgumentCaptor<PageRequest>
+//
+//        val userEntityModel: EntityModel<User>
+//
+//        @BeforeEach
+//        fun setUp() {
+//            val users = mutableListOf<User>()
+//            users.add(validUser)
+//        }
+//    }
 }
