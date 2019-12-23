@@ -1,12 +1,12 @@
 package com.plugga.backend.unit.service
 
-import com.nhaarman.mockito_kotlin.reset
 import com.plugga.backend.entity.User
 import com.plugga.backend.repository.UserRepository
 import com.plugga.backend.service.UserService
 import com.plugga.backend.service.UserServiceImpl
+import java.sql.Timestamp
+import java.util.Optional
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
@@ -21,8 +21,6 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import java.sql.Timestamp
-import java.util.*
 
 @ExtendWith(MockitoExtension::class)
 internal class UserServiceTest {
@@ -36,18 +34,11 @@ internal class UserServiceTest {
     @Mock
     lateinit var pageable: Pageable
 
-    lateinit var userService: UserService
+    private lateinit var userService: UserService
 
     @BeforeEach
     fun setup() {
         userService = UserServiceImpl(userRepository, passwordEncoder)
-    }
-
-    @AfterEach
-    fun cleanup() {
-        reset(userRepository)
-        reset(passwordEncoder)
-        reset(pageable)
     }
 
     @Test
@@ -100,7 +91,7 @@ internal class UserServiceTest {
 
     @Test
     fun `test UserService save() update user`() {
-        //TODO: test UserService.save() with existing user aka id > 0
+        // TODO: test UserService.save() with existing user aka id > 0
     }
 
     @Test
@@ -112,29 +103,16 @@ internal class UserServiceTest {
     @Nested
     inner class TestUpdateExistingFields {
 
-        lateinit var existingUser: User
+        private lateinit var existingUser: User
 
-        lateinit var inputUserData: User
+        private lateinit var inputUserData: User
 
-        lateinit var userServiceImpl: UserServiceImpl
+        private lateinit var userServiceImpl: UserServiceImpl
 
         private val existingName = "name"
         private val existingEmail = "test@test.com"
         private val existingPassword = "Passw0rd"
         private val timeInMilli: Long = System.currentTimeMillis()
-
-//        @Test
-//        fun `test updateExistingUserFields`() {
-////            val userServiceImpl = UserServiceImpl(userRepository, passwordEncoder)
-////            userServiceImpl.updateExistingUserFields(existingUser, newUserData)
-//            userServiceImpl.updateExistingUserFields(existingUser, newUserData)
-//
-//            verify(userServiceImpl).updateExistingUserName(any(), any())
-//            verify(userServiceImpl).updateExistingUserEmail(any(), any())
-//            verify(userServiceImpl).updateExistingUserPassword(any(), any())
-//            verify(userServiceImpl).updateExistingUserDateCreated(any(), any())
-//            verify(userServiceImpl).updateExistingUserLastLogin(any(), any())
-//        }
 
         @BeforeEach
         fun setup() {
@@ -148,6 +126,11 @@ internal class UserServiceTest {
             existingUser.lastLogin = Timestamp(timeInMilli)
 
             inputUserData = User()
+        }
+
+        @Test
+        fun `test updateExistingUserFields`() {
+            // TODO
         }
 
         @Test

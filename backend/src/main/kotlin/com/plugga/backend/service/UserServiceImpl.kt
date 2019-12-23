@@ -1,7 +1,8 @@
 package com.plugga.backend.service
 
-import com.plugga.backend.repository.UserRepository
 import com.plugga.backend.entity.User
+import com.plugga.backend.repository.UserRepository
+import java.sql.Timestamp
 import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -9,7 +10,6 @@ import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.sql.Timestamp
 
 @Service
 class UserServiceImpl @Autowired
@@ -31,11 +31,16 @@ constructor(private val userRepository: UserRepository, private val passwordEnco
         user.password?.let {
             user.password = passwordEncoder.encode(it)
         }
-        if (user.id == 0) {
-            user.dateCreated = Timestamp(System.currentTimeMillis())
-            userRepository.save(user)
-            return user
-        }
+        return if (user.id == 0) saveNewUser(user) else updateUser(user)
+    }
+
+    fun saveNewUser(user: User): User {
+        user.dateCreated = Timestamp(System.currentTimeMillis())
+        userRepository.save(user)
+        return user
+    }
+
+    fun updateUser(user: User): User? {
         val queryResult: Optional<User> = userRepository.findById(user.id)
         if (queryResult.isPresent) {
             val existingUser = queryResult.get()

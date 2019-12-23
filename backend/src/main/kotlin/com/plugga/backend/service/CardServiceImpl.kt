@@ -1,9 +1,9 @@
 package com.plugga.backend.service
 
+import com.plugga.backend.entity.Card
 import com.plugga.backend.repository.CardRepository
 import com.plugga.backend.repository.DeckCardRepository
 import com.plugga.backend.repository.util.subListForRequestedPage
-import com.plugga.backend.entity.Card
 import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page

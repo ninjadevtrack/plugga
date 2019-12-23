@@ -1,9 +1,9 @@
 package com.plugga.backend.service
 
+import com.plugga.backend.entity.Deck
 import com.plugga.backend.repository.DeckRepository
 import com.plugga.backend.repository.UserDeckRepository
 import com.plugga.backend.repository.util.subListForRequestedPage
-import com.plugga.backend.entity.Deck
 import java.util.Optional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page

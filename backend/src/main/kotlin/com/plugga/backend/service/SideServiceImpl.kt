@@ -1,7 +1,7 @@
 package com.plugga.backend.service
 
-import com.plugga.backend.repository.SideRepository
 import com.plugga.backend.entity.Side
+import com.plugga.backend.repository.SideRepository
 import java.util.Optional
 import javax.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
